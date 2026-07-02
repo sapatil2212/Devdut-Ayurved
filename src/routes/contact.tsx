@@ -31,8 +31,17 @@ function ContactPage() {
               <div className="flex items-start gap-3"><MapPin className="size-5 text-[var(--gold)] mt-0.5" /><span>{SITE.address}</span></div>
             </div>
             <div>
-              <div className="eyebrow mb-2">Call</div>
-              <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 hover:text-[var(--copper)]"><Phone className="size-5 text-[var(--gold)]" />{SITE.phone}</a>
+              <div className="eyebrow mb-2">Call / WhatsApp</div>
+              <div className="flex flex-col gap-3">
+                <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-[var(--copper)]">
+                  <MessageCircle className="size-5 text-green-500 fill-green-500" />
+                  <span>Dr. Ganeshkumar Sir: {SITE.whatsapp} (WhatsApp)</span>
+                </a>
+                <a href={`tel:${SITE.phone2.replace(/\s/g, "")}`} className="flex items-center gap-3 hover:text-[var(--copper)]">
+                  <Phone className="size-5 text-[var(--gold)]" />
+                  <span>{SITE.phone2} (Direct Call)</span>
+                </a>
+              </div>
             </div>
             <div>
               <div className="eyebrow mb-2">Email</div>

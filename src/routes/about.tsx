@@ -3,8 +3,12 @@ import { PageShell } from "@/components/site/PageShell";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 import { Ornament } from "@/components/site/Ornament";
-import templeImg from "@/assets/temple.jpg";
+import aboutHeroImg from "@/assets/about-hero.png";
+import aboutPaperImg from "@/assets/about-paper.png";
+import doctorPng from "@/assets/doctor.png";
 import treatmentsImg from "@/assets/treatments.jpg";
+import { FaqSection } from "@/components/site/FaqSection";
+import { TrustedIcons } from "@/components/site/TrustedIcons";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -19,74 +23,57 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
-const timeline = [
-  { y: "1998", t: "Foundation", d: "Dr. Devdut Sharma opens a small three-room clinic in Pune with one Panchakarma table." },
-  { y: "2004", t: "In-house pharmacy", d: "The clinic begins formulating its own herbal medicines to guarantee purity." },
-  { y: "2011", t: "Panchakarma centre", d: "A dedicated 12-bed classical Panchakarma wing is added." },
-  { y: "2018", t: "Research & training", d: "Fellowships with three international wellness centres begin." },
-  { y: "2023", t: "Virtual care", d: "Global patients begin receiving Prakriti-based consultations online." },
-  { y: "2026", t: "New home", d: "Devdut moves into a purpose-built 24-therapy-room clinic and teaching centre." },
-];
-
 function AboutPage() {
   return (
     <PageShell>
       <PageHeader
-        sanskrit="चरैवेति चरैवेति"
-        eyebrow="About the clinic"
+        sanskrit="आयुर्वेदः जीवनस्य आधारः"
         title="A family practice, twenty-six years young."
         intro="We are three generations of vaidyas, one in-house pharmacy, and a stubborn belief that healing should never be rushed."
+        image={aboutHeroImg}
       />
 
-      <section className="container-page py-24 grid gap-16 lg:grid-cols-2 items-center">
+      <section className="container-page pt-24 pb-8 grid gap-16 lg:grid-cols-2 items-center">
         <Reveal>
-          <img src={templeImg} alt="" width={1600} height={900} loading="lazy" className="rounded-3xl shadow-elegant" />
+          <div className="max-w-md mx-auto">
+            <img src={doctorPng} alt="Lead Ayurvedic Physician" width={1600} height={900} loading="lazy" className="rounded-3xl" />
+          </div>
         </Reveal>
         <Reveal delay={0.1}>
-          <div className="eyebrow mb-4">Our story</div>
-          <h2 className="font-display text-4xl md:text-5xl leading-tight">Started in a three-room clinic. Never stopped listening.</h2>
+          <div className="eyebrow mb-4">Ayurvedic Expert</div>
+          <h2 className="font-display text-4xl md:text-5xl leading-tight">Meet Our Ayurvedic Expert</h2>
           <p className="mt-6 text-lg text-[var(--muted-foreground)]">
-            Devdut began in 1998 as a modest three-room clinic on a quiet street in Pune. Dr. Devdut Sharma had recently returned from a five-year classical apprenticeship in Kerala, and he wanted to build something small and honest — where every patient was known by name and every medicine was made in-house.
+            Our lead Ayurvedic physician is dedicated to delivering authentic, personalized care rooted in the timeless principles of Ayurveda. Every consultation focuses on understanding the individual, not just the disease.
           </p>
           <p className="mt-4 text-lg text-[var(--muted-foreground)]">
-            Twenty-six years later, the philosophy has not changed. The building has.
+            With years of clinical experience, the doctor specializes in identifying the root cause of health concerns and creating customized treatment plans using herbal medicines, Panchakarma, and lifestyle guidance.
+          </p>
+          <p className="mt-4 text-lg text-[var(--muted-foreground)]">
+            Committed to compassionate care and holistic healing, the goal is to help every patient achieve lasting wellness through the perfect balance of nature, science, and traditional Ayurvedic wisdom.
           </p>
         </Reveal>
       </section>
 
-      <section className="bg-[var(--cream)] border-y border-[var(--border)]">
-        <div className="container-page py-24">
-          <div className="text-center max-w-2xl mx-auto">
-            <Reveal>
-              <div className="eyebrow mb-3">The journey</div>
-              <h2 className="font-display text-4xl md:text-5xl">Milestones along the way.</h2>
-              <Ornament className="mt-8" />
-            </Reveal>
-          </div>
-          <ol className="mt-16 relative border-l-2 border-[var(--gold)]/30 max-w-3xl mx-auto space-y-12 pl-8">
-            {timeline.map((step, i) => (
-              <Reveal key={step.y} delay={i * 0.05} as="li">
-                <div className="absolute -left-[11px] mt-1.5 size-5 rounded-full bg-gold-gradient ring-4 ring-[var(--cream)]" />
-                <div className="font-display text-3xl text-[var(--gold)]">{step.y}</div>
-                <h3 className="font-display text-2xl mt-1">{step.t}</h3>
-                <p className="mt-2 text-[var(--muted-foreground)]">{step.d}</p>
-              </Reveal>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <section className="container-page py-24 grid gap-12 lg:grid-cols-3">
+      <section className="container-page pt-8 pb-24 grid gap-8 lg:grid-cols-3">
         {[
           { t: "Mission", d: "Deliver classical Ayurveda with modern precision — every patient assessed, every formula personalised, every plan revisited." },
           { t: "Vision", d: "To become the standard of care for people who want to be treated as more than a diagnosis." },
           { t: "Values", d: "Honesty over hype. Slow over fast. Root cause over quick fix. Always, patient over protocol." },
         ].map((v, i) => (
           <Reveal key={v.t} delay={i * 0.08}>
-            <article className="h-full rounded-3xl border border-[var(--border)] bg-[var(--card)] p-10">
-              <div className="font-sanskrit text-[var(--gold)] text-xl mb-3">◈</div>
-              <h3 className="font-display text-3xl mb-4">{v.t}</h3>
-              <p className="text-[var(--muted-foreground)] leading-relaxed">{v.d}</p>
+            <article className="relative h-full">
+              {/* Parchment background image */}
+              <img
+                src={aboutPaperImg}
+                alt=""
+                aria-hidden
+                className="absolute inset-0 w-full h-full object-fill pointer-events-none"
+              />
+              <div className="relative z-10 text-center px-8 py-14 md:px-10 md:py-16">
+                <div className="font-sanskrit text-[#a87c3b] text-xl mb-3">◈</div>
+                <h3 className="font-display text-2xl md:text-3xl mb-3 text-[#4a3520]">{v.t}</h3>
+                <p className="text-sm md:text-base text-[#6b5744] leading-relaxed">{v.d}</p>
+              </div>
             </article>
           </Reveal>
         ))}
@@ -106,6 +93,10 @@ function AboutPage() {
           </Reveal>
         </div>
       </section>
+
+      <TrustedIcons />
+
+      <FaqSection showCta={false} />
     </PageShell>
   );
 }

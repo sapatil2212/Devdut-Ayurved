@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { MapPin, Clock, Phone, Mail } from "lucide-react";
+import { MapPin, Clock, Phone, Mail, MessageCircle } from "lucide-react";
 import { NAV, SITE } from "@/lib/site";
 import { Ornament } from "./Ornament";
 
@@ -47,7 +47,18 @@ export function SiteFooter() {
             <ul className="space-y-4 text-sm text-[var(--parchment)]/80">
               <li className="flex gap-3"><MapPin className="size-4 mt-0.5 text-[var(--gold)]" /><span>{SITE.address}</span></li>
               <li className="flex gap-3"><Clock className="size-4 mt-0.5 text-[var(--gold)]" /><span>{SITE.hours}</span></li>
-              <li className="flex gap-3"><Phone className="size-4 mt-0.5 text-[var(--gold)]" /><a href={`tel:${SITE.phone}`}>{SITE.phone}</a></li>
+              <li className="flex gap-3">
+                <Phone className="size-4 mt-0.5 text-[var(--gold)]" />
+                <div className="flex flex-wrap items-center gap-2">
+                  <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noreferrer" className="hover:text-[var(--gold)]">
+                    {SITE.whatsapp}
+                  </a>
+                  <span className="text-[var(--parchment)]/40">/</span>
+                  <a href={`tel:${SITE.phone2.replace(/\s/g, "")}`} className="hover:text-[var(--gold)]">
+                    {SITE.phone2}
+                  </a>
+                </div>
+              </li>
               <li className="flex gap-3"><Mail className="size-4 mt-0.5 text-[var(--gold)]" /><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
             </ul>
           </div>

@@ -8,34 +8,53 @@ export function PageHeader({
   intro,
   sanskrit,
   children,
+  image,
 }: {
   eyebrow?: string;
   title: string;
   intro?: string;
   sanskrit?: string;
   children?: ReactNode;
+  image?: string;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-[var(--border)]">
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-40"
-        style={{
-          background:
-            "radial-gradient(60% 60% at 50% 0%, oklch(0.75 0.13 85 / 0.18), transparent 70%)",
-        }}
-      />
-      <div className="container-page relative py-24 md:py-32 text-center">
+    <section className={`relative overflow-hidden border-b border-[var(--border)] ${image ? "-mt-20" : ""}`}>
+      {/* Background image with overlay */}
+      {image && (
+        <>
+          <img
+            src={image}
+            alt=""
+            className="absolute inset-0 size-full object-cover object-center"
+            aria-hidden
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[var(--forest-deep)]/70 via-[var(--forest-deep)]/60 to-[var(--forest-deep)]/80" />
+        </>
+      )}
+
+      {/* Radial glow (only when no image) */}
+      {!image && (
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-40"
+          style={{
+            background:
+              "radial-gradient(60% 60% at 50% 0%, oklch(0.75 0.13 85 / 0.18), transparent 70%)",
+          }}
+        />
+      )}
+
+      <div className={`container-page relative py-24 md:py-32 text-center ${image ? "text-[var(--parchment)] min-h-dvh flex flex-col items-center justify-start" : ""}`}>
         <Reveal>
-          {sanskrit && <div className="font-sanskrit text-[var(--gold)] text-lg mb-3">{sanskrit}</div>}
-          {eyebrow && <div className="eyebrow mb-4">{eyebrow}</div>}
-          <h1 className="font-display text-4xl md:text-6xl leading-[1.05] text-balance">{title}</h1>
+          {sanskrit && <div className={`font-sanskrit text-lg ${image ? "mb-1 text-[var(--gold)]" : "mb-3 text-[var(--gold)]"}`}>{sanskrit}</div>}
+          {eyebrow && <div className={`eyebrow mb-4 ${image ? "text-[var(--parchment)]/70" : ""}`}>{eyebrow}</div>}
+          <h1 className={`font-display text-4xl md:text-6xl leading-[1.05] text-balance ${image ? "text-[var(--parchment)]" : ""}`}>{title}</h1>
           {intro && (
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-[var(--muted-foreground)] text-balance">
+            <p className={`mx-auto max-w-2xl text-balance ${image ? "mt-3 text-sm md:text-lg text-[var(--parchment)]/80" : "mt-6 text-lg text-[var(--muted-foreground)]"}`}>
               {intro}
             </p>
           )}
-          <Ornament className="mt-10" />
+          {!image && <Ornament className="mt-10" />}
           {children && <div className="mt-8">{children}</div>}
         </Reveal>
       </div>

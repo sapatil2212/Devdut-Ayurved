@@ -9,7 +9,7 @@ function unwrapCountUp(mod: any): any {
   return mod;
 }
 const CountUp = unwrapCountUp(CountUpModule);
-import { ArrowRight, Sparkles, Leaf, Heart, ShieldCheck, Star, Quote, ArrowDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Sparkles, Leaf, Heart, ShieldCheck, Star, Quote, ArrowDown, ChevronLeft, ChevronRight, Flame, Search, FlaskConical, HandHeart } from "lucide-react";
 import { PageShell } from "@/components/site/PageShell";
 import { Reveal } from "@/components/site/Reveal";
 import { Ornament, LeafSVG, Mandala } from "@/components/site/Ornament";
@@ -21,6 +21,10 @@ import doctorImg from "@/assets/doctor.jpg";
 import treatmentsImg from "@/assets/treatments.jpg";
 import therapyImg from "@/assets/therapy.jpg";
 import templeImg from "@/assets/temple.jpg";
+import parchmentImg from "@/assets/ancient-paper.png";
+import frangipaniFlowerImg from "@/assets/frangipani-flower.png";
+import rightPaperImg from "@/assets/right-book.webp";
+import leftBowlImg from "@/assets/left-bowl.png";
 
 
 export const Route = createFileRoute("/")({
@@ -42,14 +46,15 @@ function HomePage() {
     <PageShell>
       <Hero />
       <Marquee />
+      <AncientSecrets />
       <Philosophy />
+      <VedicWisdom />
       <WhyAyurveda />
       <TreatmentsShowcase />
       <DoctorFeature />
       <Journey />
       <Stats />
       <Testimonials />
-      <BlogPreview />
       <FinalCTA />
     </PageShell>
   );
@@ -63,12 +68,40 @@ function Hero() {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  const slides = [heroImg, therapyImg, treatmentsImg, templeImg];
+  const slides = [
+    {
+      img: heroImg,
+      sanskrit: "शरीरमाद्यं खलु धर्मसाधनम्",
+      headline: <>Healing that <em className="text-shimmer not-italic">begins</em> in nature.</>,
+      sub: "Five thousand years of Ayurvedic wisdom, delivered with the care and precision of modern medicine — for the way you actually live today.",
+    },
+    {
+      img: therapyImg,
+      sanskrit: "मनः प्रसादः परमं सुखम्",
+      headline: <>Restore your body.<em className="text-shimmer not-italic block mt-1"> Renew your spirit.</em></>,
+      sub: "Personalised therapies rooted in classical Panchakarma — cleansing, rebuilding and balancing from the inside out.",
+    },
+    {
+      img: treatmentsImg,
+      sanskrit: "आरोग्यं परमं भाग्यम्",
+      headline: <>Ancient treatments.<em className="text-shimmer not-italic block mt-1"> Lasting results.</em></>,
+      sub: "45 signature therapies crafted for your unique Prakriti — from Shirodhara to Rasayana, every protocol is yours alone.",
+    },
+    {
+      img: templeImg,
+      sanskrit: "स्वस्थस्य स्वास्थ्यरक्षणम्",
+      headline: <>Where tradition<em className="text-shimmer not-italic block mt-1"> meets healing.</em></>,
+      sub: "Rooted in the living wisdom of Kerala's classical lineage and BHU's medical traditions — a practice built on centuries of proof.",
+    },
+  ];
+
   const [idx, setIdx] = useState(0);
   useEffect(() => {
     const id = setInterval(() => setIdx((i) => (i + 1) % slides.length), 5000);
     return () => clearInterval(id);
   }, [slides.length]);
+
+  const slide = slides[idx];
 
   return (
     <section ref={ref} className="relative -mt-20 min-h-dvh overflow-hidden bg-forest-gradient text-[var(--parchment)]">
@@ -76,7 +109,7 @@ function Hero() {
         <AnimatePresence mode="sync">
           <motion.img
             key={idx}
-            src={slides[idx]}
+            src={slide.img}
             alt=""
             initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 0.8, scale: 1 }}
@@ -89,77 +122,119 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--forest-deep)] via-transparent to-[var(--forest-deep)]/50 opacity-90" />
       </motion.div>
 
-
       <Mandala className="absolute -right-40 -bottom-40 size-[700px] text-[var(--gold)]/10 animate-glow" />
 
       <motion.div style={{ opacity }} className="relative container-page min-h-dvh flex flex-col justify-center pt-32 pb-20">
-        <Reveal>
-          <div className="font-sanskrit text-[var(--gold)] text-base md:text-lg mb-4">
-            शरीरमाद्यं खलु धर्मसाधनम्
-          </div>
-        </Reveal>
 
-        <Reveal delay={0.15}>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.02] max-w-4xl text-balance text-[var(--parchment)]">
-            Healing that <em className="text-shimmer not-italic">begins</em> in nature.
-          </h1>
-        </Reveal>
-        <Reveal delay={0.35}>
-          <p className="mt-6 max-w-xl text-base md:text-lg text-[var(--parchment)]/80 text-balance">
-            Five thousand years of Ayurvedic wisdom, delivered with the care and precision of modern medicine — for the way you actually live today.
-          </p>
-        </Reveal>
+        {/* Sanskrit — soft fade + gentle drift up */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`sanskrit-${idx}`}
+            className="font-sanskrit text-[var(--gold)] text-base md:text-lg mb-4"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            {slide.sanskrit}
+          </motion.div>
+        </AnimatePresence>
 
-        <Reveal delay={0.5}>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            <Button asChild size="lg" className="rounded-full bg-gold-gradient text-[var(--forest-deep)] hover:opacity-90 shadow-gold h-14 px-8 text-base font-medium">
-              <Link to="/book">Book Consultation <ArrowRight className="ml-2 size-4" /></Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-full border-[var(--parchment)]/25 bg-white/5 text-[var(--parchment)] hover:bg-white/10 h-14 px-8 text-base font-medium">
-              <Link to="/treatments">Explore Treatments</Link>
-            </Button>
-            
-            <div className="ml-auto flex items-center justify-center pt-8 md:pt-0">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                className="relative flex items-center justify-center text-[var(--parchment)]"
-              >
-                <svg width="90" height="90" viewBox="0 0 100 100" className="overflow-visible opacity-80">
-                  <path
-                    id="scrollPath"
-                    d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
-                    fill="none"
-                  />
-                  <text fill="currentColor" fontSize="12" fontWeight="600" letterSpacing="0.1em">
-                    <textPath href="#scrollPath" startOffset="0%" textLength="238.7" lengthAdjust="spacing">
-                      SCROLL DOWN * SCROLL DOWN * SCROLL DOWN * 
-                    </textPath>
-                  </text>
-                </svg>
-              </motion.div>
-              <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 2, repeat: Infinity }} className="absolute text-[var(--parchment)]">
-                <ArrowDown className="size-5" />
-              </motion.div>
-            </div>
+        {/* Headline — pure cross-fade */}
+        <AnimatePresence mode="wait">
+          <motion.h1
+            key={`h1-${idx}`}
+            className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.02] max-w-4xl text-balance text-[var(--parchment)]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.85, ease: "easeInOut", delay: 0.08 }}
+          >
+            {slide.headline}
+          </motion.h1>
+        </AnimatePresence>
+
+        {/* Sub paragraph — fade + gentle drift up, slightly delayed */}
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={`sub-${idx}`}
+            className="mt-6 max-w-xl text-base md:text-lg font-light text-[var(--parchment)]/80 text-balance"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.18 }}
+          >
+            {slide.sub}
+          </motion.p>
+        </AnimatePresence>
+
+
+        <div className="mt-10 flex flex-wrap items-center gap-4">
+          <Button asChild className="rounded-full bg-gold-gradient text-[var(--forest-deep)] hover:opacity-90 shadow-gold h-12 px-6 text-sm font-medium">
+            <Link to="/book">Book Consultation <ArrowRight className="ml-2 size-4" /></Link>
+          </Button>
+          <Button asChild variant="outline" className="rounded-full border-[var(--parchment)]/25 bg-white/5 text-[var(--parchment)] hover:bg-white/10 h-12 px-6 text-sm font-medium">
+            <Link to="/treatments">Explore Treatments</Link>
+          </Button>
+
+          {/* Slide dots */}
+          <div className="ml-auto flex items-center gap-2 pt-1">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIdx(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`rounded-full transition-all duration-300 ${
+                  i === idx
+                    ? "w-6 h-2 bg-[var(--gold)]"
+                    : "w-2 h-2 bg-[var(--parchment)]/40 hover:bg-[var(--parchment)]/70"
+                }`}
+              />
+            ))}
           </div>
-        </Reveal>
+        </div>
       </motion.div>
+
+      {/* Scroll indicator — bottom-right corner */}
+      <div className="absolute bottom-8 right-8 flex items-center justify-center">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="relative flex items-center justify-center text-[var(--parchment)]"
+        >
+          <svg width="90" height="90" viewBox="0 0 100 100" className="overflow-visible opacity-80">
+            <path
+              id="scrollPath"
+              d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
+              fill="none"
+            />
+            <text fill="currentColor" fontSize="12" fontWeight="400" letterSpacing="0.1em">
+              <textPath href="#scrollPath" startOffset="0%" textLength="238.7" lengthAdjust="spacing">
+                SCROLL DOWN * SCROLL DOWN * SCROLL DOWN * 
+              </textPath>
+            </text>
+          </svg>
+        </motion.div>
+        <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 2, repeat: Infinity }} className="absolute text-[var(--parchment)]">
+          <ArrowDown className="size-5" />
+        </motion.div>
+      </div>
     </section>
   );
 }
+
 
 /* -------------------- MARQUEE -------------------- */
 function Marquee() {
   const items = ["Panchakarma", "Nadi Pariksha", "Shirodhara", "Rasayana", "Abhyanga", "Basti", "Nasya", "Herbal Formulations"];
   const row = [...items, ...items];
   return (
-    <div className="border-y border-[var(--border)] bg-[var(--cream)] overflow-hidden py-8">
-      <div className="flex animate-marquee whitespace-nowrap gap-16 text-2xl md:text-4xl font-display text-[var(--forest-deep)]/70">
+    <div className="bg-forest-gradient border-b border-white/10 overflow-hidden py-4">
+      <div className="flex animate-marquee whitespace-nowrap gap-4 text-lg md:text-2xl font-display font-light text-[var(--parchment)]/70">
         {row.map((t, i) => (
-          <span key={i} className="flex items-center gap-16">
+          <span key={i} className="flex items-center gap-4">
             {t}
-            <span className="text-[var(--gold)]">✦</span>
+            <span className="text-[var(--gold)]/80 text-sm">✦</span>
           </span>
         ))}
       </div>
@@ -176,7 +251,7 @@ function Philosophy() {
           <div className="relative">
             <div className="absolute -top-6 -left-6 size-24 rounded-full bg-gold-gradient blur-3xl opacity-40" />
             <img src={templeImg} alt="Ancient temple silhouette at dawn" width={1600} height={900} loading="lazy" className="relative rounded-3xl shadow-elegant" />
-            <div className="absolute -bottom-8 -right-8 w-56 rounded-2xl bg-[var(--cream)] p-6 shadow-elegant border border-[var(--border)]">
+            <div className="absolute -bottom-4 -right-2 sm:-bottom-8 sm:-right-8 w-48 sm:w-56 rounded-2xl bg-[var(--cream)] p-6 shadow-elegant border border-[var(--border)]">
               <div className="font-sanskrit text-[var(--gold)] text-sm mb-1">आयुर्वेद</div>
               <div className="font-display text-lg text-[var(--forest-deep)]">The science of life</div>
             </div>
@@ -210,40 +285,210 @@ function Philosophy() {
   );
 }
 
+/* -------------------- VEDIC WISDOM -------------------- */
+function VedicWisdom() {
+  return (
+    <section className="relative pt-24 pb-40 md:pb-24 bg-[#1c120c] text-[var(--parchment)] overflow-visible">
+      {/* Top right manuscript roll image — half above, half inside */}
+      <motion.img
+        src={rightPaperImg}
+        alt=""
+        initial={{ opacity: 0, x: 90, rotate: 16 }}
+        whileInView={{ opacity: 1, x: 0, rotate: 6 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className="absolute -right-8 md:-right-20 -top-16 md:-top-24 w-64 md:w-[420px] pointer-events-none z-10"
+        aria-hidden
+      />
+
+      <div className="container-page relative z-10">
+        {/* Main Content */}
+        <motion.div
+          initial={{ opacity: 0, x: -60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="max-w-4xl mb-8 md:mb-20"
+        >
+          <h2 className="font-display text-4xl md:text-6xl leading-[1.1] text-[#f4ebd0]">
+            Unlock 2,500 Years of<br />
+            Vedic Wisdom for Lasting<br />
+            Health and Vitality
+          </h2>
+        </motion.div>
+
+        {/* Four Columns */}
+        <div className="grid grid-cols-2 gap-4 sm:gap-8 lg:grid-cols-4 max-w-5xl ml-auto">
+          {[
+            {
+              title: "Natural Healing with Side-Benefit",
+              desc: "Powerful treatments without the side effects of conventional medicine.",
+            },
+            {
+              title: "Holistic Care for Serious Conditions",
+              desc: "Proven healing from chronic pain to metabolic imbalances for transformative results.",
+            },
+            {
+              title: "Personalized Healing Plans",
+              desc: "Personalized treatments crafted by master Vaidyas to suit your unique health needs.",
+            },
+            {
+              title: "Uncompromised Purity",
+              desc: "Rigorously tested products to ensure the highest standards of safety and purity.",
+            },
+          ].map((col, idx) => (
+            <div key={idx} className="flex flex-col gap-1.5 md:gap-2">
+              <h3 className="font-display text-sm md:text-lg text-[var(--gold)] font-semibold">
+                {col.title}
+              </h3>
+              <p className="text-xs md:text-sm text-[var(--parchment)]/70 leading-relaxed font-light">
+                {col.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Bottom left bowl image — half inside, half outside */}
+      <motion.img
+        src={leftBowlImg}
+        alt=""
+        initial={{ opacity: 0, x: -90, rotate: -16 }}
+        whileInView={{ opacity: 1, x: 0, rotate: -6 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className="absolute -left-8 md:-left-20 -bottom-44 md:-bottom-52 w-56 md:w-[360px] pointer-events-none z-10 sepia-[.35] contrast-105 brightness-95 saturate-[1.1] drop-shadow-[0_22px_45px_rgba(0,0,0,0.75)]"
+        aria-hidden
+      />
+    </section>
+  );
+}
+
+/* -------------------- ANCIENT SECRETS -------------------- */
+function AncientSecrets() {
+  return (
+    <section className="relative py-10 md:py-14 overflow-hidden">
+      <div className="container-page relative">
+        {/* Parchment scroll card */}
+        <div className="relative mx-auto max-w-5xl">
+          {/* Parchment background image */}
+          <img
+            src={parchmentImg}
+            alt=""
+            className="absolute inset-0 w-full h-full object-fill"
+            aria-hidden
+          />
+
+          {/* Content on parchment */}
+          <div className="relative z-10 flex flex-col items-center text-center px-8 md:px-20 pt-16 pb-20 md:pt-24 md:pb-30">
+            <h2 className="font-display text-3xl md:text-5xl leading-tight text-[#4a3520] text-balance">
+              Discover Ancient Secrets<br />
+              for Vibrant Health
+            </h2>
+            <p className="mt-4 max-w-lg text-xs md:text-base text-[#6b5744] font-medium leading-relaxed">
+              Transform chronic pain into lasting relief, restore natural harmony, and experience
+              vibrant health with Devdut Ayurved — trusted as the pinnacle of
+              ancient Ayurvedic healing.
+            </p>
+            <Button asChild className="mt-5 rounded-full bg-[#4a3520] text-[var(--parchment)] hover:bg-[#3a2810] px-6 py-2.5 md:px-10 md:py-3 h-auto text-xs md:text-sm font-medium tracking-wide">
+              <Link to="/book">Book my Consultation</Link>
+            </Button>
+          </div>
+
+          {/* Frangipani flower overlapping the bottom right corner with scroll animation */}
+          <motion.img
+            src={frangipaniFlowerImg}
+            alt=""
+            initial={{ x: 60, opacity: 0, rotate: 15 }}
+            whileInView={{ x: 0, opacity: 1, rotate: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="absolute right-2 md:right-8 -bottom-4 md:-bottom-6 w-44 md:w-60 z-20 pointer-events-none"
+            aria-hidden
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* -------------------- WHY AYURVEDA -------------------- */
 function WhyAyurveda() {
   const cards = [
-    { title: "Traditional healing", body: "Formulas refined over centuries — proven by generations, not marketing campaigns.", icon: "🪔" },
-    { title: "No side effects", body: "Plant-based, purified and personalised. We work with the body, never against it.", icon: "🌿" },
-    { title: "Root cause treatment", body: "We look for what is causing the imbalance — not just what is loudest.", icon: "🔍" },
-    { title: "Personalised care", body: "Your protocol is not our protocol. Every plan is designed from your assessment upward.", icon: "✨" },
-    { title: "Natural medicines", body: "Formulated in-house from single herbs to complex Rasayana. Traceable, testable, pure.", icon: "🏺" },
-    { title: "Continuity of care", body: "Weekly check-ins, adjustments and support — until your body is stable, not for a fixed number of sessions.", icon: "🤝" },
+    { num: "I", title: "Traditional healing", body: "Formulas refined over centuries — proven by generations, not marketing campaigns.", Icon: Flame, sanskrit: "परम्परा" },
+    { num: "II", title: "No side effects", body: "Plant-based, purified and personalised. We work with the body, never against it.", Icon: Leaf, sanskrit: "निर्दोष" },
+    { num: "III", title: "Root cause treatment", body: "We look for what is causing the imbalance — not just what is loudest.", Icon: Search, sanskrit: "मूल" },
+    { num: "IV", title: "Personalised care", body: "Your protocol is not our protocol. Every plan is designed from your assessment upward.", Icon: Sparkles, sanskrit: "प्रकृति" },
+    { num: "V", title: "Natural medicines", body: "Formulated in-house from single herbs to complex Rasayana. Traceable, testable, pure.", Icon: FlaskConical, sanskrit: "औषधि" },
+    { num: "VI", title: "Continuity of care", body: "Weekly check-ins, adjustments and support — until your body is stable, not for a fixed number of sessions.", Icon: HandHeart, sanskrit: "सेवा" },
   ];
+
+  const container = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.1 } },
+  };
+  const item = {
+    hidden: { opacity: 0, y: 36 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+  };
+
   return (
-    <section className="bg-[var(--cream)] border-y border-[var(--border)]">
-      <div className="container-page py-32">
+    <section className="relative overflow-hidden bg-[var(--cream)] border-y border-[var(--border)]">
+      {/* Ancient texture + mandala watermarks */}
+      <img src={parchmentImg} alt="" aria-hidden className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.12] mix-blend-multiply" />
+      <Mandala className="pointer-events-none absolute -left-40 -top-40 size-[520px] text-[var(--gold)]/10" />
+      <Mandala className="pointer-events-none absolute -right-48 -bottom-48 size-[560px] text-[var(--copper)]/10" />
+
+      <div className="container-page relative py-24 md:py-32">
         <div className="text-center max-w-2xl mx-auto">
           <Reveal>
+            <div className="font-sanskrit text-[var(--gold)] text-base md:text-lg mb-2">आयुर्वेद</div>
             <div className="eyebrow mb-4">Why Ayurveda</div>
             <h2 className="font-display text-3xl md:text-5xl leading-tight text-balance">
-              Six reasons people choose Devdut.
+              Six reasons people choose <span className="italic text-[var(--copper)]">Devdut.</span>
             </h2>
             <Ornament className="mt-8" />
           </Reveal>
         </div>
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {cards.map((c, i) => (
-            <Reveal key={c.title} delay={i * 0.05}>
-              <article className="group h-full rounded-3xl border border-[var(--border)] bg-[var(--parchment)] p-8 hover-lift">
-                <div className="text-4xl mb-6" aria-hidden>{c.icon}</div>
-                <h3 className="font-display text-2xl mb-3">{c.title}</h3>
-                <p className="text-[var(--muted-foreground)] leading-relaxed">{c.body}</p>
-                <div className="gold-divider mt-8 opacity-40 group-hover:opacity-100 transition-opacity" />
-              </article>
-            </Reveal>
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          className="mt-12 md:mt-16 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3"
+        >
+          {cards.map((c) => (
+            <motion.article
+              key={c.title}
+              variants={item}
+              whileHover={{ y: -6 }}
+              transition={{ type: "spring", stiffness: 300, damping: 24 }}
+              className="group relative h-full overflow-hidden rounded-2xl md:rounded-3xl border border-[var(--gold)]/25 bg-[var(--parchment)]/80 p-4 md:p-8 backdrop-blur-sm transition-colors duration-500 hover:border-[var(--gold)]/60"
+            >
+              {/* Corner flourishes */}
+              <span aria-hidden className="pointer-events-none absolute left-2.5 top-2.5 md:left-3 md:top-3 size-4 md:size-5 border-l border-t border-[var(--gold)]/40 rounded-tl-lg" />
+              <span aria-hidden className="pointer-events-none absolute right-2.5 bottom-2.5 md:right-3 md:bottom-3 size-4 md:size-5 border-r border-b border-[var(--gold)]/40 rounded-br-lg" />
+
+              {/* Icon seal */}
+              <div className="relative mb-3 md:mb-6 inline-grid">
+                <motion.span
+                  whileHover={{ rotate: 6, scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                  className="grid size-10 md:size-14 place-items-center rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 text-[var(--gold)] ring-1 ring-[var(--gold)]/20"
+                >
+                  <c.Icon className="size-5 md:size-6" strokeWidth={1.5} />
+                </motion.span>
+              </div>
+
+              <div className="mb-0.5 md:mb-1 font-sanskrit text-xs md:text-sm text-[var(--copper)]/80">{c.sanskrit}</div>
+              <h3 className="font-display text-base md:text-2xl mb-1.5 md:mb-3 leading-snug text-[var(--forest-deep)]">{c.title}</h3>
+              <p className="text-xs md:text-base text-[var(--muted-foreground)] leading-relaxed">{c.body}</p>
+
+              {/* Growing gold divider */}
+              <div className="mt-4 md:mt-8 h-px w-10 md:w-12 origin-left bg-gradient-to-r from-[var(--gold)] to-transparent transition-all duration-500 group-hover:w-full" />
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -252,6 +497,7 @@ function WhyAyurveda() {
 /* -------------------- TREATMENTS -------------------- */
 function TreatmentsShowcase() {
   const featured = TREATMENTS.slice(0, 6);
+  const images = [treatmentsImg, therapyImg, templeImg, heroImg, doctorImg, therapyImg];
   return (
     <section className="container-page py-32">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
@@ -274,23 +520,39 @@ function TreatmentsShowcase() {
             <Link
               to="/treatments/$slug"
               params={{ slug: t.slug }}
-              className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 hover-lift"
+              className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)] hover-lift"
             >
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-xs uppercase tracking-widest text-[var(--gold)]">{t.category}</span>
-                  <span className="font-sanskrit text-[var(--copper)]">{t.sanskrit ?? "◈"}</span>
-                </div>
-                <h3 className="font-display text-3xl mb-3 group-hover:text-[var(--copper)] transition-colors">{t.name}</h3>
-                <p className="text-[var(--muted-foreground)]">{t.short}</p>
-              </div>
-              <div className="mt-8 flex items-center justify-between text-sm">
-                <span className="text-[var(--muted-foreground)]">{t.duration}</span>
-                <span className="inline-flex items-center gap-2 font-medium text-[var(--forest-deep)]">
-                  Learn more <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+              {/* Top half — image */}
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <img
+                  src={images[i % images.length]}
+                  alt={t.name}
+                  loading="lazy"
+                  className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--forest-deep)]/70 via-[var(--forest-deep)]/10 to-transparent" />
+                <span className="absolute left-4 top-4 rounded-full bg-black/25 px-3 py-1 text-xs uppercase tracking-widest text-[var(--parchment)] backdrop-blur-sm">
+                  {t.category}
+                </span>
+                <span className="absolute right-4 top-4 font-sanskrit text-lg text-[var(--gold)] drop-shadow">
+                  {t.sanskrit ?? "◈"}
+                </span>
+                <span className="absolute bottom-3 left-4 text-xs font-medium text-[var(--parchment)]/90">
+                  {t.duration}
                 </span>
               </div>
-              <div aria-hidden className="absolute -bottom-16 -right-16 size-40 rounded-full bg-gold-gradient opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-30" />
+
+              {/* Bottom half — text */}
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="font-display text-2xl md:text-3xl mb-2 text-[var(--forest-deep)] transition-colors group-hover:text-[var(--copper)]">
+                  {t.name}
+                </h3>
+                <p className="text-sm text-[var(--muted-foreground)] leading-relaxed">{t.short}</p>
+                <span className="mt-auto pt-6 inline-flex items-center gap-2 text-sm font-medium text-[var(--forest-deep)]">
+                  Learn more
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </div>
             </Link>
           </Reveal>
         ))}
@@ -514,52 +776,6 @@ function Testimonials() {
   );
 }
 
-/* -------------------- BLOG PREVIEW -------------------- */
-import { POSTS } from "@/lib/blog";
-function BlogPreview() {
-  const posts = POSTS.slice(0, 3);
-  return (
-    <section className="bg-[var(--cream)] border-y border-[var(--border)]">
-      <div className="container-page py-32">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
-          <Reveal>
-            <div className="eyebrow mb-4">The Journal</div>
-            <h2 className="font-display text-3xl md:text-5xl leading-tight max-w-2xl">
-              Wisdom, written down.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <Button asChild variant="outline" className="rounded-full">
-              <Link to="/blog">Read all articles <ArrowRight className="ml-2 size-4" /></Link>
-            </Button>
-          </Reveal>
-        </div>
-        <div className="grid gap-8 lg:grid-cols-3">
-          {posts.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 0.08}>
-              <Link
-                to="/blog/$slug"
-                params={{ slug: p.slug }}
-                className="group flex h-full flex-col rounded-3xl border border-[var(--border)] bg-[var(--parchment)] overflow-hidden hover-lift"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-forest-gradient">
-                  <img src={i === 0 ? treatmentsImg : i === 1 ? therapyImg : templeImg} alt="" loading="lazy" className="size-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105" />
-                </div>
-                <div className="p-8 flex-1 flex flex-col">
-                  <div className="flex items-center gap-4 text-xs uppercase tracking-widest text-[var(--gold)] mb-4">
-                    <span>{p.category}</span><span>·</span><span>{p.readTime}</span>
-                  </div>
-                  <h3 className="font-display text-2xl mb-3 group-hover:text-[var(--copper)] transition-colors">{p.title}</h3>
-                  <p className="text-[var(--muted-foreground)] flex-1">{p.excerpt}</p>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* -------------------- FINAL CTA -------------------- */
 function FinalCTA() {
@@ -582,8 +798,9 @@ function FinalCTA() {
               स्वास्थ्यमेव परमं धनम्
             </div>
             
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.1] max-w-3xl mx-auto text-balance drop-shadow-lg text-[var(--parchment)]">
-              Your body already knows how to heal. <em className="text-shimmer not-italic block mt-1">Let it.</em>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.1] max-w-3xl mx-auto drop-shadow-lg text-[var(--parchment)]">
+              <span className="block">Your body already knows how to heal.</span>
+              <em className="text-shimmer not-italic block mt-1">Let it.</em>
             </h2>
             
             <Ornament className="my-6 opacity-70" />

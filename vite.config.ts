@@ -9,7 +9,10 @@ export default defineConfig({
     // tanstackStart already bundles TanStackRouterVite + code-splitting internally.
     // Do NOT add TanStackRouterVite separately or it will conflict.
     tanstackStart({
-      server: { entry: "server" },
+      server: { 
+        entry: "server",
+        preset: "vercel"
+      },
     }),
     react(),
   ],

@@ -1,7 +1,14 @@
 {
-    "$schema": "https://openapi.vercel.sh/vercel.json",
-    "framework": "vite",
     "buildCommand": "npm run build",
-    "outputDirectory": "dist",
-    "cleanUrls": true
+    "outputDirectory": "dist/client",
+    "cleanUrls": true,
+    "functions": {
+        "api/ssr.js": {
+            "runtime": "nodejs20.x",
+            "includeFiles": "dist/server/**"
+        }
+    },
+    "rewrites": [
+        { "source": "/(.*)", "destination": "/api/ssr" }
+    ]
 }

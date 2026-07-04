@@ -67,7 +67,12 @@ export function SiteFooter() {
         <Ornament className="mt-20 opacity-60" />
 
         <div className="mt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[var(--parchment)]/60">
-          <div>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</div>
+          <div>
+            © 2026 Devdut Ayurved Clinic. All Rights Reserved. · Developed by{" "}
+            <a href="https://theblueintellect.com" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--gold)] transition-colors">
+              The Blue Intellect
+            </a>
+          </div>
           <div className="flex gap-6">
             <Link to="/privacy" className="hover:text-[var(--gold)]">Privacy</Link>
             <Link to="/terms" className="hover:text-[var(--gold)]">Terms</Link>

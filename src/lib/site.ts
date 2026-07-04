@@ -22,6 +22,7 @@ export const SITE = {
 export const NAV = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
+  { to: "/treatments/$slug", params: { slug: "panchakarma" }, label: "Panchakarma" },
   { to: "/treatments", label: "Treatments", dropdown: true },
   { to: "/gallery", label: "Gallery" },
   { to: "/contact", label: "Contact" },

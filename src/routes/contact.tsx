@@ -1,10 +1,41 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useNavigate } from "@tanstack/react-router";
 import { PageShell } from "@/components/site/PageShell";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site";
+import { TREATMENTS } from "@/lib/treatments";
+import contactHeroImg from "@/assets/contact-hero.png";
+import type { ReactNode } from "react";
+
+const schema = z.object({
+  name: z.string().min(2, "Please enter your name"),
+  phone: z.string().min(7, "Please enter a valid phone"),
+  email: z.string().email("Enter a valid email"),
+  treatment: z.string().min(1, "Choose a treatment"),
+  preferredDate: z.string().min(1, "Pick a date"),
+  notes: z.string().optional(),
+});
+
+type FormValues = z.infer<typeof schema>;
+
+const inputCls =
+  "mt-1 w-full rounded-full border border-[var(--border)] bg-[var(--parchment)] px-5 py-3 text-sm outline-none focus:border-[var(--gold)] focus:ring-2 focus:ring-[var(--gold)]/30 transition";
+
+function Field({ label, error, children }: { label: string; error?: string; children: ReactNode }) {
+  return (
+    <label className="block">
+      <span className="text-xs uppercase tracking-widest text-[var(--muted-foreground)]">{label}</span>
+      <div className="mt-1">{children}</div>
+      {error && <span className="mt-1 block text-xs text-[var(--destructive)]">{error}</span>}
+    </label>
+  );
+}
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -19,12 +50,36 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: { treatment: "" },
+  });
+
+  const onSubmit = async (_: FormValues) => {
+    await new Promise((r) => setTimeout(r, 700));
+    reset();
+    navigate({ to: "/thank-you" });
+  };
+
   return (
     <PageShell>
-      <PageHeader eyebrow="Contact" title="Come see us, or call." intro="We answer every message ourselves. No call centres, no bots." />
+      <PageHeader
+        sanskrit="संपर्कः सेवायाः आरम्भः"
+        title="Come see us, or call."
+        intro="We answer every message ourselves. No call centres, no bots."
+        image={contactHeroImg}
+        imageHeightClass="min-h-[42vh] md:min-h-[60vh]"
+        imageAlignClass="justify-center md:justify-start"
+      />
 
       <section className="container-page py-16 grid gap-10 lg:grid-cols-[1fr_1.4fr]">
-        <Reveal>
+        <Reveal className="order-2 lg:order-1">
           <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 space-y-6">
             <div>
               <div className="eyebrow mb-2">Visit</div>
@@ -57,28 +112,48 @@ function ContactPage() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.1}>
-          <form className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 space-y-5">
-            <h2 className="font-display text-3xl">Send us a message</h2>
+        <Reveal delay={0.1} className="order-1 lg:order-2">
+          <form onSubmit={handleSubmit(onSubmit)} className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 space-y-5">
+            <h2 className="font-display text-3xl">Book an appointment</h2>
+
             <div className="grid gap-4 sm:grid-cols-2">
-              <label className="block">
-                <span className="text-xs uppercase tracking-widest text-[var(--muted-foreground)]">Name</span>
-                <input required className="mt-2 w-full rounded-full border border-[var(--border)] bg-[var(--parchment)] px-5 py-3 outline-none focus:border-[var(--gold)]" />
-              </label>
-              <label className="block">
-                <span className="text-xs uppercase tracking-widest text-[var(--muted-foreground)]">Phone</span>
-                <input required className="mt-2 w-full rounded-full border border-[var(--border)] bg-[var(--parchment)] px-5 py-3 outline-none focus:border-[var(--gold)]" />
-              </label>
+              <Field label="Full name" error={errors.name?.message}>
+                <input {...register("name")} className={inputCls} />
+              </Field>
+              <Field label="Phone" error={errors.phone?.message}>
+                <input {...register("phone")} className={inputCls} />
+              </Field>
             </div>
-            <label className="block">
-              <span className="text-xs uppercase tracking-widest text-[var(--muted-foreground)]">Email</span>
-              <input type="email" required className="mt-2 w-full rounded-full border border-[var(--border)] bg-[var(--parchment)] px-5 py-3 outline-none focus:border-[var(--gold)]" />
-            </label>
-            <label className="block">
-              <span className="text-xs uppercase tracking-widest text-[var(--muted-foreground)]">Message</span>
-              <textarea required rows={5} className="mt-2 w-full rounded-3xl border border-[var(--border)] bg-[var(--parchment)] px-5 py-3 outline-none focus:border-[var(--gold)]" />
-            </label>
-            <Button type="submit" className="rounded-full bg-forest-gradient text-[var(--parchment)] h-12 px-6">Send message</Button>
+
+            <Field label="Email" error={errors.email?.message}>
+              <input type="email" {...register("email")} className={inputCls} />
+            </Field>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field label="Treatment" error={errors.treatment?.message}>
+                <select {...register("treatment")} className={inputCls}>
+                  <option value="">Select a treatment</option>
+                  {TREATMENTS.map((t) => (
+                    <option key={t.slug} value={t.slug}>{t.name}</option>
+                  ))}
+                </select>
+              </Field>
+              <Field label="Preferred date" error={errors.preferredDate?.message}>
+                <input type="date" {...register("preferredDate")} className={inputCls} />
+              </Field>
+            </div>
+
+            <Field label="Anything we should know?">
+              <textarea rows={4} {...register("notes")} className={`${inputCls} rounded-3xl`} />
+            </Field>
+
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="rounded-full bg-forest-gradient text-[var(--parchment)] h-12 px-6 text-sm"
+            >
+              {isSubmitting ? "Sending…" : "Request appointment"}
+            </Button>
           </form>
         </Reveal>
       </section>

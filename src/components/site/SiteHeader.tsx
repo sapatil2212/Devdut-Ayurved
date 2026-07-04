@@ -1,13 +1,14 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Phone, ChevronDown, ArrowRight, Instagram, Facebook, Youtube, MessageCircle } from "lucide-react";
+import { Phone, ChevronDown, ChevronRight, ArrowRight, Instagram, Facebook, Youtube, MessageCircle } from "lucide-react";
 import { NAV, SITE } from "@/lib/site";
 import { TREATMENTS } from "@/lib/treatments";
 import { Button } from "@/components/ui/button";
 import { BookAppointmentDialog } from "./BookAppointmentDialog";
 import logoLight from "@/assets/logo/devdut-ayurved-logo-light.png";
 import logoDark from "@/assets/logo/devdut-ayurved-logo-dark.png";
+import therapyImg from "@/assets/therapy.jpg";
 
 /* Morphing hamburger → close icon */
 function BurgerIcon({ open, dark }: { open: boolean; dark: boolean }) {
@@ -77,7 +78,7 @@ export function SiteHeader() {
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-500 ${
         scrolled
-          ? "bg-[var(--parchment)]/85 backdrop-blur-xl border-b border-[var(--border)]"
+          ? "bg-[var(--parchment)]/85 backdrop-blur-xl shadow-[0_1px_12px_rgba(0,0,0,0.06)]"
           : "bg-transparent"
       }`}
     >
@@ -105,18 +106,82 @@ export function SiteHeader() {
                     {n.label}
                     <ChevronDown className="size-3.5 transition-transform duration-300 group-hover:rotate-180" />
                   </Link>
-                  <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                    <div className="w-64 rounded-2xl border border-[var(--border)] bg-[var(--parchment)] p-2 shadow-elegant overflow-hidden max-h-[70vh] overflow-y-auto">
-                      {TREATMENTS.map((t) => (
-                        <Link
-                          key={t.slug}
-                          to="/treatments/$slug"
-                          params={{ slug: t.slug }}
-                          className="block rounded-xl px-4 py-2.5 text-sm font-medium text-[var(--muted-foreground)] hover:bg-[var(--cream)] hover:text-[var(--forest-deep)] transition-colors"
-                        >
-                          {t.name}
-                        </Link>
-                      ))}
+                  <div className="absolute left-1/2 -translate-x-[45%] top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0 z-50">
+                    <div className="w-[850px] rounded-3xl border border-[var(--border)] bg-[var(--parchment)] p-6 shadow-elegant flex gap-8">
+                      {/* Left Column: Image */}
+                      <div className="w-[260px] shrink-0 relative rounded-2xl overflow-hidden aspect-[4/3] border border-[var(--border)]">
+                        <img
+                          src={therapyImg}
+                          alt="Ayurvedic Treatment Room"
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--forest-deep)]/20 to-transparent" />
+                      </div>
+
+                      {/* Right Columns: Grid of 3 columns */}
+                      <div className="flex-1 grid grid-cols-3 gap-6">
+                        {/* Column 1 */}
+                        <div className="flex flex-col gap-2">
+                          {[
+                            { name: "Panchakarma Therapies", to: "/treatments/$slug", params: { slug: "panchakarma" } },
+                            { name: "Lifestyle & Chronic Diseases", to: "/treatments/$slug", params: { slug: "lifestyle-chronic" } },
+                            { name: "Bone, Joint & Neurological Care", to: "/treatments/$slug", params: { slug: "joint-pain" } },
+                          ].map((item, idx) => (
+                            <Link
+                              key={idx}
+                              to={item.to as any}
+                              params={item.params as any}
+                              className="group/item flex items-center gap-3 py-1.5 text-[13px] font-medium text-[var(--muted-foreground)] hover:text-[var(--forest-deep)] transition-all duration-200"
+                            >
+                              <span className="size-5 rounded-full bg-[var(--forest-deep)]/10 text-[var(--forest-deep)] flex items-center justify-center shrink-0 transition-all duration-300 group-hover/item:bg-[var(--forest-deep)] group-hover/item:text-[var(--parchment)] group-hover/item:translate-x-1">
+                                <ChevronRight className="size-3" />
+                              </span>
+                              <span>{item.name}</span>
+                            </Link>
+                          ))}
+                        </div>
+
+                        {/* Column 2 */}
+                        <div className="flex flex-col gap-2">
+                          {[
+                            { name: "Skin, Hair & Cosmetic Care", to: "/treatments/$slug", params: { slug: "skin" } },
+                            { name: "Women's & Men's Health", to: "/treatments/$slug", params: { slug: "womens-health" } },
+                            { name: "Digestive, Kidney & Respiratory Care", to: "/treatments/$slug", params: { slug: "digestion" } },
+                          ].map((item, idx) => (
+                            <Link
+                              key={idx}
+                              to={item.to as any}
+                              params={item.params as any}
+                              className="group/item flex items-center gap-3 py-1.5 text-[13px] font-medium text-[var(--muted-foreground)] hover:text-[var(--forest-deep)] transition-all duration-200"
+                            >
+                              <span className="size-5 rounded-full bg-[var(--forest-deep)]/10 text-[var(--forest-deep)] flex items-center justify-center shrink-0 transition-all duration-300 group-hover/item:bg-[var(--forest-deep)] group-hover/item:text-[var(--parchment)] group-hover/item:translate-x-1">
+                                <ChevronRight className="size-3" />
+                              </span>
+                              <span>{item.name}</span>
+                            </Link>
+                          ))}
+                        </div>
+
+                        {/* Column 3 */}
+                        <div className="flex flex-col gap-2">
+                          {[
+                            { name: "Child Health & Immunity", to: "/treatments/$slug", params: { slug: "child" } },
+                            { name: "General Wellness & Preventive Care", to: "/treatments/$slug", params: { slug: "preventive-care" } },
+                          ].map((item, idx) => (
+                            <Link
+                              key={idx}
+                              to={item.to as any}
+                              params={item.params as any}
+                              className="group/item flex items-center gap-3 py-1.5 text-[13px] font-medium text-[var(--muted-foreground)] hover:text-[var(--forest-deep)] transition-all duration-200"
+                            >
+                              <span className="size-5 rounded-full bg-[var(--forest-deep)]/10 text-[var(--forest-deep)] flex items-center justify-center shrink-0 transition-all duration-300 group-hover/item:bg-[var(--forest-deep)] group-hover/item:text-[var(--parchment)] group-hover/item:translate-x-1">
+                                <ChevronRight className="size-3" />
+                              </span>
+                              <span>{item.name}</span>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -126,7 +191,8 @@ export function SiteHeader() {
             return (
               <Link
                 key={n.to}
-                to={n.to}
+                to={n.to as any}
+                params={("params" in n ? n.params : undefined) as any}
                 activeOptions={{ exact: n.to === "/" }}
                 activeProps={{ className: scrolled ? "text-[var(--forest-deep)]" : "text-[var(--gold)]" }}
                 inactiveProps={{ className: scrolled ? "text-[var(--muted-foreground)]" : "text-[var(--parchment)]/85" }}
@@ -269,7 +335,8 @@ export function SiteHeader() {
                     return (
                       <motion.li key={n.to} variants={itemVariants} className="border-b border-[var(--border)]/50">
                         <Link
-                          to={n.to}
+                          to={n.to as any}
+                          params={("params" in n ? n.params : undefined) as any}
                           className={`group flex items-center gap-3 py-3 font-display text-lg transition-all duration-300 hover:pl-1 ${active ? "text-[var(--gold)]" : "text-[var(--forest-deep)]"}`}
                         >
                           <span className="text-[11px] font-sans font-semibold tracking-widest text-[var(--gold)]/70">{num}</span>
@@ -292,12 +359,12 @@ export function SiteHeader() {
                 <BookAppointmentDialog
                   trigger={
                     <Button
-                      onClick={() => setOpen(false)}
                       className="w-full bg-forest-gradient text-[var(--parchment)] rounded-full h-12 shadow-gold"
                     >
                       Book Appointment <ArrowRight className="ml-2 size-4" />
                     </Button>
                   }
+                  onOpen={() => setOpen(false)}
                 />
                 <a
                   href={`tel:${SITE.phone.replace(/\s/g, "")}`}

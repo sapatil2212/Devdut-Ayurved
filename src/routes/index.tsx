@@ -9,11 +9,12 @@ function unwrapCountUp(mod: any): any {
   return mod;
 }
 const CountUp = unwrapCountUp(CountUpModule);
-import { ArrowRight, Sparkles, Leaf, Heart, ShieldCheck, Star, Quote, ArrowDown, ChevronLeft, ChevronRight, Flame, Search, FlaskConical, HandHeart } from "lucide-react";
+import { ArrowRight, Sparkles, Leaf, Heart, ShieldCheck, Star, Quote, ArrowDown, ChevronLeft, ChevronRight, Flame, Search, FlaskConical, HandHeart, Activity, Brain, Wind, Baby } from "lucide-react";
 import { PageShell } from "@/components/site/PageShell";
 import { Reveal } from "@/components/site/Reveal";
 import { Ornament, LeafSVG, Mandala } from "@/components/site/Ornament";
 import { Button } from "@/components/ui/button";
+import { BookAppointmentDialog } from "@/components/site/BookAppointmentDialog";
 import { TREATMENTS } from "@/lib/treatments";
 import { SITE } from "@/lib/site";
 import heroImg from "@/assets/hero-ayurveda.jpg";
@@ -21,10 +22,19 @@ import doctorImg from "@/assets/doctor.jpg";
 import treatmentsImg from "@/assets/treatments.jpg";
 import therapyImg from "@/assets/therapy.jpg";
 import templeImg from "@/assets/temple.jpg";
+import homeAboutImg from "@/assets/home-about.png";
 import parchmentImg from "@/assets/ancient-paper.png";
 import frangipaniFlowerImg from "@/assets/frangipani-flower.png";
 import rightPaperImg from "@/assets/right-book.webp";
 import leftBowlImg from "@/assets/left-bowl.png";
+import aboutHeroImg from "@/assets/about-hero.png";
+import doctorPng from "@/assets/doctor.png";
+import childImg from "@/assets/treatments/child.png";
+import lifestyleChronicImg from "@/assets/treatments/Lifestyle-Chronic.png";
+import humanHealthImg from "@/assets/treatments/human-Health.png";
+import jointImg from "@/assets/treatments/joint.png";
+import skinHairImg from "@/assets/treatments/skin-hair.png";
+import digestiveImg from "@/assets/treatments/digestive.png";
 
 
 export const Route = createFileRoute("/")({
@@ -53,7 +63,6 @@ function HomePage() {
       <TreatmentsShowcase />
       <DoctorFeature />
       <Journey />
-      <Stats />
       <Testimonials />
       <FinalCTA />
     </PageShell>
@@ -169,11 +178,15 @@ function Hero() {
         </AnimatePresence>
 
 
-        <div className="mt-10 flex flex-wrap items-center gap-4">
-          <Button asChild className="rounded-full bg-gold-gradient text-[var(--forest-deep)] hover:opacity-90 shadow-gold h-12 px-6 text-sm font-medium">
-            <Link to="/book">Book Consultation <ArrowRight className="ml-2 size-4" /></Link>
-          </Button>
-          <Button asChild variant="outline" className="rounded-full border-[var(--parchment)]/25 bg-white/5 text-[var(--parchment)] hover:bg-white/10 h-12 px-6 text-sm font-medium">
+        <div className="mt-10 flex flex-wrap items-center gap-3 md:gap-4">
+          <BookAppointmentDialog
+            trigger={
+              <Button className="rounded-full bg-gold-gradient text-[var(--forest-deep)] hover:opacity-90 shadow-gold h-9 px-4 text-xs md:h-12 md:px-6 md:text-sm font-medium cursor-pointer">
+                Book Consultation <ArrowRight className="ml-1.5 size-3 md:ml-2 md:size-4" />
+              </Button>
+            }
+          />
+          <Button asChild variant="outline" className="rounded-full border-[var(--parchment)]/25 bg-white/5 text-[var(--parchment)] hover:bg-white/10 h-9 px-4 text-xs md:h-12 md:px-6 md:text-sm font-medium">
             <Link to="/treatments">Explore Treatments</Link>
           </Button>
 
@@ -184,11 +197,10 @@ function Hero() {
                 key={i}
                 onClick={() => setIdx(i)}
                 aria-label={`Go to slide ${i + 1}`}
-                className={`rounded-full transition-all duration-300 ${
-                  i === idx
-                    ? "w-6 h-2 bg-[var(--gold)]"
-                    : "w-2 h-2 bg-[var(--parchment)]/40 hover:bg-[var(--parchment)]/70"
-                }`}
+                className={`rounded-full transition-all duration-300 ${i === idx
+                  ? "w-6 h-2 bg-[var(--gold)]"
+                  : "w-2 h-2 bg-[var(--parchment)]/40 hover:bg-[var(--parchment)]/70"
+                  }`}
               />
             ))}
           </div>
@@ -196,7 +208,7 @@ function Hero() {
       </motion.div>
 
       {/* Scroll indicator — bottom-right corner */}
-      <div className="absolute bottom-8 right-8 flex items-center justify-center">
+      <div className="hidden md:flex absolute bottom-8 right-8 items-center justify-center">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
@@ -210,7 +222,7 @@ function Hero() {
             />
             <text fill="currentColor" fontSize="12" fontWeight="400" letterSpacing="0.1em">
               <textPath href="#scrollPath" startOffset="0%" textLength="238.7" lengthAdjust="spacing">
-                SCROLL DOWN * SCROLL DOWN * SCROLL DOWN * 
+                SCROLL DOWN * SCROLL DOWN * SCROLL DOWN *
               </textPath>
             </text>
           </svg>
@@ -245,28 +257,26 @@ function Marquee() {
 /* -------------------- PHILOSOPHY -------------------- */
 function Philosophy() {
   return (
-    <section className="container-page py-32">
+    <section className="container-page pt-0 md:pt-2 pb-24 md:pb-32">
       <div className="grid gap-16 lg:grid-cols-2 items-center">
         <Reveal>
           <div className="relative">
             <div className="absolute -top-6 -left-6 size-24 rounded-full bg-gold-gradient blur-3xl opacity-40" />
-            <img src={templeImg} alt="Ancient temple silhouette at dawn" width={1600} height={900} loading="lazy" className="relative rounded-3xl shadow-elegant" />
-            <div className="absolute -bottom-4 -right-2 sm:-bottom-8 sm:-right-8 w-48 sm:w-56 rounded-2xl bg-[var(--cream)] p-6 shadow-elegant border border-[var(--border)]">
-              <div className="font-sanskrit text-[var(--gold)] text-sm mb-1">आयुर्वेद</div>
-              <div className="font-display text-lg text-[var(--forest-deep)]">The science of life</div>
-            </div>
+            <img src={homeAboutImg} alt="Our Philosophy - Ancient wisdom. Modern precision." width={1600} height={1000} loading="lazy" className="relative rounded-3xl w-full max-h-[480px] object-cover" />
           </div>
         </Reveal>
         <Reveal delay={0.15}>
-          <div className="eyebrow mb-4">Our Philosophy</div>
-          <h2 className="font-display text-3xl md:text-5xl leading-tight text-balance">
-            Ancient wisdom. <span className="italic text-[var(--copper)]">Modern precision.</span>
+          <div className="eyebrow mb-1">Our Philosophy</div>
+          <h2 className="font-display text-2xl md:text-4xl leading-tight sm:whitespace-nowrap">
+            Ancient Wisdom. <span className="italic text-[var(--copper)]">Modern Precision.</span>
           </h2>
-          <p className="mt-6 text-lg text-[var(--muted-foreground)]">
-            Ayurveda does not treat diseases — it treats people. At Devdut, every plan begins with your unique constitution, your history and your daily life. What we prescribe you cannot find in a pharmacy, because it does not yet exist. We make it, for you.
+          <p className="mt-3 text-sm md:text-base text-[var(--muted-foreground)] leading-relaxed">
+            At Devdut Ayurved Clinic, we believe that true healing begins by understanding the root cause of illness, not just its symptoms. Guided by the timeless principles of Ayurveda, we combine traditional therapies, personalized care, and evidence-based practices to restore balance to the body, mind, and spirit.
           </p>
-          <Ornament className="my-8 !justify-start" />
-          <div className="grid gap-4 sm:grid-cols-2">
+          <p className="mt-4 text-sm md:text-base text-[var(--muted-foreground)] leading-relaxed">
+            Every treatment is thoughtfully tailored to your unique Prakriti (body constitution), lifestyle, and health goals. By integrating authentic Ayurvedic wisdom with a modern, patient-centered approach, we help you achieve lasting wellness, naturally and safely.
+          </p>
+          <div className="grid grid-cols-2 gap-4 mt-8">
             {[
               { icon: Leaf, label: "Root cause, not symptoms" },
               { icon: Heart, label: "Personalised to your Prakriti" },
@@ -288,7 +298,7 @@ function Philosophy() {
 /* -------------------- VEDIC WISDOM -------------------- */
 function VedicWisdom() {
   return (
-    <section className="relative pt-24 pb-40 md:pb-24 bg-[#1c120c] text-[var(--parchment)] overflow-visible">
+    <section className="relative pt-16 pb-36 md:pt-24 md:pb-24 bg-[#1c120c] text-[var(--parchment)] overflow-visible">
       {/* Top right manuscript roll image — half above, half inside */}
       <motion.img
         src={rightPaperImg}
@@ -308,7 +318,7 @@ function VedicWisdom() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="max-w-4xl mb-8 md:mb-20"
+          className="max-w-4xl mb-6 md:mb-20"
         >
           <h2 className="font-display text-4xl md:text-6xl leading-[1.1] text-[#f4ebd0]">
             Unlock 2,500 Years of<br />
@@ -366,7 +376,7 @@ function VedicWisdom() {
 /* -------------------- ANCIENT SECRETS -------------------- */
 function AncientSecrets() {
   return (
-    <section className="relative py-10 md:py-14 overflow-hidden">
+    <section className="relative pt-10 md:pt-14 pb-8 md:pb-10 overflow-hidden">
       <div className="container-page relative">
         {/* Parchment scroll card */}
         <div className="relative mx-auto max-w-5xl">
@@ -389,9 +399,13 @@ function AncientSecrets() {
               vibrant health with Devdut Ayurved — trusted as the pinnacle of
               ancient Ayurvedic healing.
             </p>
-            <Button asChild className="mt-5 rounded-full bg-[#4a3520] text-[var(--parchment)] hover:bg-[#3a2810] px-6 py-2.5 md:px-10 md:py-3 h-auto text-xs md:text-sm font-medium tracking-wide">
-              <Link to="/book">Book my Consultation</Link>
-            </Button>
+            <BookAppointmentDialog
+              trigger={
+                <Button className="mt-5 rounded-full bg-[#4a3520] text-[var(--parchment)] hover:bg-[#3a2810] px-6 py-2.5 md:px-10 md:py-3 h-auto text-xs md:text-sm font-medium tracking-wide cursor-pointer">
+                  Book my Consultation
+                </Button>
+              }
+            />
           </div>
 
           {/* Frangipani flower overlapping the bottom right corner with scroll animation */}
@@ -441,12 +455,11 @@ function WhyAyurveda() {
       <div className="container-page relative py-24 md:py-32">
         <div className="text-center max-w-2xl mx-auto">
           <Reveal>
-            <div className="font-sanskrit text-[var(--gold)] text-base md:text-lg mb-2">आयुर्वेद</div>
-            <div className="eyebrow mb-4">Why Ayurveda</div>
-            <h2 className="font-display text-3xl md:text-5xl leading-tight text-balance">
+            <div className="eyebrow mb-2">Why Ayurveda</div>
+            <h2 className="font-display text-3xl md:text-5xl leading-tight sm:whitespace-nowrap">
               Six reasons people choose <span className="italic text-[var(--copper)]">Devdut.</span>
             </h2>
-            <Ornament className="mt-8" />
+            <Ornament className="mt-4" />
           </Reveal>
         </div>
 
@@ -455,7 +468,7 @@ function WhyAyurveda() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
-          className="mt-12 md:mt-16 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3"
+          className="mt-6 md:mt-8 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3"
         >
           {cards.map((c) => (
             <motion.article
@@ -463,29 +476,28 @@ function WhyAyurveda() {
               variants={item}
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 300, damping: 24 }}
-              className="group relative h-full overflow-hidden rounded-2xl md:rounded-3xl border border-[var(--gold)]/25 bg-[var(--parchment)]/80 p-4 md:p-8 backdrop-blur-sm transition-colors duration-500 hover:border-[var(--gold)]/60"
+              className="group relative h-full overflow-hidden rounded-2xl md:rounded-3xl border border-[var(--border)] bg-[var(--parchment)]/40 p-4 md:p-8 transition-all duration-300 hover:border-[var(--gold)]/50 hover:bg-[var(--parchment)]/60"
             >
-              {/* Corner flourishes */}
-              <span aria-hidden className="pointer-events-none absolute left-2.5 top-2.5 md:left-3 md:top-3 size-4 md:size-5 border-l border-t border-[var(--gold)]/40 rounded-tl-lg" />
-              <span aria-hidden className="pointer-events-none absolute right-2.5 bottom-2.5 md:right-3 md:bottom-3 size-4 md:size-5 border-r border-b border-[var(--gold)]/40 rounded-br-lg" />
+              {/* Corner flourishes — only visible on hover */}
+              <span aria-hidden className="pointer-events-none absolute left-2.5 top-2.5 md:left-3 md:top-3 size-4 md:size-5 border-l border-t border-[var(--gold)]/60 rounded-tl-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <span aria-hidden className="pointer-events-none absolute right-2.5 bottom-2.5 md:right-3 md:bottom-3 size-4 md:size-5 border-r border-b border-[var(--gold)]/60 rounded-br-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-              {/* Icon seal */}
-              <div className="relative mb-3 md:mb-6 inline-grid">
+              {/* Icon seal — positioned top-right */}
+              <div className="absolute top-3 right-4 md:top-5 md:right-8 inline-grid">
                 <motion.span
                   whileHover={{ rotate: 6, scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                  className="grid size-10 md:size-14 place-items-center rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 text-[var(--gold)] ring-1 ring-[var(--gold)]/20"
+                  className="grid size-10 md:size-14 place-items-center rounded-full border border-[var(--gold)]/30 bg-[var(--gold)]/5 text-[var(--gold)]"
                 >
                   <c.Icon className="size-5 md:size-6" strokeWidth={1.5} />
                 </motion.span>
               </div>
 
-              <div className="mb-0.5 md:mb-1 font-sanskrit text-xs md:text-sm text-[var(--copper)]/80">{c.sanskrit}</div>
-              <h3 className="font-display text-base md:text-2xl mb-1.5 md:mb-3 leading-snug text-[var(--forest-deep)]">{c.title}</h3>
+              <div className="pr-12 md:pr-16">
+                <div className="mb-0.5 md:mb-1 font-sanskrit text-xs md:text-sm text-[var(--copper)]/80">{c.sanskrit}</div>
+                <h3 className="font-display text-base md:text-2xl mb-1.5 md:mb-3 leading-snug text-[var(--forest-deep)]">{c.title}</h3>
+              </div>
               <p className="text-xs md:text-base text-[var(--muted-foreground)] leading-relaxed">{c.body}</p>
-
-              {/* Growing gold divider */}
-              <div className="mt-4 md:mt-8 h-px w-10 md:w-12 origin-left bg-gradient-to-r from-[var(--gold)] to-transparent transition-all duration-500 group-hover:w-full" />
             </motion.article>
           ))}
         </motion.div>
@@ -496,8 +508,65 @@ function WhyAyurveda() {
 
 /* -------------------- TREATMENTS -------------------- */
 function TreatmentsShowcase() {
-  const featured = TREATMENTS.slice(0, 6);
-  const images = [treatmentsImg, therapyImg, templeImg, heroImg, doctorImg, therapyImg];
+  const categories = [
+    {
+      title: "Panchakarma Therapies",
+      slug: "panchakarma",
+      icon: Leaf,
+      image: therapyImg,
+      items: ["Vamana", "Virechana", "Basti", "Nasya", "Raktamokshana"],
+    },
+    {
+      title: "Lifestyle & Chronic Diseases",
+      slug: "lifestyle-chronic",
+      icon: Activity,
+      image: lifestyleChronicImg,
+      items: ["Diabetes", "Thyroid Disorders", "Obesity", "Weight Management", "Acidity", "Jaundice", "Allergies", "Insomnia"],
+    },
+    {
+      title: "Bone, Joint & Neurological Care",
+      slug: "joint-pain",
+      icon: Brain,
+      image: jointImg,
+      items: ["Arthritis", "Joint Pain", "Sciatica", "Migraine", "Headache", "Epilepsy"],
+    },
+    {
+      title: "Skin, Hair & Cosmetic Care",
+      slug: "skin",
+      icon: Sparkles,
+      image: skinHairImg,
+      items: ["Hair Fall", "Acne & Pimples", "Skin Diseases", "Warts & Corns", "Herpes Zoster"],
+    },
+    {
+      title: "Women's & Men's Health",
+      slug: "womens-health",
+      icon: Heart,
+      image: humanHealthImg,
+      items: ["Menstrual Disorders", "Infertility", "Pregnancy Care", "White Discharge (Leucorrhoea)", "Sexual Weakness", "Hormonal Health"],
+    },
+    {
+      title: "Digestive, Kidney & Respiratory Care",
+      slug: "digestion",
+      icon: Wind,
+      image: digestiveImg,
+      items: ["Stomach Disorders", "Piles", "Kidney Diseases", "Urinary Disorders", "Asthma", "Chronic Cold", "Tonsillitis", "Stomatitis"],
+    },
+    {
+      title: "Child Health & Immunity",
+      slug: "child",
+      icon: Baby,
+      image: childImg,
+      items: ["Children's Diseases", "Suvarnaprashan", "Intellectual Development", "Immunity Enhancement"],
+    },
+    {
+      title: "General Wellness & Preventive Care",
+      slug: "preventive-care",
+      icon: ShieldCheck,
+      image: homeAboutImg,
+      items: ["Heart Diseases", "Abscess Management", "Tumour Supportive Care", "Personalized Diet Consultation", "Lifestyle Counseling", "Preventive Health Check-ups"],
+    },
+  ];
+
   return (
     <section className="container-page py-32">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
@@ -514,46 +583,55 @@ function TreatmentsShowcase() {
         </Reveal>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {featured.map((t, i) => (
-          <Reveal key={t.slug} delay={i * 0.05}>
-            <Link
-              to="/treatments/$slug"
-              params={{ slug: t.slug }}
+      <div className="grid gap-y-6 gap-x-4 md:grid-cols-2 lg:grid-cols-4">
+        {categories.map((cat, i) => (
+          <Reveal key={cat.title} delay={i * 0.05}>
+            <div
               className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)] hover-lift"
             >
               {/* Top half — image */}
               <div className="relative aspect-[16/10] overflow-hidden">
                 <img
-                  src={images[i % images.length]}
-                  alt={t.name}
+                  src={cat.image}
+                  alt={cat.title}
                   loading="lazy"
                   className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--forest-deep)]/70 via-[var(--forest-deep)]/10 to-transparent" />
-                <span className="absolute left-4 top-4 rounded-full bg-black/25 px-3 py-1 text-xs uppercase tracking-widest text-[var(--parchment)] backdrop-blur-sm">
-                  {t.category}
-                </span>
-                <span className="absolute right-4 top-4 font-sanskrit text-lg text-[var(--gold)] drop-shadow">
-                  {t.sanskrit ?? "◈"}
-                </span>
-                <span className="absolute bottom-3 left-4 text-xs font-medium text-[var(--parchment)]/90">
-                  {t.duration}
-                </span>
               </div>
 
               {/* Bottom half — text */}
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="font-display text-2xl md:text-3xl mb-2 text-[var(--forest-deep)] transition-colors group-hover:text-[var(--copper)]">
-                  {t.name}
+              <div className="flex flex-1 flex-col p-4 md:p-5">
+                <h3 className="font-display text-lg md:text-xl mb-1 text-[var(--forest-deep)] transition-colors group-hover:text-[var(--copper)]">
+                  {cat.title}
                 </h3>
-                <p className="text-sm text-[var(--muted-foreground)] leading-relaxed">{t.short}</p>
-                <span className="mt-auto pt-6 inline-flex items-center gap-2 text-sm font-medium text-[var(--forest-deep)]">
-                  Learn more
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                </span>
+                <ul className="grid grid-cols-2 gap-x-2.5 gap-y-1.5 mt-3 mb-4">
+                  {cat.items.slice(0, 4).map((item) => (
+                    <li key={item} className="flex items-center gap-1.5 text-xs text-[var(--muted-foreground)] transition-colors group-hover:text-[var(--forest-deep)] min-w-0">
+                      <span className="text-[var(--gold)] text-[10px] shrink-0">✦</span>
+                      <span className="truncate" title={item}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="border-t border-[var(--border)]/60 mt-auto pt-3 flex items-center justify-between gap-2">
+                  <BookAppointmentDialog
+                    trigger={
+                      <button className="text-[11px] font-semibold text-[var(--parchment)] bg-[var(--forest-deep)] hover:opacity-95 transition-opacity py-1 px-3.5 rounded-lg border border-transparent">
+                        Book appointment
+                      </button>
+                    }
+                  />
+                  <Link
+                    to="/treatments/$slug"
+                    params={{ slug: cat.slug }}
+                    className="text-[11px] font-semibold text-[var(--forest-deep)] hover:text-[var(--copper)] transition-colors inline-flex items-center gap-1 py-1 px-1.5 hover:bg-[var(--cream)] rounded-lg border border-transparent"
+                  >
+                    Learn more
+                    <ArrowRight className="size-3" />
+                  </Link>
+                </div>
               </div>
-            </Link>
+            </div>
           </Reveal>
         ))}
       </div>
@@ -602,9 +680,13 @@ function DoctorFeature() {
             <Button asChild className="rounded-full bg-gold-gradient text-[var(--forest-deep)] h-12 px-6">
               <Link to="/doctor">Read full profile</Link>
             </Button>
-            <Button asChild variant="outline" className="rounded-full border-white/25 bg-white/5 text-[var(--parchment)] hover:bg-white/10 h-12 px-6">
-              <Link to="/book">Book consultation</Link>
-            </Button>
+            <BookAppointmentDialog
+              trigger={
+                <Button variant="outline" className="rounded-full border-white/25 bg-white/5 text-[var(--parchment)] hover:bg-white/10 h-12 px-6 cursor-pointer">
+                  Book consultation
+                </Button>
+              }
+            />
           </div>
         </Reveal>
       </div>
@@ -650,29 +732,6 @@ function Journey() {
   );
 }
 
-/* -------------------- STATS STRIP -------------------- */
-function Stats() {
-  const stats = [
-    { n: 26, s: "+", l: "Years of practice" },
-    { n: 12000, s: "+", l: "Patients healed" },
-    { n: 45, s: "", l: "Signature therapies" },
-    { n: 4.9, s: "/5", l: "Google rating", decimals: 1 },
-  ];
-  return (
-    <section className="bg-[var(--cream)] border-y border-[var(--border)]">
-      <div className="container-page py-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-        {stats.map((s) => (
-          <Reveal key={s.l}>
-            <div className="font-display text-4xl md:text-5xl text-[var(--forest-deep)]">
-              <CountUp end={s.n} duration={2.5} decimals={s.decimals ?? 0} separator="," enableScrollSpy scrollSpyOnce />{s.s}
-            </div>
-            <div className="mt-2 text-xs uppercase tracking-widest text-[var(--muted-foreground)]">{s.l}</div>
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 /* -------------------- TESTIMONIALS -------------------- */
 function Testimonials() {
@@ -685,7 +744,7 @@ function Testimonials() {
 
   const next = () => setIdx((i) => (i + 1) % items.length);
   const prev = () => setIdx((i) => (i - 1 + items.length) % items.length);
-  
+
   useEffect(() => {
     const timer = setInterval(next, 6000);
     return () => clearInterval(timer);
@@ -710,7 +769,7 @@ function Testimonials() {
           <Reveal delay={0.1}>
             <Quote className="size-8 md:size-10 text-[var(--gold)]/40 mb-4" strokeWidth={1} />
           </Reveal>
-          
+
           <div className="min-h-[180px]">
             <AnimatePresence mode="wait">
               <motion.div
@@ -723,7 +782,7 @@ function Testimonials() {
                 <p className="font-display text-xl md:text-2xl leading-relaxed text-[var(--forest-deep)] italic mb-6 text-balance">
                   "{current.body}"
                 </p>
-                
+
                 <div className="uppercase tracking-widest text-xs font-bold text-[var(--gold)] mb-1">
                   {current.name}
                 </div>
@@ -736,14 +795,14 @@ function Testimonials() {
 
           <Reveal delay={0.2}>
             <div className="flex items-center gap-4 mt-auto">
-              <button 
+              <button
                 onClick={prev}
                 className="size-12 rounded-full border border-[var(--border)] flex items-center justify-center text-[var(--foreground)] hover:bg-[var(--cream)] transition-colors"
                 aria-label="Previous testimonial"
               >
                 <ChevronLeft className="size-5" />
               </button>
-              <button 
+              <button
                 onClick={next}
                 className="size-12 rounded-full bg-[var(--forest-deep)] flex items-center justify-center text-white hover:bg-[var(--forest)] transition-colors shadow-sm"
                 aria-label="Next testimonial"
@@ -792,28 +851,32 @@ function FinalCTA() {
 
           <Mandala className="absolute -top-40 -right-40 size-[600px] text-[var(--gold)]/15 animate-glow pointer-events-none" />
           <Mandala className="absolute -bottom-40 -left-40 size-[600px] text-[var(--gold)]/15 animate-glow pointer-events-none" />
-          
+
           <div className="relative z-10 flex flex-col items-center">
             <div className="font-sanskrit text-[var(--gold)] text-lg md:text-xl mb-3 tracking-wide drop-shadow-md">
               स्वास्थ्यमेव परमं धनम्
             </div>
-            
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.1] max-w-3xl mx-auto drop-shadow-lg text-[var(--parchment)]">
+
+            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl leading-[1.2] max-w-2xl mx-auto drop-shadow-lg text-[var(--parchment)]">
               <span className="block">Your body already knows how to heal.</span>
-              <em className="text-shimmer not-italic block mt-1">Let it.</em>
+              <em className="text-shimmer not-italic">Let it.</em>
             </h2>
-            
+
             <Ornament className="my-6 opacity-70" />
-            
+
             <p className="mx-auto max-w-xl text-base md:text-lg text-[var(--parchment)]/90 leading-relaxed font-light">
               Book a first consultation with Dr. Devdut. <br className="hidden md:block" />
               In-clinic in Pune or virtual, from anywhere in the world.
             </p>
-            
+
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">
-              <Button asChild className="rounded-full bg-gold-gradient text-[var(--forest-deep)] h-12 px-8 shadow-gold font-semibold transition-transform hover:scale-105">
-                <Link to="/book">Book Your Consultation <ArrowRight className="ml-2 size-4" /></Link>
-              </Button>
+              <BookAppointmentDialog
+                trigger={
+                  <Button className="rounded-full bg-gold-gradient text-[var(--forest-deep)] h-12 px-8 shadow-gold font-semibold transition-transform hover:scale-105 cursor-pointer">
+                    Book Your Consultation <ArrowRight className="ml-2 size-4" />
+                  </Button>
+                }
+              />
               <Button asChild variant="outline" className="rounded-full border-[var(--parchment)]/30 bg-white/5 text-[var(--parchment)] hover:bg-white/15 h-12 px-8 backdrop-blur-sm transition-colors">
                 <Link to="/contact">Talk To Us First</Link>
               </Button>

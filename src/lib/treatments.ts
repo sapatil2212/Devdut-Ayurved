@@ -72,12 +72,13 @@ export const TREATMENTS: Treatment[] = [
   },
   {
     slug: "joint-pain",
-    name: "Joint & Spine",
+    name: "Bone, Joint & Neurological Care",
+    sanskrit: "अस्थि-सन्धि-स्नायु चिकित्सा",
     category: "Chronic",
-    short: "Sandhigata Vata, arthritis, slipped disc, sciatica and frozen shoulder — mobility restored.",
+    short: "Comprehensive Ayurvedic management of arthritis, joint pain, sciatica, migraine, headaches, and neurological concerns.",
     duration: "3 – 8 weeks",
-    benefits: ["Pain relief without NSAIDs", "Better mobility", "Reduced stiffness", "Prevents progression"],
-    approach: ["Abhyanga & Pinda Sweda", "Kati / Janu / Greeva Basti", "Guggulu-based internal herbs", "Guided rehab"],
+    benefits: ["Natural pain relief", "Improved joint flexibility", "Reduced inflammation", "Better mobility & strength", "Enhanced nervous system function"],
+    approach: ["Nadi Pariksha and postural analysis", "Abhyanga & Pinda Sweda", "Kati / Janu / Greeva Basti", "Nasya & specialized therapies", "Rehabilitation & yoga guidance"],
   },
   {
     slug: "weight-loss",
@@ -133,6 +134,61 @@ export const TREATMENTS: Treatment[] = [
     benefits: ["Easier breathing", "Fewer flare-ups", "Reduced inhaler use", "Immunity boost"],
     approach: ["Nasya therapy", "Vaman when indicated", "Steam & herbal inhalation", "Immunity Rasayana"],
   },
+  {
+    slug: "child",
+    name: "Child Health & Immunity",
+    sanskrit: "बाल चिकित्सा",
+    category: "Wellness",
+    short: "Nurturing healthy growth, memory, brain development, and natural immunity using gentle Ayurvedic care.",
+    duration: "4 – 12 weeks",
+    benefits: ["Boosts natural immunity", "Improves memory & focus", "Supports physical growth", "Safe & chemical-free"],
+    approach: [
+      "Suvarnaprashan traditional immunization",
+      "Prakriti and growth assessment",
+      "Gentle herbal immunity elixirs",
+      "Child-friendly diet & lifestyle guidance"
+    ]
+  },
+  {
+    slug: "womens-health",
+    name: "Women's & Men's Health",
+    sanskrit: "स्त्री-पुरुष स्वास्थ्य",
+    category: "Women",
+    short: "Comprehensive Ayurvedic care for reproductive & hormonal health — from menstrual disorders and fertility to pregnancy and men's vitality.",
+    duration: "6 – 16 weeks",
+    benefits: ["Hormonal balance", "Reproductive wellness", "Natural fertility support", "Confidential & personalized care"],
+    approach: [
+      "Prakriti & Dosha assessment",
+      "Personalized herbal medicines",
+      "Panchakarma where indicated",
+      "Diet, lifestyle & fertility counseling"
+    ]
+  },
+  {
+    slug: "lifestyle-chronic",
+    name: "Lifestyle & Chronic Disease Care",
+    sanskrit: "जीवनशैली चिकित्सा",
+    category: "Chronic",
+    short: "Root-cause Ayurvedic management of diabetes, thyroid, obesity, allergies, insomnia, acidity, and liver conditions through personalized herbal and Panchakarma protocols.",
+    duration: "8 – 24 weeks",
+    benefits: ["Blood sugar & metabolic control", "Healthy weight management", "Stronger immunity", "Long-term chronic disease relief"],
+    approach: [
+      "Prakriti & Dosha assessment",
+      "Classical Ayurvedic herbal medicines",
+      "Panchakarma detox therapies",
+      "Personalized diet & lifestyle guidance"
+    ]
+  },
+  {
+    slug: "preventive-care",
+    name: "General Wellness & Preventive Care",
+    sanskrit: "स्वस्थवृत्त एवं रोगप्रतिरोध चिकित्सा",
+    category: "Wellness",
+    short: "Maintain lifelong health, boost natural immunity, support heart wellness, and prevent lifestyle-related illness through seasonal detox, custom nutrition, and daily routines.",
+    duration: "Ongoing / Seasonal",
+    benefits: ["Strengthens natural immunity", "Promotes healthy ageing", "Improves digestion & metabolism", "Supports cardiovascular health", "Enhances physical & mental well-being"],
+    approach: ["Comprehensive Prakriti & Agni evaluation", "Seasonal Shodhana (Panchakarma detox)", "Custom Ayurvedic diet planning", "Dinacharya (daily rhythm) & lifestyle coaching", "Immunity and Rasayana therapies"],
+  }
 ];
 
 export const CATEGORIES = ["Signature", "Wellness", "Chronic", "Women", "Lifestyle"] as const;

@@ -9,6 +9,9 @@ export function PageHeader({
   sanskrit,
   children,
   image,
+  imageHeightClass = "min-h-dvh",
+  imageFitClass = "object-cover object-center",
+  imageAlignClass = "justify-start",
 }: {
   eyebrow?: string;
   title: string;
@@ -16,6 +19,9 @@ export function PageHeader({
   sanskrit?: string;
   children?: ReactNode;
   image?: string;
+  imageHeightClass?: string;
+  imageFitClass?: string;
+  imageAlignClass?: string;
 }) {
   return (
     <section className={`relative overflow-hidden border-b border-[var(--border)] ${image ? "-mt-20" : ""}`}>
@@ -25,10 +31,10 @@ export function PageHeader({
           <img
             src={image}
             alt=""
-            className="absolute inset-0 size-full object-cover object-center"
+            className={`absolute inset-0 size-full ${imageFitClass}`}
             aria-hidden
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[var(--forest-deep)]/70 via-[var(--forest-deep)]/60 to-[var(--forest-deep)]/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[var(--forest-deep)]/90 via-[var(--forest-deep)]/85 to-[var(--forest-deep)]/95" />
         </>
       )}
 
@@ -44,7 +50,7 @@ export function PageHeader({
         />
       )}
 
-      <div className={`container-page relative py-24 md:py-32 text-center ${image ? "text-[var(--parchment)] min-h-dvh flex flex-col items-center justify-start" : ""}`}>
+      <div className={`container-page relative text-center ${image ? `py-16 md:py-32 text-[var(--parchment)] ${imageHeightClass} flex flex-col items-center ${imageAlignClass}` : "py-24 md:py-32"}`}>
         <Reveal>
           {sanskrit && <div className={`font-sanskrit text-lg ${image ? "mb-1 text-[var(--gold)]" : "mb-3 text-[var(--gold)]"}`}>{sanskrit}</div>}
           {eyebrow && <div className={`eyebrow mb-4 ${image ? "text-[var(--parchment)]/70" : ""}`}>{eyebrow}</div>}

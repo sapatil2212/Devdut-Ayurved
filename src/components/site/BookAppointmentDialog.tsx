@@ -20,21 +20,29 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 const inputCls =
-  "w-full rounded-full border border-[var(--border)] bg-[var(--parchment)] px-3.5 py-2 text-xs outline-none focus:border-[var(--gold)] focus:ring-2 focus:ring-[var(--gold)]/30 transition";
+  "w-full rounded-full border border-[var(--border)] bg-[var(--parchment)] px-3 py-1.5 text-[11px] md:px-3.5 md:py-2 md:text-xs outline-none focus:border-[var(--gold)] focus:ring-2 focus:ring-[var(--gold)]/30 transition";
 
 function Field({ label, error, children }: { label: string; error?: string; children: ReactNode }) {
   return (
     <label className="block">
-      <span className="text-[10px] uppercase tracking-widest text-[var(--muted-foreground)]">{label}</span>
-      <div className="mt-1">{children}</div>
-      {error && <span className="mt-1 block text-[10px] text-[var(--destructive)]">{error}</span>}
+      <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-[var(--muted-foreground)]">{label}</span>
+      <div className="mt-0.5 md:mt-1">{children}</div>
+      {error && <span className="mt-0.5 block text-[9px] md:text-[10px] text-[var(--destructive)]">{error}</span>}
     </label>
   );
 }
 
-export function BookAppointmentDialog({ trigger }: { trigger: ReactNode }) {
+export function BookAppointmentDialog({ trigger, onOpen }: { trigger: ReactNode; onOpen?: () => void }) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+
+  const handleOpenChange = (val: boolean) => {
+    setOpen(val);
+    if (val && onOpen) {
+      // slight delay so Radix portal mounts before drawer unmounts
+      setTimeout(onOpen, 50);
+    }
+  };
   const {
     register,
     handleSubmit,
@@ -53,9 +61,9 @@ export function BookAppointmentDialog({ trigger }: { trigger: ReactNode }) {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="grid w-[95vw] max-w-4xl overflow-hidden p-0 border-0 sm:rounded-3xl md:grid-cols-2 bg-[var(--parchment)]">
+      <DialogContent className="grid w-[92vw] max-w-4xl overflow-hidden p-0 border-0 rounded-2xl sm:rounded-3xl md:grid-cols-2 bg-[var(--parchment)]">
         {/* Left — image half */}
         <div className="relative hidden md:block">
           <img
@@ -67,14 +75,14 @@ export function BookAppointmentDialog({ trigger }: { trigger: ReactNode }) {
         </div>
 
         {/* Right — form half */}
-        <div className="max-h-[90vh] overflow-y-auto p-5 md:p-6">
-          <DialogTitle className="font-display text-xl md:text-2xl text-[var(--forest-deep)]">
+        <div className="max-h-[85vh] overflow-y-auto p-4 md:p-6">
+          <DialogTitle className="font-display text-lg md:text-2xl text-[var(--forest-deep)]">
             Book an appointment
           </DialogTitle>
           <DialogDescription className="sr-only">Appointment booking form</DialogDescription>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-3">
-            <div className="grid gap-3 sm:grid-cols-2">
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-3 space-y-2.5 md:space-y-3">
+            <div className="grid gap-2 sm:grid-cols-2 md:gap-3">
               <Field label="Full name" error={errors.name?.message}>
                 <input {...register("name")} className={inputCls} />
               </Field>
@@ -87,7 +95,7 @@ export function BookAppointmentDialog({ trigger }: { trigger: ReactNode }) {
               <input type="email" {...register("email")} className={inputCls} />
             </Field>
 
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid gap-2 sm:grid-cols-2 md:gap-3">
               <Field label="Treatment" error={errors.treatment?.message}>
                 <select {...register("treatment")} className={inputCls}>
                   <option value="">Select a treatment</option>
@@ -102,13 +110,13 @@ export function BookAppointmentDialog({ trigger }: { trigger: ReactNode }) {
             </div>
 
             <Field label="Anything we should know?">
-              <textarea rows={2} {...register("notes")} className={`${inputCls} rounded-2xl`} />
+              <textarea rows={2} {...register("notes")} className={`${inputCls} rounded-xl md:rounded-2xl`} />
             </Field>
 
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full rounded-full bg-forest-gradient text-[var(--parchment)] h-10 text-sm shadow-gold"
+              className="w-full rounded-full bg-forest-gradient text-[var(--parchment)] h-8 md:h-10 text-xs md:text-sm shadow-gold"
             >
               {isSubmitting ? "Sending…" : "Request appointment"}
             </Button>

@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import * as CountUpModule from "react-countup";
+import { BookAppointmentDialog } from "@/components/site/BookAppointmentDialog";
 function unwrapCountUp(mod: any): any {
   if (typeof mod === "function") return mod;
   if (mod?.default && typeof mod.default === "function") return mod.default;
@@ -102,7 +103,13 @@ function DoctorPage() {
           </div>
 
           <div className="mt-10 flex flex-wrap gap-4">
-            <Button asChild className="rounded-full bg-forest-gradient text-[var(--parchment)] h-12 px-6"><Link to="/book">Book consultation</Link></Button>
+            <BookAppointmentDialog
+              trigger={
+                <Button className="rounded-full bg-forest-gradient text-[var(--parchment)] h-12 px-6 cursor-pointer">
+                  Book consultation
+                </Button>
+              }
+            />
             <Button asChild variant="outline" className="rounded-full h-12 px-6"><Link to="/treatments">See treatments</Link></Button>
           </div>
         </Reveal>

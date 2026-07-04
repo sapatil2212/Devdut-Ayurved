@@ -43,13 +43,13 @@ function AboutPage() {
           <div className="eyebrow mb-4">Ayurvedic Expert</div>
           <h2 className="font-display text-4xl md:text-5xl leading-tight">Meet Our Ayurvedic Expert</h2>
           <p className="mt-6 text-lg text-[var(--muted-foreground)]">
-            Our lead Ayurvedic physician is dedicated to delivering authentic, personalized care rooted in the timeless principles of Ayurveda. Every consultation focuses on understanding the individual, not just the disease.
+            Dr. Ganesh Kumar Patil (B.A.M.S.) is a dedicated Ayurvedic physician committed to providing authentic, patient-centered healthcare through the timeless principles of Ayurveda. With expertise in classical Ayurvedic treatments and Panchakarma therapies, he focuses on restoring health naturally by addressing the root cause of disease.
           </p>
           <p className="mt-4 text-lg text-[var(--muted-foreground)]">
-            With years of clinical experience, the doctor specializes in identifying the root cause of health concerns and creating customized treatment plans using herbal medicines, Panchakarma, and lifestyle guidance.
+            Based in Pune, Maharashtra, Dr. Patil offers personalized Ayurvedic consultations, customized herbal treatments, Panchakarma therapies, and diet &amp; lifestyle guidance tailored to each individual's unique body constitution (Prakriti) and health needs.
           </p>
           <p className="mt-4 text-lg text-[var(--muted-foreground)]">
-            Committed to compassionate care and holistic healing, the goal is to help every patient achieve lasting wellness through the perfect balance of nature, science, and traditional Ayurvedic wisdom.
+            Driven by a vision of holistic healing, his approach combines traditional Ayurvedic wisdom with compassionate care to help patients achieve lasting wellness, improved quality of life, and a healthier future.
           </p>
         </Reveal>
       </section>

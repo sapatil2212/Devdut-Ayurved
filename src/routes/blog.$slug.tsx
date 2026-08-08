@@ -28,7 +28,7 @@ export const Route = createFileRoute("/blog/$slug")({
         "@type": "Article",
         headline: loaderData?.title,
         datePublished: loaderData?.date,
-        author: { "@type": "Person", name: "Dr. Devdut Sharma" },
+        author: { "@type": "Person", name: "Dr. Ganesh Kumar Patil" },
       }),
     }],
   }),
@@ -73,7 +73,7 @@ function BlogDetail() {
             </div>
             <Ornament className="my-16" />
             <div className="text-center text-[var(--muted-foreground)]">
-              Written by <span className="font-medium text-[var(--foreground)]">Dr. Devdut Sharma</span>
+              Written by <span className="font-medium text-[var(--foreground)]">Dr. Ganesh Kumar Patil</span>
             </div>
           </Reveal>
         </div>

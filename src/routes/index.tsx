@@ -9,14 +9,14 @@ function unwrapCountUp(mod: any): any {
   return mod;
 }
 const CountUp = unwrapCountUp(CountUpModule);
-import { ArrowRight, Sparkles, Leaf, Heart, ShieldCheck, Star, Quote, ArrowDown, ChevronLeft, ChevronRight, Flame, Search, FlaskConical, HandHeart, Activity, Brain, Wind, Baby } from "lucide-react";
+import { ArrowRight, Sparkles, Leaf, Heart, ShieldCheck, Star, Quote, ArrowDown, ChevronLeft, ChevronRight, Flame, Search, FlaskConical, HandHeart } from "lucide-react";
 import { PageShell } from "@/components/site/PageShell";
 import { Reveal } from "@/components/site/Reveal";
-import { Ornament, LeafSVG, Mandala } from "@/components/site/Ornament";
+import { Ornament, Mandala } from "@/components/site/Ornament";
 import { Button } from "@/components/ui/button";
 import { BookAppointmentDialog } from "@/components/site/BookAppointmentDialog";
-import { TREATMENTS } from "@/lib/treatments";
 import { SITE } from "@/lib/site";
+import { TESTIMONIALS } from "@/lib/testimonials";
 import heroImg from "@/assets/hero-ayurveda.jpg";
 import doctorImg from "@/assets/doctor.jpg";
 import treatmentsImg from "@/assets/treatments.jpg";
@@ -27,8 +27,6 @@ import parchmentImg from "@/assets/ancient-paper.png";
 import frangipaniFlowerImg from "@/assets/frangipani-flower.png";
 import rightPaperImg from "@/assets/right-book.webp";
 import leftBowlImg from "@/assets/left-bowl.png";
-import aboutHeroImg from "@/assets/about-hero.png";
-import doctorPng from "@/assets/doctor.png";
 import childImg from "@/assets/treatments/child.png";
 import lifestyleChronicImg from "@/assets/treatments/Lifestyle-Chronic.png";
 import humanHealthImg from "@/assets/treatments/human-Health.png";
@@ -60,6 +58,7 @@ function HomePage() {
       <Philosophy />
       <VedicWisdom />
       <WhyAyurveda />
+      <NadiparikshaHighlight />
       <TreatmentsShowcase />
       <DoctorFeature />
       <Journey />
@@ -506,64 +505,131 @@ function WhyAyurveda() {
   );
 }
 
+/* -------------------- NADIPARIKSHA USP -------------------- */
+function NadiparikshaHighlight() {
+  return (
+    <section className="container-page py-16 md:py-20">
+      <Reveal>
+        <div className="relative overflow-hidden rounded-[2rem] border border-[var(--gold)]/35 bg-forest-gradient text-[var(--parchment)] p-8 md:p-12">
+          <Mandala className="absolute -right-24 -bottom-24 size-[360px] text-[var(--gold)]/10 pointer-events-none" />
+          <div className="relative z-10 grid gap-8 lg:grid-cols-[1.4fr_1fr] items-center">
+            <div>
+              <div className="text-[var(--gold)] text-xs uppercase tracking-widest font-semibold mb-3">Clinic USP</div>
+              <h2 className="font-display text-3xl md:text-5xl leading-tight text-[var(--parchment)]">
+                Nadipariksha — pulse diagnosis that designs your care
+              </h2>
+              <p className="mt-4 text-[var(--parchment)]/80 max-w-2xl leading-relaxed">
+                Classical three-finger pulse reading to map Prakriti, doshas and early imbalance — the starting point of every protocol with Dr. Ganesh Kumar Patil.
+              </p>
+              <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-4 py-2 text-sm text-[var(--gold)] font-medium">
+                Promo: Every month on the {SITE.nadiparikshaDates}
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-3 lg:justify-end">
+              <Button asChild className="rounded-full bg-gold-gradient text-[var(--forest-deep)] h-12 px-6">
+                <Link to="/nadipariksha">Explore Nadipariksha <ArrowRight className="ml-2 size-4" /></Link>
+              </Button>
+              <BookAppointmentDialog
+                trigger={
+                  <Button variant="outline" className="rounded-full border-white/25 bg-white/5 text-[var(--parchment)] hover:bg-white/10 h-12 px-6 cursor-pointer">
+                    Book session
+                  </Button>
+                }
+              />
+            </div>
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
 /* -------------------- TREATMENTS -------------------- */
 function TreatmentsShowcase() {
   const categories = [
     {
+      title: "Nadipariksha",
+      slug: "nadipariksha",
+      image: therapyImg,
+      items: ["Pulse Diagnosis", "Prakriti Mapping", "Dosha Assessment", "1st & 15th Promo"],
+    },
+    {
       title: "Panchakarma Therapies",
       slug: "panchakarma",
-      icon: Leaf,
       image: therapyImg,
       items: ["Vamana", "Virechana", "Basti", "Nasya", "Raktamokshana"],
     },
     {
+      title: "Agnikshar Chikitsa",
+      slug: "agnikshar",
+      image: templeImg,
+      items: ["Agnikarma", "Kshara Karma", "Warts & Corns", "Chronic Lesions"],
+    },
+    {
       title: "Lifestyle & Chronic Diseases",
       slug: "lifestyle-chronic",
-      icon: Activity,
       image: lifestyleChronicImg,
-      items: ["Diabetes", "Thyroid Disorders", "Obesity", "Weight Management", "Acidity", "Jaundice", "Allergies", "Insomnia"],
+      items: ["Diabetes", "Thyroid", "Jaundice", "Infective Hepatitis", "Obesity", "Allergies"],
     },
     {
       title: "Bone, Joint & Neurological Care",
       slug: "joint-pain",
-      icon: Brain,
       image: jointImg,
       items: ["Arthritis", "Joint Pain", "Sciatica", "Migraine", "Headache", "Epilepsy"],
     },
     {
+      title: "Paralysis Treatment",
+      slug: "paralysis",
+      image: jointImg,
+      items: ["Hemiplegia", "Paraplegia", "Post-stroke Care", "Nerve Nourishment"],
+    },
+    {
       title: "Skin, Hair & Cosmetic Care",
       slug: "skin",
-      icon: Sparkles,
       image: skinHairImg,
-      items: ["Hair Fall", "Acne & Pimples", "Skin Diseases", "Warts & Corns", "Herpes Zoster"],
+      items: ["Hair Fall", "Acne", "Skin Diseases", "Cracked Heels", "Warts & Corns"],
     },
     {
       title: "Women's & Men's Health",
       slug: "womens-health",
-      icon: Heart,
       image: humanHealthImg,
-      items: ["Menstrual Disorders", "Infertility", "Pregnancy Care", "White Discharge (Leucorrhoea)", "Sexual Weakness", "Hormonal Health"],
+      items: ["Menstrual Disorders", "Infertility", "Sexual Weakness", "Nightmares", "Hormonal Health"],
     },
     {
-      title: "Digestive, Kidney & Respiratory Care",
+      title: "Digestive Care",
       slug: "digestion",
-      icon: Wind,
       image: digestiveImg,
-      items: ["Stomach Disorders", "Piles", "Kidney Diseases", "Urinary Disorders", "Asthma", "Chronic Cold", "Tonsillitis", "Stomatitis"],
+      items: ["Stomach Disorders", "Piles", "Fissure", "Fistula", "Acidity", "Constipation"],
+    },
+    {
+      title: "Kidney Diseases",
+      slug: "kidney",
+      image: digestiveImg,
+      items: ["Renal Calculi", "Renal Failure", "Urinary Disorders", "Stone Support"],
+    },
+    {
+      title: "Mental Health Care",
+      slug: "mental-health",
+      image: homeAboutImg,
+      items: ["Anxiety", "Insomnia", "Nightmares", "Burnout", "Stress"],
+    },
+    {
+      title: "Respiratory Care",
+      slug: "respiratory",
+      image: templeImg,
+      items: ["Asthma", "Chronic Cold", "Sinusitis", "Tonsillitis", "Cough"],
     },
     {
       title: "Child Health & Immunity",
       slug: "child",
-      icon: Baby,
       image: childImg,
-      items: ["Children's Diseases", "Suvarnaprashan", "Intellectual Development", "Immunity Enhancement"],
+      items: ["Children's Diseases", "Suvarnaprashan", "Intellectual Development", "Immunity"],
     },
     {
       title: "General Wellness & Preventive Care",
       slug: "preventive-care",
-      icon: ShieldCheck,
       image: homeAboutImg,
-      items: ["Heart Diseases", "Abscess Management", "Tumour Supportive Care", "Personalized Diet Consultation", "Lifestyle Counseling", "Preventive Health Check-ups"],
+      items: ["Heart Diseases", "Abscess Management", "Diet Consultation", "Preventive Check-ups"],
     },
   ];
 
@@ -647,7 +713,7 @@ function DoctorFeature() {
       <div className="container-page py-32 grid gap-16 lg:grid-cols-[1fr_1.2fr] items-center relative">
         <Reveal>
           <div className="relative">
-            <img src={doctorImg} alt="Dr. Devdut Sharma, senior Ayurvedic physician" width={1024} height={1280} loading="lazy" className="rounded-3xl shadow-elegant" />
+            <img src={doctorImg} alt="Dr. Ganesh Kumar Patil, Ayurvedic physician" width={1024} height={1280} loading="lazy" className="rounded-3xl shadow-elegant" />
             <div className="absolute -bottom-6 -right-6 rounded-2xl bg-[var(--parchment)] text-[var(--forest-deep)] p-5 shadow-elegant">
               <div className="text-xs uppercase tracking-widest text-[var(--gold)] mb-1">Google reviews</div>
               <div className="flex items-center gap-2">
@@ -661,13 +727,16 @@ function DoctorFeature() {
         <Reveal delay={0.15}>
           <div className="eyebrow mb-4 text-[var(--gold)]">Meet the Vaidya</div>
           <h2 className="font-display text-3xl md:text-5xl leading-tight text-[var(--parchment)] text-balance">
-            Dr. Devdut Sharma, <span className="italic text-[var(--gold)]">BAMS, MD (Ayu.)</span>
+            Dr. Ganesh Kumar Patil, <span className="italic text-[var(--gold)]">B.A.M.S.</span>
           </h2>
           <p className="mt-6 text-lg text-[var(--parchment)]/80">
-            Twenty-six years of clinical practice. Trained at the Institute of Medical Sciences, Banaras Hindu University, and mentored by traditional Vaidyas in Kerala's classical Panchakarma lineage.
+            Thirty years of clinical practice. Expert in Nadipariksha, classical Panchakarma and personalised herbal care — restoring health by treating the root cause, not just the symptoms.
+          </p>
+          <p className="mt-4 text-sm text-[var(--parchment)]/70">
+            Every consultation begins with Nadipariksha. Promo sessions every month on the {SITE.nadiparikshaDates}.
           </p>
           <div className="mt-10 grid grid-cols-3 gap-6">
-            {[{ n: 26, s: "+", l: "Years practising" }, { n: 12000, s: "+", l: "Patients treated" }, { n: 15, s: "", l: "Awards & fellowships" }].map((s) => (
+            {[{ n: 30, s: "+", l: "Years practising" }, { n: 12000, s: "+", l: "Patients treated" }, { n: 15, s: "", l: "Awards & fellowships" }].map((s) => (
               <div key={s.l}>
                 <div className="font-display text-4xl md:text-5xl text-[var(--gold)]">
                   <CountUp end={s.n} duration={2.5} enableScrollSpy scrollSpyOnce separator="," />{s.s}
@@ -677,16 +746,16 @@ function DoctorFeature() {
             ))}
           </div>
           <div className="mt-10 flex flex-wrap gap-4">
-            <Button asChild className="rounded-full bg-gold-gradient text-[var(--forest-deep)] h-12 px-6">
-              <Link to="/doctor">Read full profile</Link>
-            </Button>
             <BookAppointmentDialog
               trigger={
-                <Button variant="outline" className="rounded-full border-white/25 bg-white/5 text-[var(--parchment)] hover:bg-white/10 h-12 px-6 cursor-pointer">
+                <Button className="rounded-full bg-gold-gradient text-[var(--forest-deep)] h-12 px-6 cursor-pointer">
                   Book consultation
                 </Button>
               }
             />
+            <Button asChild variant="outline" className="rounded-full border-white/25 bg-white/5 text-[var(--parchment)] hover:bg-white/10 h-12 px-6">
+              <Link to="/about">About the clinic</Link>
+            </Button>
           </div>
         </Reveal>
       </div>
@@ -736,11 +805,11 @@ function Journey() {
 /* -------------------- TESTIMONIALS -------------------- */
 function Testimonials() {
   const [idx, setIdx] = useState(0);
-  const items = [
-    { name: "ANIKET PATIL", role: "Patient from Karvand · via Google Reviews", body: "Dr. Salunke is extremely skilled. I got my single-sitting RCT and ceramic cap done here, and there was zero pain during the procedure. Best dentist in Shirpur area.", image: doctorImg },
-    { name: "ANAYA M.", role: "Patient from Mumbai", body: "Six months at Devdut and my cycles are regular for the first time in a decade. No more hormones. I feel like myself again.", image: therapyImg },
-    { name: "ROHAN K.", role: "Patient from Pune", body: "Twenty years of chronic migraine. Panchakarma changed the trajectory — I have gone from four attacks a week to two a month.", image: treatmentsImg }
-  ];
+  const images = [doctorImg, therapyImg, treatmentsImg, homeAboutImg, templeImg];
+  const items = TESTIMONIALS.map((t, i) => ({
+    ...t,
+    image: images[i % images.length],
+  }));
 
   const next = () => setIdx((i) => (i + 1) % items.length);
   const prev = () => setIdx((i) => (i - 1 + items.length) % items.length);
@@ -755,7 +824,6 @@ function Testimonials() {
   return (
     <section className="container-page py-24 md:py-32">
       <div className="grid gap-12 lg:gap-24 lg:grid-cols-2 lg:items-start">
-        {/* Left Column */}
         <div className="flex flex-col">
           <Reveal>
             <div className="mb-8 md:mb-12 mt-4">
@@ -813,7 +881,6 @@ function Testimonials() {
           </Reveal>
         </div>
 
-        {/* Right Column */}
         <Reveal delay={0.3}>
           <div className="relative aspect-square md:aspect-[4/3] lg:aspect-[4/3.5] overflow-hidden rounded-[2.5rem] bg-[var(--cream)]">
             <AnimatePresence mode="wait">
@@ -865,8 +932,8 @@ function FinalCTA() {
             <Ornament className="my-6 opacity-70" />
 
             <p className="mx-auto max-w-xl text-base md:text-lg text-[var(--parchment)]/90 leading-relaxed font-light">
-              Book a first consultation with Dr. Devdut. <br className="hidden md:block" />
-              In-clinic in Pune or virtual, from anywhere in the world.
+              Book a first consultation with Dr. Ganesh Kumar Patil. <br className="hidden md:block" />
+              In-clinic in Pune — kindly call first to check availability.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">

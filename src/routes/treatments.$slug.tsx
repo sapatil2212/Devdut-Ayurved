@@ -750,6 +750,7 @@ function SkinSpecialDetail({ t, related }: { t: any; related: any[] }) {
     { name: "Fungal Skin Infections", desc: "Treat common fungal infections naturally while improving the body's immunity." },
     { name: "Allergic Skin Conditions", desc: "Manage skin allergies, itching, redness, and irritation with safe herbal therapies." },
     { name: "Pigmentation & Uneven Skin Tone", desc: "Improve skin texture and complexion using traditional Ayurvedic detoxification and herbal care." },
+    { name: "Cracked Heels", desc: "Heal painful cracked heels and dry, fissured foot skin with local therapies and internal nourishment." },
     { name: "Warts & Corns", desc: "Natural Ayurvedic management of warts and corns with appropriate therapeutic procedures." },
     { name: "Herpes Zoster", desc: "Support recovery and reduce discomfort through Ayurvedic medicines and immune-supportive care." }
   ];
@@ -1474,6 +1475,7 @@ function WomensMensHealthSpecialDetail({ t, related }: { t: any; related: any[] 
       intro: "Holistic Ayurvedic care for maintaining long-term women's health through personalized preventive programs, including management of white discharge (Leucorrhoea).",
       conditions: [
         { name: "White Discharge (Leucorrhoea)", desc: "Manage abnormal vaginal discharge naturally by improving reproductive health and immunity." },
+        { name: "Nightmares & Sleep Disturbance", desc: "Address nightmares and restless sleep linked to hormonal and emotional imbalance." },
         { name: "Stress Management", desc: "Address stress-linked hormonal disruption with Shirodhara, Medhya Rasayana, and lifestyle design." },
         { name: "Preventive Health Care", desc: "Seasonal Panchakarma and Rasayana protocols to maintain lifelong reproductive wellness." },
         { name: "Hormonal Detox", desc: "Clear accumulated toxins affecting hormonal axes through targeted Shodhana therapies." },
@@ -1490,6 +1492,7 @@ function WomensMensHealthSpecialDetail({ t, related }: { t: any; related: any[] 
       conditions: [
         { name: "Low Vitality & Energy", desc: "Restore physical strength and stamina with classical Vajikarana (aphrodisiac) Rasayana formulations." },
         { name: "Stress-Related Weakness", desc: "Address performance anxiety and mental fatigue with adaptogenic herbs and Shirodhara." },
+        { name: "Nightmares & Disturbed Sleep", desc: "Calm the mind and reduce nightmares linked to stress, sexual weakness and vitality imbalance." },
         { name: "Reproductive Health", desc: "Improve reproductive health and sperm quality with targeted Ayurvedic protocols." },
         { name: "Hormonal Balance", desc: "Regulate testosterone and related hormones naturally through diet, herbs, and lifestyle." },
       ],
@@ -1997,15 +2000,15 @@ function LifestyleChronicSpecialDetail({ t, related }: { t: any; related: any[] 
     {
       tab: "Liver",
       Icon: HeartPulse,
-      heading: "Jaundice & Liver Wellness",
-      intro: "The liver plays a vital role in digestion and detoxification. Ayurveda supports liver health through herbal medicines, dietary recommendations, and therapies that promote natural healing and improve overall digestive function.",
+      heading: "Jaundice & Infective Hepatitis",
+      intro: "The liver plays a vital role in digestion and detoxification. Ayurveda supports jaundice management and infective hepatitis recovery through herbal medicines, dietary recommendations, and therapies that promote natural healing.",
       points: [
-        "Liver Detoxification",
         "Jaundice Management",
+        "Infective Hepatitis Support",
+        "Liver Detoxification",
         "Digestive Health Improvement",
         "Herbal Hepato-protective Formulas",
         "Dietary Recommendations",
-        "Immunity & Vitality Support",
       ],
     },
   ];
@@ -2463,6 +2466,20 @@ function BoneJointNeurologicalSpecialDetail({ t, related }: { t: any; related: a
         "Medhya (Brain Tonic) Rasayana",
         "Lifestyle & Sleep Optimization",
         "Mental Calming & Resilience",
+      ],
+    },
+    {
+      tab: "Paralysis",
+      Icon: PersonStanding,
+      heading: "Paralysis Supportive Care",
+      intro: "Supportive Ayurvedic care for hemiplegia, paraplegia and post-stroke weakness — focusing on nerve nourishment, muscle tone, mobility and recovery alongside modern rehabilitation.",
+      points: [
+        "Hemiplegia Support",
+        "Paraplegia Support",
+        "Post-stroke Recovery",
+        "Nerve Nourishment",
+        "Muscle Tone Improvement",
+        "Mobility & Coordination",
       ],
     },
   ];
@@ -3402,6 +3419,38 @@ function DigestiveSpecialDetail({ t, related }: { t: any; related: any[] }) {
       imageCaption: "Virechana therapy (therapeutic purgation) cleanses the liver and portal system, reducing pressure in the hemorrhoidal veins to relieve piles swelling and bleeding.",
     },
     {
+      tab: "Fissure",
+      Icon: ShieldAlert,
+      heading: "Anal Fissure",
+      intro: "Painful anal fissures are managed with stool softening, local healing therapies, Pitta-Vata pacification and lifestyle correction to promote tissue repair and prevent recurrence.",
+      points: [
+        "Pain Relief During Bowels",
+        "Tissue Healing Support",
+        "Stool Softening Protocols",
+        "Local Herbal Care",
+        "Bleeding Control",
+        "Preventing Recurrence",
+      ],
+      image: digestiveImg,
+      imageCaption: "",
+    },
+    {
+      tab: "Fistula",
+      Icon: ShieldAlert,
+      heading: "Fistula-in-Ano",
+      intro: "Ayurvedic care for fistula focuses on infection control, channel cleansing and classical approaches including Kshara/Agnikshar where indicated, alongside diet and bowel regulation.",
+      points: [
+        "Infection Control Support",
+        "Channel Cleansing Care",
+        "Kshara / Agnikshar Guidance",
+        "Pain & Discharge Management",
+        "Bowel Regulation",
+        "Long-term Prevention",
+      ],
+      image: templeImg,
+      imageCaption: "",
+    },
+    {
       tab: "Mouth Ulcers",
       Icon: Sparkles,
       heading: "Stomatitis (Mouth Ulcers)",
@@ -3420,12 +3469,12 @@ function DigestiveSpecialDetail({ t, related }: { t: any; related: any[] }) {
     {
       tab: "Liver Health",
       Icon: HeartPulse,
-      heading: "Jaundice & Liver Health",
-      intro: "The liver (Yakrit) is the site of Ranjaka Pitta, vital for blood formation, digestion, and detoxification. Ayurveda supports healthy liver function using hepato-protective herbs and therapies that cleanse bile channels.",
+      heading: "Jaundice & Infective Hepatitis",
+      intro: "The liver (Yakrit) is the site of Ranjaka Pitta, vital for blood formation, digestion, and detoxification. Ayurveda supports jaundice and infective hepatitis recovery using hepato-protective herbs and therapies that cleanse bile channels.",
       points: [
+        "Jaundice Management",
+        "Infective Hepatitis Support",
         "Purifying Liver Bile Channels",
-        "Supporting Jaundice Recovery",
-        "Enhancing Liver Detoxification",
         "Hepato-protective Herbal Formulas",
         "Improving Fat & Nutrient Metabolism",
         "Nourishing Liver Tissue",
@@ -3613,7 +3662,7 @@ function DigestiveSpecialDetail({ t, related }: { t: any; related: any[] }) {
               </p>
             </div>
 
-            {/* Right: Visual panel (Therapy Image & Caption) */}
+            {/* Right: Visual panel */}
             <div className="rounded-3xl overflow-hidden border border-[var(--border)] bg-[var(--parchment)] p-6 shadow-md flex flex-col gap-5">
               <div className="w-full relative aspect-[4/3] rounded-2xl overflow-hidden border border-[var(--border)] bg-[var(--cream)]">
                 <img
@@ -3622,15 +3671,6 @@ function DigestiveSpecialDetail({ t, related }: { t: any; related: any[] }) {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--forest-deep)]/10 to-transparent pointer-events-none" />
-              </div>
-              <div>
-                <h4 className="font-display text-lg text-[var(--forest-deep)] mb-2 flex items-center gap-2">
-                  <span className="size-2 rounded-full bg-[var(--gold)]" />
-                  Recommended Therapy
-                </h4>
-                <p className="text-xs text-[var(--muted-foreground)] leading-relaxed bg-[var(--cream)] p-3.5 rounded-xl border border-[var(--border)]">
-                  {active.imageCaption}
-                </p>
               </div>
               <div className="mt-2">
                 <BookAppointmentDialog

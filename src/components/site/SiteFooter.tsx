@@ -49,13 +49,12 @@ export function SiteFooter() {
               <li className="flex gap-3"><Clock className="size-4 mt-0.5 text-[var(--gold)]" /><span>{SITE.hours}</span></li>
               <li className="flex gap-3">
                 <Phone className="size-4 mt-0.5 text-[var(--gold)]" />
-                <div className="flex flex-wrap items-center gap-2">
-                  <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noreferrer" className="hover:text-[var(--gold)]">
-                    {SITE.whatsapp}
+                <div className="flex flex-col gap-1">
+                  <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="hover:text-[var(--gold)]">
+                    Call Dr. Ganeshkumar: {SITE.phone}
                   </a>
-                  <span className="text-[var(--parchment)]/40">/</span>
-                  <a href={`tel:${SITE.phone2.replace(/\s/g, "")}`} className="hover:text-[var(--gold)]">
-                    {SITE.phone2}
+                  <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noreferrer" className="hover:text-[var(--gold)]">
+                    WhatsApp: {SITE.whatsapp}
                   </a>
                 </div>
               </li>

@@ -16,9 +16,14 @@ import type { ReactNode } from "react";
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
   phone: z.string().min(7, "Please enter a valid phone"),
-  email: z.string().email("Enter a valid email"),
+  email: z
+    .string()
+    .optional()
+    .refine((v) => !v || z.string().email().safeParse(v).success, "Enter a valid email"),
+  age: z.string().min(1, "Please enter your age"),
   treatment: z.string().min(1, "Choose a treatment"),
   preferredDate: z.string().min(1, "Pick a date"),
+  preferredTime: z.string().min(1, "Pick a time"),
   notes: z.string().optional(),
 });
 
@@ -58,7 +63,7 @@ function ContactPage() {
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { treatment: "" },
+    defaultValues: { treatment: "", email: "" },
   });
 
   const onSubmit = async (_: FormValues) => {
@@ -88,13 +93,13 @@ function ContactPage() {
             <div>
               <div className="eyebrow mb-2">Call / WhatsApp</div>
               <div className="flex flex-col gap-3">
+                <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 hover:text-[var(--copper)]">
+                  <Phone className="size-5 text-[var(--gold)]" />
+                  <span>Dr. Ganeshkumar Sir: {SITE.phone} (Call)</span>
+                </a>
                 <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-[var(--copper)]">
                   <MessageCircle className="size-5 text-green-500 fill-green-500" />
-                  <span>Dr. Ganeshkumar Sir: {SITE.whatsapp} (WhatsApp)</span>
-                </a>
-                <a href={`tel:${SITE.phone2.replace(/\s/g, "")}`} className="flex items-center gap-3 hover:text-[var(--copper)]">
-                  <Phone className="size-5 text-[var(--gold)]" />
-                  <span>{SITE.phone2} (Direct Call)</span>
+                  <span>WhatsApp: {SITE.whatsapp}</span>
                 </a>
               </div>
             </div>
@@ -116,6 +121,10 @@ function ContactPage() {
           <form onSubmit={handleSubmit(onSubmit)} className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 space-y-5">
             <h2 className="font-display text-3xl">Book an appointment</h2>
 
+            <p className="rounded-2xl border border-[var(--gold)]/30 bg-[var(--cream)] px-4 py-3 text-sm text-[var(--forest-deep)] leading-relaxed">
+              Kindly call first to check the availability and then come.
+            </p>
+
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label="Full name" error={errors.name?.message}>
                 <input {...register("name")} className={inputCls} />
@@ -125,9 +134,14 @@ function ContactPage() {
               </Field>
             </div>
 
-            <Field label="Email" error={errors.email?.message}>
-              <input type="email" {...register("email")} className={inputCls} />
-            </Field>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field label="Age" error={errors.age?.message}>
+                <input type="number" min={1} max={120} {...register("age")} className={inputCls} />
+              </Field>
+              <Field label="Email (optional)" error={errors.email?.message}>
+                <input type="email" {...register("email")} className={inputCls} />
+              </Field>
+            </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label="Treatment" error={errors.treatment?.message}>
@@ -142,6 +156,10 @@ function ContactPage() {
                 <input type="date" {...register("preferredDate")} className={inputCls} />
               </Field>
             </div>
+
+            <Field label="Preferred time" error={errors.preferredTime?.message}>
+              <input type="time" {...register("preferredTime")} className={inputCls} />
+            </Field>
 
             <Field label="Anything we should know?">
               <textarea rows={4} {...register("notes")} className={`${inputCls} rounded-3xl`} />

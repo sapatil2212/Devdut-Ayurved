@@ -11,6 +11,23 @@ export type Treatment = {
 
 export const TREATMENTS: Treatment[] = [
   {
+    slug: "nadipariksha",
+    name: "Nadipariksha",
+    sanskrit: "नाडी परीक्षा",
+    category: "Signature",
+    short:
+      "Classical pulse diagnosis — our clinic USP. Precise reading of doshas, tissues and vital channels to design truly personalised care.",
+    duration: "45 – 60 mins",
+    benefits: ["Accurate Prakriti mapping", "Root-cause clarity", "Personalised protocol", "Early imbalance detection"],
+    approach: [
+      "Classical three-finger Nadi reading",
+      "Dosha, Dhatu and Mala assessment",
+      "Prakriti and Vikriti correlation",
+      "Written findings and treatment roadmap",
+      "Follow-up pulse review on 1st & 15th promo days",
+    ],
+  },
+  {
     slug: "panchakarma",
     name: "Panchakarma",
     sanskrit: "पञ्चकर्म",
@@ -28,17 +45,35 @@ export const TREATMENTS: Treatment[] = [
     ],
   },
   {
+    slug: "agnikshar",
+    name: "Agnikshar Chikitsa",
+    sanskrit: "अग्निक्षार चिकित्सा",
+    category: "Signature",
+    short:
+      "Classical para-surgical therapy using controlled heat and alkali for chronic lesions, warts, corns and selected anorectal conditions.",
+    duration: "Session-based",
+    benefits: ["Minimal invasive option", "Targets chronic lesions", "Faster local healing", "Reduced recurrence risk"],
+    approach: [
+      "Clinical assessment and suitability check",
+      "Local preparation and sterile protocol",
+      "Controlled Agnikarma / Kshara application",
+      "Post-procedure wound care and herbs",
+      "Diet and lifestyle to prevent recurrence",
+    ],
+  },
+  {
     slug: "skin",
     name: "Skin & Complexion",
     sanskrit: "त्वचा चिकित्सा",
     category: "Wellness",
     short:
-      "Chronic acne, eczema, psoriasis and pigmentation treated from the root — blood, digestion and dosha.",
+      "Chronic acne, eczema, psoriasis, pigmentation and cracked heels treated from the root — blood, digestion and dosha.",
     duration: "6 – 12 weeks",
-    benefits: ["Clear, calm skin", "Reduced flare-ups", "Even tone", "No suppressive steroids"],
+    benefits: ["Clear, calm skin", "Reduced flare-ups", "Even tone", "Healed cracked heels", "No suppressive steroids"],
     approach: [
       "Raktashodhana — blood purification protocols",
       "Custom lepa (herbal pastes) and medicated ghee",
+      "Local care for cracked heels and calluses",
       "Diet & digestion correction",
       "Stress and sleep support",
     ],
@@ -81,6 +116,23 @@ export const TREATMENTS: Treatment[] = [
     approach: ["Nadi Pariksha and postural analysis", "Abhyanga & Pinda Sweda", "Kati / Janu / Greeva Basti", "Nasya & specialized therapies", "Rehabilitation & yoga guidance"],
   },
   {
+    slug: "paralysis",
+    name: "Paralysis Treatment",
+    sanskrit: "पक्षाघात चिकित्सा",
+    category: "Chronic",
+    short:
+      "Supportive Ayurvedic care for hemiplegia, paraplegia and post-stroke weakness — nerve nourishment, mobility and recovery.",
+    duration: "8 – 24 weeks",
+    benefits: ["Improved muscle tone", "Better mobility", "Nerve nourishment", "Speech & coordination support"],
+    approach: [
+      "Detailed neurological and Prakriti assessment",
+      "Abhyanga, Swedana and Pinda Sweda",
+      "Basti and Nasya where indicated",
+      "Medhya and Vata-pacifying Rasayana",
+      "Physiotherapy-aligned lifestyle guidance",
+    ],
+  },
+  {
     slug: "weight-loss",
     name: "Weight & Metabolism",
     category: "Lifestyle",
@@ -109,12 +161,41 @@ export const TREATMENTS: Treatment[] = [
   },
   {
     slug: "digestion",
-    name: "Digestive Disorders",
+    name: "Digestive Care",
     category: "Wellness",
-    short: "IBS, acidity, bloating, constipation and fatty liver — rebuild Agni, the digestive fire.",
+    short:
+      "IBS, acidity, bloating, constipation, piles, fissure and fistula — rebuild Agni and heal the gut naturally.",
     duration: "6 – 12 weeks",
-    benefits: ["Regular digestion", "Reduced bloating", "Better nutrient absorption", "Weight normalisation"],
-    approach: ["Deepana & Pachana", "Basti therapy", "Meal timing & combinations", "Gut-mind axis work"],
+    benefits: ["Regular digestion", "Reduced bloating", "Anorectal relief", "Better nutrient absorption"],
+    approach: ["Deepana & Pachana", "Basti therapy", "Anorectal care for piles, fissure & fistula", "Meal timing & combinations", "Gut-mind axis work"],
+  },
+  {
+    slug: "kidney",
+    name: "Kidney Diseases",
+    sanskrit: "वृक्क चिकित्सा",
+    category: "Chronic",
+    short:
+      "Ayurvedic support for renal calculi (kidney stones), renal failure supportive care, and urinary disorders.",
+    duration: "8 – 24 weeks",
+    benefits: ["Stone management support", "Urinary comfort", "Renal supportive care", "Diet for kidney health"],
+    approach: [
+      "Prakriti and urinary system assessment",
+      "Herbal protocols for Mutrashmari (calculi)",
+      "Supportive care in renal insufficiency",
+      "Fluid, diet and lifestyle guidance",
+      "Monitoring with modern reports as needed",
+    ],
+  },
+  {
+    slug: "mental-health",
+    name: "Mental Health Care",
+    sanskrit: "मानसिक स्वास्थ्य",
+    category: "Lifestyle",
+    short:
+      "Anxiety, burnout, insomnia, nightmares and emotional imbalance — Shirodhara, Medhya Rasayana and daily rhythm design.",
+    duration: "4 – 12 weeks",
+    benefits: ["Deeper sleep", "Fewer nightmares", "Calmer mind", "Emotional resilience"],
+    approach: ["Shirodhara series", "Ashwagandha & Brahmi Rasayana", "Nightmare and sleep protocol", "Dinacharya redesign", "Pranayama coaching"],
   },
   {
     slug: "stress-sleep",
@@ -146,8 +227,8 @@ export const TREATMENTS: Treatment[] = [
       "Suvarnaprashan traditional immunization",
       "Prakriti and growth assessment",
       "Gentle herbal immunity elixirs",
-      "Child-friendly diet & lifestyle guidance"
-    ]
+      "Child-friendly diet & lifestyle guidance",
+    ],
   },
   {
     slug: "womens-health",
@@ -161,23 +242,25 @@ export const TREATMENTS: Treatment[] = [
       "Prakriti & Dosha assessment",
       "Personalized herbal medicines",
       "Panchakarma where indicated",
-      "Diet, lifestyle & fertility counseling"
-    ]
+      "Diet, lifestyle & fertility counseling",
+    ],
   },
   {
     slug: "lifestyle-chronic",
     name: "Lifestyle & Chronic Disease Care",
     sanskrit: "जीवनशैली चिकित्सा",
     category: "Chronic",
-    short: "Root-cause Ayurvedic management of diabetes, thyroid, obesity, allergies, insomnia, acidity, and liver conditions through personalized herbal and Panchakarma protocols.",
+    short:
+      "Root-cause Ayurvedic management of diabetes, thyroid, obesity, allergies, insomnia, acidity, jaundice and infective hepatitis through personalized herbal and Panchakarma protocols.",
     duration: "8 – 24 weeks",
-    benefits: ["Blood sugar & metabolic control", "Healthy weight management", "Stronger immunity", "Long-term chronic disease relief"],
+    benefits: ["Blood sugar & metabolic control", "Healthy weight management", "Liver & jaundice support", "Long-term chronic disease relief"],
     approach: [
       "Prakriti & Dosha assessment",
       "Classical Ayurvedic herbal medicines",
+      "Jaundice & infective hepatitis protocols",
       "Panchakarma detox therapies",
-      "Personalized diet & lifestyle guidance"
-    ]
+      "Personalized diet & lifestyle guidance",
+    ],
   },
   {
     slug: "preventive-care",
@@ -188,7 +271,7 @@ export const TREATMENTS: Treatment[] = [
     duration: "Ongoing / Seasonal",
     benefits: ["Strengthens natural immunity", "Promotes healthy ageing", "Improves digestion & metabolism", "Supports cardiovascular health", "Enhances physical & mental well-being"],
     approach: ["Comprehensive Prakriti & Agni evaluation", "Seasonal Shodhana (Panchakarma detox)", "Custom Ayurvedic diet planning", "Dinacharya (daily rhythm) & lifestyle coaching", "Immunity and Rasayana therapies"],
-  }
+  },
 ];
 
 export const CATEGORIES = ["Signature", "Wellness", "Chronic", "Women", "Lifestyle"] as const;

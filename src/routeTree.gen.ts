@@ -15,9 +15,9 @@ import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as NadiparikshaRouteImport } from './routes/nadipariksha'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FaqRouteImport } from './routes/faq'
-import { Route as DoctorRouteImport } from './routes/doctor'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BookRouteImport } from './routes/book'
 import { Route as BlogRouteImport } from './routes/blog'
@@ -58,6 +58,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NadiparikshaRoute = NadiparikshaRouteImport.update({
+  id: '/nadipariksha',
+  path: '/nadipariksha',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
@@ -66,11 +71,6 @@ const GalleryRoute = GalleryRouteImport.update({
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DoctorRoute = DoctorRouteImport.update({
-  id: '/doctor',
-  path: '/doctor',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -125,9 +125,9 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRouteWithChildren
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
-  '/doctor': typeof DoctorRoute
   '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
+  '/nadipariksha': typeof NadiparikshaRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -144,9 +144,9 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
-  '/doctor': typeof DoctorRoute
   '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
+  '/nadipariksha': typeof NadiparikshaRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -164,9 +164,9 @@ export interface FileRoutesById {
   '/blog': typeof BlogRouteWithChildren
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
-  '/doctor': typeof DoctorRoute
   '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
+  '/nadipariksha': typeof NadiparikshaRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -186,9 +186,9 @@ export interface FileRouteTypes {
     | '/blog'
     | '/book'
     | '/contact'
-    | '/doctor'
     | '/faq'
     | '/gallery'
+    | '/nadipariksha'
     | '/privacy'
     | '/sitemap.xml'
     | '/terms'
@@ -205,9 +205,9 @@ export interface FileRouteTypes {
     | '/about'
     | '/book'
     | '/contact'
-    | '/doctor'
     | '/faq'
     | '/gallery'
+    | '/nadipariksha'
     | '/privacy'
     | '/sitemap.xml'
     | '/terms'
@@ -224,9 +224,9 @@ export interface FileRouteTypes {
     | '/blog'
     | '/book'
     | '/contact'
-    | '/doctor'
     | '/faq'
     | '/gallery'
+    | '/nadipariksha'
     | '/privacy'
     | '/sitemap.xml'
     | '/terms'
@@ -245,9 +245,9 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRouteWithChildren
   BookRoute: typeof BookRoute
   ContactRoute: typeof ContactRoute
-  DoctorRoute: typeof DoctorRoute
   FaqRoute: typeof FaqRoute
   GalleryRoute: typeof GalleryRoute
+  NadiparikshaRoute: typeof NadiparikshaRoute
   PrivacyRoute: typeof PrivacyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
@@ -300,6 +300,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/nadipariksha': {
+      id: '/nadipariksha'
+      path: '/nadipariksha'
+      fullPath: '/nadipariksha'
+      preLoaderRoute: typeof NadiparikshaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gallery': {
       id: '/gallery'
       path: '/gallery'
@@ -312,13 +319,6 @@ declare module '@tanstack/react-router' {
       path: '/faq'
       fullPath: '/faq'
       preLoaderRoute: typeof FaqRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/doctor': {
-      id: '/doctor'
-      path: '/doctor'
-      fullPath: '/doctor'
-      preLoaderRoute: typeof DoctorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -419,9 +419,9 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRouteWithChildren,
   BookRoute: BookRoute,
   ContactRoute: ContactRoute,
-  DoctorRoute: DoctorRoute,
   FaqRoute: FaqRoute,
   GalleryRoute: GalleryRoute,
+  NadiparikshaRoute: NadiparikshaRoute,
   PrivacyRoute: PrivacyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,

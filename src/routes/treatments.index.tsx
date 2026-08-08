@@ -14,14 +14,18 @@ import therapyImg from "@/assets/therapy.jpg";
 import templeImg from "@/assets/temple.jpg";
 import homeAboutImg from "@/assets/home-about.png";
 import aboutHeroImg from "@/assets/about-hero.png";
-import doctorPng from "@/assets/doctor.png";
 import childImg from "@/assets/treatments/child.png";
+import digestiveImg from "@/assets/treatments/digestive.png";
+import jointImg from "@/assets/treatments/joint.png";
+import skinHairImg from "@/assets/treatments/skin-hair.png";
+import lifestyleChronicImg from "@/assets/treatments/Lifestyle-Chronic.png";
+import humanHealthImg from "@/assets/treatments/human-Health.png";
 
 export const Route = createFileRoute("/treatments/")({
   head: () => ({
     meta: [
       { title: "Treatments — Devdut Ayurved Clinic" },
-      { name: "description", content: "Classical Panchakarma, personalised herbal protocols and modern Ayurvedic care for skin, hair, PCOD, joints, diabetes, migraine and more." },
+      { name: "description", content: "Classical Panchakarma, Nadipariksha, Agnikshar, kidney, digestive, mental health, respiratory care and more at Devdut Ayurved." },
       { property: "og:url", content: "/treatments" },
     ],
     links: [{ rel: "canonical", href: "/treatments" }],
@@ -31,38 +35,47 @@ export const Route = createFileRoute("/treatments/")({
 
 function getLinkForItem(item: string) {
   const lower = item.toLowerCase();
+  if (lower.includes("nadi") || lower.includes("pulse") || lower.includes("prakriti") || lower.includes("1st")) {
+    return { to: "/treatments/$slug" as const, params: { slug: "nadipariksha" } };
+  }
+  if (lower.includes("agni") || lower.includes("kshara") || lower.includes("wart") || lower.includes("corn") && lower.includes("chronic")) {
+    return { to: "/treatments/$slug" as const, params: { slug: "agnikshar" } };
+  }
   if (["vamana", "virechana", "basti", "nasya", "raktamokshana"].some(x => lower.includes(x))) {
     return { to: "/treatments/$slug" as const, params: { slug: "panchakarma" } };
   }
   if (lower.includes("child") || lower.includes("suvarnaprashan") || lower.includes("intellectual") || lower.includes("growth")) {
     return { to: "/treatments/$slug" as const, params: { slug: "child" } };
   }
-  if (lower.includes("skin") || lower.includes("acne") || lower.includes("pimples") || lower.includes("warts") || lower.includes("herpes")) {
+  if (lower.includes("cracked") || lower.includes("skin") || lower.includes("acne") || lower.includes("pimples") || lower.includes("herpes") || lower.includes("hair")) {
     return { to: "/treatments/$slug" as const, params: { slug: "skin" } };
   }
-  if (lower.includes("hair") || lower.includes("scalp") || lower.includes("dandruff")) {
-    return { to: "/treatments/$slug" as const, params: { slug: "hair" } };
-  }
-  if (lower.includes("pcod") || lower.includes("pcos") || lower.includes("menstrual") || lower.includes("white discharge") || lower.includes("leucorrhoea") || lower.includes("hormonal") || lower.includes("infertility") || lower.includes("pregnancy") || lower.includes("conception") || lower.includes("sexual")) {
+  if (lower.includes("nightmare") || lower.includes("pcod") || lower.includes("pcos") || lower.includes("menstrual") || lower.includes("leucorrhoea") || lower.includes("hormonal") || lower.includes("infertility") || lower.includes("pregnancy") || lower.includes("sexual")) {
     return { to: "/treatments/$slug" as const, params: { slug: "womens-health" } };
   }
-  if (lower.includes("joint") || lower.includes("spine") || lower.includes("arthritis") || lower.includes("sciatica") || lower.includes("back pain") || lower.includes("muscular") || lower.includes("aches") || lower.includes("headache") || lower.includes("epilepsy")) {
+  if (lower.includes("paralysis") || lower.includes("hemiplegia") || lower.includes("paraplegia") || lower.includes("stroke")) {
+    return { to: "/treatments/$slug" as const, params: { slug: "paralysis" } };
+  }
+  if (lower.includes("joint") || lower.includes("arthritis") || lower.includes("sciatica") || lower.includes("headache") || lower.includes("epilepsy") || lower.includes("migraine")) {
     return { to: "/treatments/$slug" as const, params: { slug: "joint-pain" } };
   }
-  if (lower.includes("weight") || lower.includes("metabolism") || lower.includes("obesity") || lower.includes("diabetes") || lower.includes("glycemic") || lower.includes("sugar") || lower.includes("thyroid") || lower.includes("allergy") || lower.includes("allergies") || lower.includes("insomnia") || lower.includes("acidity") || lower.includes("jaundice") || lower.includes("liver")) {
+  if (lower.includes("jaundice") || lower.includes("hepatitis") || lower.includes("diabetes") || lower.includes("thyroid") || lower.includes("obesity") || lower.includes("allergy") || lower.includes("allergies") || lower.includes("insomnia") || lower.includes("weight")) {
     return { to: "/treatments/$slug" as const, params: { slug: "lifestyle-chronic" } };
   }
-  if (lower.includes("heart") || lower.includes("abscess") || lower.includes("tumour") || lower.includes("preventive") || lower.includes("wellness") || lower.includes("check-up") || lower.includes("diet") || lower.includes("counseling")) {
-    return { to: "/treatments/$slug" as const, params: { slug: "preventive-care" } };
+  if (lower.includes("kidney") || lower.includes("renal") || lower.includes("urinary") || lower.includes("calculi") || lower.includes("stone")) {
+    return { to: "/treatments/$slug" as const, params: { slug: "kidney" } };
   }
-  if (lower.includes("digestive") || lower.includes("digestion") || lower.includes("ibs") || lower.includes("stomach") || lower.includes("piles") || lower.includes("bloating") || lower.includes("constipation") || lower.includes("kidney") || lower.includes("urinary")) {
+  if (lower.includes("mental") || lower.includes("anxiety") || lower.includes("burnout") || lower.includes("nightmare")) {
+    return { to: "/treatments/$slug" as const, params: { slug: "mental-health" } };
+  }
+  if (lower.includes("fissure") || lower.includes("fistula") || lower.includes("piles") || lower.includes("digestive") || lower.includes("stomach") || lower.includes("acidity") || lower.includes("constipation")) {
     return { to: "/treatments/$slug" as const, params: { slug: "digestion" } };
-  }
-  if (lower.includes("stress") || lower.includes("sleep") || lower.includes("burnout")) {
-    return { to: "/treatments/$slug" as const, params: { slug: "stress-sleep" } };
   }
   if (lower.includes("respiratory") || lower.includes("asthma") || lower.includes("sinus") || lower.includes("cough") || lower.includes("cold") || lower.includes("tonsil")) {
     return { to: "/treatments/$slug" as const, params: { slug: "respiratory" } };
+  }
+  if (lower.includes("heart") || lower.includes("abscess") || lower.includes("preventive") || lower.includes("diet") || lower.includes("wellness")) {
+    return { to: "/treatments/$slug" as const, params: { slug: "preventive-care" } };
   }
   return { to: "/treatments" as const, params: undefined };
 }
@@ -70,40 +83,76 @@ function getLinkForItem(item: string) {
 function TreatmentsPage() {
   const categories = [
     {
+      title: "Nadipariksha",
+      image: therapyImg,
+      learnMore: { to: "/treatments/$slug" as const, params: { slug: "nadipariksha" } },
+      items: ["Pulse Diagnosis", "Prakriti Mapping", "Dosha Assessment", "1st & 15th Promo"],
+    },
+    {
       title: "Panchakarma Therapies",
       image: therapyImg,
       learnMore: { to: "/treatments/$slug" as const, params: { slug: "panchakarma" } },
       items: ["Vamana", "Virechana", "Basti", "Nasya", "Raktamokshana"],
     },
     {
+      title: "Agnikshar Chikitsa",
+      image: templeImg,
+      learnMore: { to: "/treatments/$slug" as const, params: { slug: "agnikshar" } },
+      items: ["Agnikarma", "Kshara Karma", "Warts & Corns", "Chronic Lesions"],
+    },
+    {
       title: "Lifestyle & Chronic Diseases",
-      image: doctorImg,
+      image: lifestyleChronicImg,
       learnMore: { to: "/treatments/$slug" as const, params: { slug: "lifestyle-chronic" } },
-      items: ["Diabetes", "Thyroid Disorders", "Obesity", "Weight Management", "Acidity", "Jaundice", "Allergies", "Insomnia"],
+      items: ["Diabetes", "Thyroid Disorders", "Obesity", "Jaundice", "Infective Hepatitis", "Allergies"],
     },
     {
       title: "Bone, Joint & Neurological Care",
-      image: treatmentsImg,
+      image: jointImg,
       learnMore: { to: "/treatments/$slug" as const, params: { slug: "joint-pain" } },
       items: ["Arthritis", "Joint Pain", "Sciatica", "Migraine", "Headache", "Epilepsy"],
     },
     {
+      title: "Paralysis Treatment",
+      image: treatmentsImg,
+      learnMore: { to: "/treatments/$slug" as const, params: { slug: "paralysis" } },
+      items: ["Hemiplegia", "Paraplegia", "Post-stroke Care", "Nerve Nourishment"],
+    },
+    {
       title: "Skin, Hair & Cosmetic Care",
-      image: heroImg,
+      image: skinHairImg,
       learnMore: { to: "/treatments/$slug" as const, params: { slug: "skin" } },
-      items: ["Hair Fall", "Acne & Pimples", "Skin Diseases", "Warts & Corns", "Herpes Zoster"],
+      items: ["Hair Fall", "Acne & Pimples", "Skin Diseases", "Cracked Heels", "Warts & Corns"],
     },
     {
       title: "Women's & Men's Health",
-      image: aboutHeroImg,
+      image: humanHealthImg,
       learnMore: { to: "/treatments/$slug" as const, params: { slug: "womens-health" } },
-      items: ["Menstrual Disorders", "Infertility", "Pregnancy Care", "White Discharge (Leucorrhoea)", "Sexual Weakness", "Hormonal Health"],
+      items: ["Menstrual Disorders", "Infertility", "Sexual Weakness", "Nightmares", "Hormonal Health"],
     },
     {
-      title: "Digestive, Kidney & Respiratory Care",
-      image: templeImg,
+      title: "Digestive Care",
+      image: digestiveImg,
       learnMore: { to: "/treatments/$slug" as const, params: { slug: "digestion" } },
-      items: ["Stomach Disorders", "Piles", "Kidney Diseases", "Urinary Disorders", "Asthma", "Chronic Cold", "Tonsillitis", "Stomatitis"],
+      items: ["Stomach Disorders", "Piles", "Fissure", "Fistula", "Acidity", "Constipation"],
+    },
+    {
+      title: "Kidney Diseases",
+      image: digestiveImg,
+      learnMore: { to: "/treatments/$slug" as const, params: { slug: "kidney" } },
+      items: ["Renal Calculi", "Renal Failure", "Urinary Disorders", "Stone Support"],
+    },
+    {
+      title: "Mental Health Care",
+      image: homeAboutImg,
+      learnMore: { to: "/treatments/$slug" as const, params: { slug: "mental-health" } },
+      items: ["Anxiety", "Insomnia", "Nightmares", "Burnout", "Stress"],
+    },
+    {
+      title: "Respiratory Care",
+      image: templeImg,
+      learnMore: { to: "/treatments/$slug" as const, params: { slug: "respiratory" } },
+      items: ["Asthma", "Chronic Cold", "Sinusitis", "Tonsillitis", "Cough"],
     },
     {
       title: "Child Health & Immunity",
@@ -113,9 +162,9 @@ function TreatmentsPage() {
     },
     {
       title: "General Wellness & Preventive Care",
-      image: homeAboutImg,
+      image: aboutHeroImg,
       learnMore: { to: "/treatments/$slug" as const, params: { slug: "preventive-care" } },
-      items: ["Heart Diseases", "Abscess Management", "Tumour Supportive Care", "Personalized Diet Consultation", "Lifestyle Counseling", "Preventive Health Check-ups"],
+      items: ["Heart Diseases", "Abscess Management", "Diet Consultation", "Preventive Check-ups"],
     },
   ];
 
@@ -124,7 +173,7 @@ function TreatmentsPage() {
       <PageHeader
         sanskrit="स्वस्थस्य स्वास्थ्य रक्षणम्"
         title="Care for every body, every stage."
-        intro="From classical Panchakarma to focused protocols for chronic conditions — every treatment plan is designed around your Prakriti."
+        intro="From Nadipariksha and classical Panchakarma to focused protocols for chronic conditions — every treatment plan is designed around your Prakriti."
         image={therapyImg}
         imageHeightClass="min-h-[50vh] md:min-h-[65vh]"
       />
@@ -136,7 +185,6 @@ function TreatmentsPage() {
               <div
                 className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)] hover-lift"
               >
-                {/* Top half — image */}
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <img
                     src={cat.image}
@@ -147,7 +195,6 @@ function TreatmentsPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-[var(--forest-deep)]/70 via-[var(--forest-deep)]/10 to-transparent" />
                 </div>
 
-                {/* Bottom half — text */}
                 <div className="flex flex-1 flex-col p-4 md:p-5">
                   <h3 className="font-display text-lg md:text-xl mb-1 text-[var(--forest-deep)] transition-colors group-hover:text-[var(--copper)]">
                     {cat.title}
@@ -193,10 +240,8 @@ function TreatmentsPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="container-page pb-20 mt-10">
         <div className="w-full bg-[var(--forest-deep)] rounded-[30px] md:rounded-[36px] md:rounded-r-[150px] p-6 pl-10 md:p-9 md:pl-16 md:pr-10 flex flex-col md:flex-row items-center justify-between gap-8 relative border border-[var(--border)]/10">
-          {/* Subtle background glow */}
           <div className="absolute -left-20 -top-20 w-80 h-80 rounded-full bg-[var(--gold)]/5 blur-3xl pointer-events-none" />
 
           <motion.div

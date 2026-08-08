@@ -11,10 +11,15 @@ import { TREATMENTS } from "@/lib/treatments";
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
   phone: z.string().min(7, "Please enter a valid phone"),
-  email: z.string().email("Enter a valid email"),
+  email: z
+    .string()
+    .optional()
+    .refine((v) => !v || z.string().email().safeParse(v).success, "Enter a valid email"),
+  age: z.string().min(1, "Please enter your age"),
   mode: z.enum(["in-clinic", "virtual"]),
   treatment: z.string().min(1, "Choose an interest"),
   preferredDate: z.string().min(1, "Pick a date"),
+  preferredTime: z.string().min(1, "Pick a time"),
   notes: z.string().optional(),
 });
 
@@ -24,7 +29,7 @@ export const Route = createFileRoute("/book")({
   head: () => ({
     meta: [
       { title: "Book an Appointment — Devdut Ayurved Clinic" },
-      { name: "description", content: "Book an in-clinic or virtual consultation with Dr. Devdut Sharma. We confirm within a working day." },
+      { name: "description", content: "Book an in-clinic consultation with Dr. Ganesh Kumar Patil. We confirm within a working day." },
       { property: "og:url", content: "/book" },
     ],
     links: [{ rel: "canonical", href: "/book" }],
@@ -36,7 +41,7 @@ function BookPage() {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { mode: "in-clinic", treatment: "" },
+    defaultValues: { mode: "in-clinic", treatment: "", email: "" },
   });
 
   const onSubmit = async (_: FormValues) => {
@@ -46,11 +51,14 @@ function BookPage() {
 
   return (
     <PageShell>
-      <PageHeader eyebrow="Book an appointment" title="Reserve your consultation." intro="60 minutes with Dr. Sharma. In-clinic in Pune, or virtual from anywhere in the world." />
+      <PageHeader eyebrow="Book an appointment" title="Reserve your consultation." intro="60 minutes with Dr. Ganesh Kumar Patil. Kindly call first to check availability, then visit the clinic in Pune." />
 
       <section className="container-page py-16 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
         <Reveal>
           <form onSubmit={handleSubmit(onSubmit)} className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 space-y-5">
+            <p className="rounded-2xl border border-[var(--gold)]/30 bg-[var(--cream)] px-4 py-3 text-sm text-[var(--forest-deep)] leading-relaxed">
+              Kindly call first to check the availability and then come.
+            </p>
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label="Full name" error={errors.name?.message}>
                 <input {...register("name")} className={input} />
@@ -59,9 +67,14 @@ function BookPage() {
                 <input {...register("phone")} className={input} />
               </Field>
             </div>
-            <Field label="Email" error={errors.email?.message}>
-              <input type="email" {...register("email")} className={input} />
-            </Field>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field label="Age" error={errors.age?.message}>
+                <input type="number" min={1} max={120} {...register("age")} className={input} />
+              </Field>
+              <Field label="Email (optional)" error={errors.email?.message}>
+                <input type="email" {...register("email")} className={input} />
+              </Field>
+            </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label="Consultation mode">
                 <select {...register("mode")} className={input}>
@@ -76,9 +89,14 @@ function BookPage() {
                 </select>
               </Field>
             </div>
-            <Field label="Preferred date" error={errors.preferredDate?.message}>
-              <input type="date" {...register("preferredDate")} className={input} />
-            </Field>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field label="Preferred date" error={errors.preferredDate?.message}>
+                <input type="date" {...register("preferredDate")} className={input} />
+              </Field>
+              <Field label="Preferred time" error={errors.preferredTime?.message}>
+                <input type="time" {...register("preferredTime")} className={input} />
+              </Field>
+            </div>
             <Field label="Anything we should know?">
               <textarea rows={4} {...register("notes")} className={`${input} rounded-3xl`} />
             </Field>
@@ -94,7 +112,7 @@ function BookPage() {
             <div className="font-sanskrit text-[var(--gold)] text-lg">◈ प्रथम-मीलनम्</div>
             <h2 className="font-display text-3xl">What to expect</h2>
             <ul className="space-y-4 text-[var(--parchment)]/85 text-sm leading-relaxed">
-              <li>60 unhurried minutes with Dr. Sharma.</li>
+              <li>60 unhurried minutes with Dr. Ganesh Kumar Patil.</li>
               <li>Nadi Pariksha (pulse) and full Prakriti assessment.</li>
               <li>Written plan with herbs, therapies and daily routine.</li>
               <li>Follow-up scheduling and continued care.</li>

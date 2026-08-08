@@ -123,14 +123,16 @@ export function SiteHeader() {
                         {/* Column 1 */}
                         <div className="flex flex-col gap-2">
                           {[
+                            { name: "Nadipariksha", to: "/nadipariksha" },
                             { name: "Panchakarma Therapies", to: "/treatments/$slug", params: { slug: "panchakarma" } },
+                            { name: "Agnikshar Chikitsa", to: "/treatments/$slug", params: { slug: "agnikshar" } },
                             { name: "Lifestyle & Chronic Diseases", to: "/treatments/$slug", params: { slug: "lifestyle-chronic" } },
                             { name: "Bone, Joint & Neurological Care", to: "/treatments/$slug", params: { slug: "joint-pain" } },
                           ].map((item, idx) => (
                             <Link
                               key={idx}
                               to={item.to as any}
-                              params={item.params as any}
+                              params={(item as any).params as any}
                               className="group/item flex items-center gap-3 py-1.5 text-[13px] font-medium text-[var(--muted-foreground)] hover:text-[var(--forest-deep)] transition-all duration-200"
                             >
                               <span className="size-5 rounded-full bg-[var(--forest-deep)]/10 text-[var(--forest-deep)] flex items-center justify-center shrink-0 transition-all duration-300 group-hover/item:bg-[var(--forest-deep)] group-hover/item:text-[var(--parchment)] group-hover/item:translate-x-1">
@@ -144,9 +146,11 @@ export function SiteHeader() {
                         {/* Column 2 */}
                         <div className="flex flex-col gap-2">
                           {[
+                            { name: "Paralysis Treatment", to: "/treatments/$slug", params: { slug: "paralysis" } },
                             { name: "Skin, Hair & Cosmetic Care", to: "/treatments/$slug", params: { slug: "skin" } },
                             { name: "Women's & Men's Health", to: "/treatments/$slug", params: { slug: "womens-health" } },
-                            { name: "Digestive, Kidney & Respiratory Care", to: "/treatments/$slug", params: { slug: "digestion" } },
+                            { name: "Digestive Care", to: "/treatments/$slug", params: { slug: "digestion" } },
+                            { name: "Kidney Diseases", to: "/treatments/$slug", params: { slug: "kidney" } },
                           ].map((item, idx) => (
                             <Link
                               key={idx}
@@ -165,6 +169,8 @@ export function SiteHeader() {
                         {/* Column 3 */}
                         <div className="flex flex-col gap-2">
                           {[
+                            { name: "Mental Health Care", to: "/treatments/$slug", params: { slug: "mental-health" } },
+                            { name: "Respiratory Care", to: "/treatments/$slug", params: { slug: "respiratory" } },
                             { name: "Child Health & Immunity", to: "/treatments/$slug", params: { slug: "child" } },
                             { name: "General Wellness & Preventive Care", to: "/treatments/$slug", params: { slug: "preventive-care" } },
                           ].map((item, idx) => (
@@ -206,11 +212,11 @@ export function SiteHeader() {
 
         <div className="hidden lg:flex items-center gap-3">
           <a
-            href={`tel:${SITE.phone2.replace(/\s/g, "")}`}
+            href={`tel:${SITE.phone.replace(/\s/g, "")}`}
             className={`flex items-center gap-2 text-sm ${scrolled ? "text-[var(--muted-foreground)] hover:text-[var(--forest-deep)]" : "text-[var(--parchment)]/85 hover:text-[var(--gold)]"}`}
           >
             <Phone className="size-4" />
-            {SITE.phone2}
+            {SITE.phone}
           </a>
           <BookAppointmentDialog
             trigger={

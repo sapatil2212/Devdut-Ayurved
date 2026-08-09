@@ -175,7 +175,7 @@ export const TREATMENTS: Treatment[] = [
     sanskrit: "वृक्क चिकित्सा",
     category: "Chronic",
     short:
-      "Ayurvedic support for renal calculi (kidney stones), renal failure supportive care, and urinary disorders.",
+      "Ayurvedic care for renal calculi (kidney stones), renal failure supportive treatment, and urinary disorders — personalised herbal protocols with diet and lifestyle guidance.",
     duration: "8 – 24 weeks",
     benefits: ["Stone management support", "Urinary comfort", "Renal supportive care", "Diet for kidney health"],
     approach: [

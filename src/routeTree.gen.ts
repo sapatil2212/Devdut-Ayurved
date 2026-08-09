@@ -17,7 +17,6 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as NadiparikshaRouteImport } from './routes/nadipariksha'
 import { Route as GalleryRouteImport } from './routes/gallery'
-import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BookRouteImport } from './routes/book'
 import { Route as BlogRouteImport } from './routes/blog'
@@ -66,11 +65,6 @@ const NadiparikshaRoute = NadiparikshaRouteImport.update({
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FaqRoute = FaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -125,7 +119,6 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRouteWithChildren
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
-  '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
   '/nadipariksha': typeof NadiparikshaRoute
   '/privacy': typeof PrivacyRoute
@@ -144,7 +137,6 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
-  '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
   '/nadipariksha': typeof NadiparikshaRoute
   '/privacy': typeof PrivacyRoute
@@ -164,7 +156,6 @@ export interface FileRoutesById {
   '/blog': typeof BlogRouteWithChildren
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
-  '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
   '/nadipariksha': typeof NadiparikshaRoute
   '/privacy': typeof PrivacyRoute
@@ -186,7 +177,6 @@ export interface FileRouteTypes {
     | '/blog'
     | '/book'
     | '/contact'
-    | '/faq'
     | '/gallery'
     | '/nadipariksha'
     | '/privacy'
@@ -205,7 +195,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/book'
     | '/contact'
-    | '/faq'
     | '/gallery'
     | '/nadipariksha'
     | '/privacy'
@@ -224,7 +213,6 @@ export interface FileRouteTypes {
     | '/blog'
     | '/book'
     | '/contact'
-    | '/faq'
     | '/gallery'
     | '/nadipariksha'
     | '/privacy'
@@ -245,7 +233,6 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRouteWithChildren
   BookRoute: typeof BookRoute
   ContactRoute: typeof ContactRoute
-  FaqRoute: typeof FaqRoute
   GalleryRoute: typeof GalleryRoute
   NadiparikshaRoute: typeof NadiparikshaRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -312,13 +299,6 @@ declare module '@tanstack/react-router' {
       path: '/gallery'
       fullPath: '/gallery'
       preLoaderRoute: typeof GalleryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faq': {
-      id: '/faq'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -419,7 +399,6 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRouteWithChildren,
   BookRoute: BookRoute,
   ContactRoute: ContactRoute,
-  FaqRoute: FaqRoute,
   GalleryRoute: GalleryRoute,
   NadiparikshaRoute: NadiparikshaRoute,
   PrivacyRoute: PrivacyRoute,

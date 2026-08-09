@@ -95,7 +95,7 @@ function ContactPage() {
               <div className="flex flex-col gap-3">
                 <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 hover:text-[var(--copper)]">
                   <Phone className="size-5 text-[var(--gold)]" />
-                  <span>Dr. Ganeshkumar Sir: {SITE.phone} (Call)</span>
+                  <span>Call: {SITE.phone}</span>
                 </a>
                 <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-[var(--copper)]">
                   <MessageCircle className="size-5 text-green-500 fill-green-500" />

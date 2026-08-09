@@ -441,7 +441,7 @@ function WhyAyurveda() {
   };
   const item = {
     hidden: { opacity: 0, y: 36 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
   };
 
   return (
@@ -730,7 +730,7 @@ function DoctorFeature() {
             Dr. Ganesh Kumar Patil, <span className="italic text-[var(--gold)]">B.A.M.S.</span>
           </h2>
           <p className="mt-6 text-lg text-[var(--parchment)]/80">
-            Thirty years of clinical practice. Expert in Nadipariksha, classical Panchakarma and personalised herbal care — restoring health by treating the root cause, not just the symptoms.
+            30+ years of clinical practice. Expert in Nadipariksha, classical Panchakarma and personalised herbal care — restoring health by treating the root cause, not just the symptoms.
           </p>
           <p className="mt-4 text-sm text-[var(--parchment)]/70">
             Every consultation begins with Nadipariksha. Promo sessions every month on the {SITE.nadiparikshaDates}.

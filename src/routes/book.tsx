@@ -110,7 +110,7 @@ function BookPage() {
         <Reveal delay={0.1}>
           <aside className="rounded-3xl bg-forest-gradient text-[var(--parchment)] p-8 space-y-6">
             <div className="font-sanskrit text-[var(--gold)] text-lg">◈ प्रथम-मीलनम्</div>
-            <h2 className="font-display text-3xl">What to expect</h2>
+            <h2 className="font-display text-3xl text-[var(--parchment)]">What to expect</h2>
             <ul className="space-y-4 text-[var(--parchment)]/85 text-sm leading-relaxed">
               <li>60 unhurried minutes with Dr. Ganesh Kumar Patil.</li>
               <li>Nadi Pariksha (pulse) and full Prakriti assessment.</li>

@@ -50,7 +50,7 @@ function getLinkForItem(item: string) {
   if (lower.includes("cracked") || lower.includes("skin") || lower.includes("acne") || lower.includes("pimples") || lower.includes("herpes") || lower.includes("hair")) {
     return { to: "/treatments/$slug" as const, params: { slug: "skin" } };
   }
-  if (lower.includes("nightmare") || lower.includes("pcod") || lower.includes("pcos") || lower.includes("menstrual") || lower.includes("leucorrhoea") || lower.includes("hormonal") || lower.includes("infertility") || lower.includes("pregnancy") || lower.includes("sexual")) {
+  if (lower.includes("pcod") || lower.includes("pcos") || lower.includes("menstrual") || lower.includes("leucorrhoea") || lower.includes("hormonal") || lower.includes("infertility") || lower.includes("pregnancy") || lower.includes("sexual")) {
     return { to: "/treatments/$slug" as const, params: { slug: "womens-health" } };
   }
   if (lower.includes("paralysis") || lower.includes("hemiplegia") || lower.includes("paraplegia") || lower.includes("stroke")) {

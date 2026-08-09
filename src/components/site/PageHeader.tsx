@@ -12,6 +12,7 @@ export function PageHeader({
   imageHeightClass = "min-h-dvh",
   imageFitClass = "object-cover object-center",
   imageAlignClass = "justify-start",
+  introMaxWidthClass = "max-w-4xl",
 }: {
   eyebrow?: string;
   title: string;
@@ -22,6 +23,7 @@ export function PageHeader({
   imageHeightClass?: string;
   imageFitClass?: string;
   imageAlignClass?: string;
+  introMaxWidthClass?: string;
 }) {
   return (
     <section className={`relative overflow-hidden border-b border-[var(--border)] ${image ? "-mt-20" : ""}`}>
@@ -50,13 +52,13 @@ export function PageHeader({
         />
       )}
 
-      <div className={`container-page relative text-center ${image ? `py-16 md:py-32 text-[var(--parchment)] ${imageHeightClass} flex flex-col items-center ${imageAlignClass}` : "py-24 md:py-32"}`}>
+      <div className={`container-page relative text-center ${image ? `pt-36 pb-16 md:py-32 text-[var(--parchment)] ${imageHeightClass} flex flex-col items-center ${imageAlignClass}` : "py-24 md:py-32"}`}>
         <Reveal>
           {sanskrit && <div className={`font-sanskrit text-lg ${image ? "mb-1 text-[var(--gold)]" : "mb-3 text-[var(--gold)]"}`}>{sanskrit}</div>}
           {eyebrow && <div className={`eyebrow mb-4 ${image ? "text-[var(--parchment)]/70" : ""}`}>{eyebrow}</div>}
           <h1 className={`font-display text-4xl md:text-6xl leading-[1.05] text-balance ${image ? "text-[var(--parchment)]" : ""}`}>{title}</h1>
           {intro && (
-            <p className={`mx-auto max-w-2xl text-balance ${image ? "mt-3 text-sm md:text-lg text-[var(--parchment)]/80" : "mt-6 text-lg text-[var(--muted-foreground)]"}`}>
+            <p className={`mx-auto ${introMaxWidthClass} text-balance ${image ? "mt-3 text-sm md:text-lg text-[var(--parchment)]/80" : "mt-6 text-lg text-[var(--muted-foreground)]"}`}>
               {intro}
             </p>
           )}

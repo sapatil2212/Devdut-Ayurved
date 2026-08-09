@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 import aboutHeroImg from "@/assets/about-hero.png";
 import aboutPaperImg from "@/assets/about-paper.png";
-import doctorPng from "@/assets/doctor.png";
+import homeAboutImg from "@/assets/home-about.png";
 import treatmentsImg from "@/assets/treatments.jpg";
 import { FaqSection } from "@/components/site/FaqSection";
 import { TrustedIcons } from "@/components/site/TrustedIcons";
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — Devdut Ayurved Clinic" },
-      { name: "description", content: "The story, mission and values of Devdut Ayurved Clinic — 30 years of classical Ayurveda with Nadipariksha at the heart of every consultation." },
+      { name: "description", content: "The story, mission and values of Devdut Ayurved Clinic — 30+ years of classical Ayurveda with Nadipariksha at the heart of every consultation." },
       { property: "og:title", content: "About — Devdut Ayurved Clinic" },
       { property: "og:url", content: "/about" },
     ],
@@ -30,15 +30,16 @@ function AboutPage() {
     <PageShell>
       <PageHeader
         sanskrit="आयुर्वेदः जीवनस्य आधारः"
-        title="A family practice, thirty years strong."
-        intro="Three decades of classical Ayurveda, one in-house pharmacy, and a stubborn belief that healing should never be rushed."
+        title="Where body, mind and spirit find balance."
+        intro="Rooted in classical Ayurveda — Prakriti assessment, Nadipariksha, herbal formulations and Panchakarma — we treat the cause of imbalance, not only the symptoms."
         image={aboutHeroImg}
+        introMaxWidthClass="max-w-5xl"
       />
 
       <section className="container-page pt-24 pb-8 grid gap-16 lg:grid-cols-2 items-center">
         <Reveal>
           <div className="max-w-md mx-auto">
-            <img src={doctorPng} alt="Dr. Ganesh Kumar Patil" width={1600} height={900} loading="lazy" className="rounded-3xl" />
+            <img src={homeAboutImg} alt="Ayurvedic Healthcare & Consultation" width={1600} height={900} loading="lazy" className="rounded-3xl shadow-md border border-[var(--border)]/40 object-cover aspect-[4/5]" />
           </div>
         </Reveal>
         <Reveal delay={0.1}>
@@ -57,7 +58,7 @@ function AboutPage() {
           <div className="mt-8 grid grid-cols-2 gap-4">
             {[
               { t: "Qualification", d: "B.A.M.S." },
-              { t: "Experience", d: "30 years of clinical practice" },
+              { t: "Experience", d: "30+ years of clinical practice" },
               { t: "Specialty", d: "Nadipariksha & Panchakarma" },
               { t: "Focus", d: "Root-cause, Prakriti-based care" },
             ].map((q) => (
@@ -70,35 +71,11 @@ function AboutPage() {
         </Reveal>
       </section>
 
-      <section className="container-page pt-8 pb-16">
-        <Reveal>
-          <div className="rounded-3xl border border-[var(--border)] bg-[var(--cream)] p-8 md:p-10 grid gap-6 lg:grid-cols-[1.2fr_1fr] items-center">
-            <div>
-              <div className="eyebrow mb-3">Clinic USP</div>
-              <h2 className="font-display text-3xl md:text-4xl text-[var(--forest-deep)]">Nadipariksha at the heart of care</h2>
-              <p className="mt-4 text-[var(--muted-foreground)] leading-relaxed">
-                Every meaningful protocol at Devdut begins with Nadipariksha — classical pulse diagnosis that reads doshas, tissues and vital channels. It is how Dr. Ganesh Kumar Patil designs treatments that fit your Prakriti, not a generic checklist.
-              </p>
-              <p className="mt-3 text-sm font-medium text-[var(--copper)]">
-                Promo highlight: Nadipariksha on the {SITE.nadiparikshaDates}.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                to="/nadipariksha"
-                className="inline-flex items-center gap-2 rounded-full bg-forest-gradient text-[var(--parchment)] px-5 py-3 text-sm font-medium"
-              >
-                Explore Nadipariksha <ArrowRight className="size-4" />
-              </Link>
-            </div>
-          </div>
-        </Reveal>
-      </section>
 
       <section className="container-page pt-8 pb-24 grid gap-8 lg:grid-cols-3">
         {[
           { t: "Mission", d: "Deliver classical Ayurveda with Nadipariksha-led precision — every patient assessed, every formula personalised, every plan revisited until balance returns." },
-          { t: "Vision", d: "To be Pune's trusted home for authentic Ayurveda — where 30 years of clinical wisdom meet compassionate, root-cause care." },
+          { t: "Vision", d: "To be Pune's trusted home for authentic Ayurveda — where 30+ years of clinical wisdom meet compassionate, root-cause care." },
           { t: "Values", d: "Honesty over hype. Slow over fast. Root cause over quick fix. Always, patient over protocol." },
         ].map((v, i) => (
           <Reveal key={v.t} delay={i * 0.08}>
@@ -136,7 +113,7 @@ function AboutPage() {
 
       <TrustedIcons />
 
-      <FaqSection showCta={false} />
+      <FaqSection />
     </PageShell>
   );
 }

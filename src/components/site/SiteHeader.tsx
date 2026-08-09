@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Phone, ChevronDown, ChevronRight, ArrowRight, Instagram, Facebook, Youtube, MessageCircle } from "lucide-react";
+import { Phone, ChevronDown, ChevronRight, ArrowRight, Instagram, Facebook, Youtube, MessageCircle, Sparkles } from "lucide-react";
 import { NAV, SITE } from "@/lib/site";
 import { TREATMENTS } from "@/lib/treatments";
 import { Button } from "@/components/ui/button";
@@ -82,6 +82,24 @@ export function SiteHeader() {
           : "bg-transparent"
       }`}
     >
+      {/* Quick Announcement Banner */}
+      <div className="bg-[var(--forest-deep)] text-[var(--parchment)] border-b border-[var(--gold)]/20 py-2 px-4 text-xs font-medium relative z-50 shadow-sm">
+        <div className="container-page flex items-center justify-center gap-2.5 sm:gap-3 flex-wrap text-center">
+          <span className="inline-flex items-center gap-1 rounded-full bg-[var(--gold)] text-[var(--forest-deep)] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider shrink-0 shadow-sm">
+            <Sparkles className="size-3" /> Special Offer
+          </span>
+          <span className="text-[11px] sm:text-xs text-[var(--parchment)]/95">
+            <strong className="text-[var(--gold)] font-semibold">Free Nadipariksha (Pulse Diagnosis)</strong> every month on the <span className="font-semibold text-white underline underline-offset-2 decoration-[var(--gold)] font-display">{SITE.nadiparikshaDates}</span>!
+          </span>
+          <BookAppointmentDialog
+            trigger={
+              <button className="text-[11px] font-semibold text-[var(--gold)] hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1 shrink-0">
+                Claim Free Slot <ArrowRight className="size-3" />
+              </button>
+            }
+          />
+        </div>
+      </div>
       <div className="container-page flex h-20 items-center justify-between">
         <Link to="/" className="group flex items-center">
           <img 
@@ -408,5 +426,5 @@ export function SiteHeader() {
 
 const itemVariants = {
   hidden: { opacity: 0, x: 24 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] } },
+  show: { opacity: 1, x: 0, transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const } },
 };

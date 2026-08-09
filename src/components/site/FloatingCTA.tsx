@@ -45,7 +45,7 @@ export function FloatingCTA() {
         animate={{ opacity: 1, scale: 1 }}
         whileHover={{ scale: 1.12 }}
         transition={{ duration: 0.25, delay: 0.05 }}
-        className="grid size-10 md:size-14 place-items-center rounded-full bg-forest-gradient text-[var(--gold)] shadow-gold ring-1 ring-[var(--gold)]/40 animate-glow"
+        className="grid size-10 md:size-14 place-items-center rounded-full bg-forest-gradient text-[var(--gold)] shadow-gold ring-1 ring-[var(--gold)]/40"
       >
         <Phone className="size-4 md:size-6" />
       </motion.a>

@@ -36,11 +36,10 @@ const defaultFaqs: FaqItem[] = [
 
 type Props = {
   items?: FaqItem[];
-  showCta?: boolean;
   className?: string;
 };
 
-export function FaqSection({ items = defaultFaqs, showCta = true, className = "" }: Props) {
+export function FaqSection({ items = defaultFaqs, className = "" }: Props) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -54,16 +53,6 @@ export function FaqSection({ items = defaultFaqs, showCta = true, className = ""
               Your Questions, <span className="italic text-[var(--copper)]">Answered</span>
             </h2>
           </Reveal>
-          {showCta && (
-            <Reveal delay={0.1}>
-              <Button
-                asChild
-                className="rounded-full bg-gold-gradient text-[var(--forest-deep)] hover:opacity-90 shadow-gold h-11 px-6 text-sm font-medium"
-              >
-                <Link to="/faq">Explore all FAQ's</Link>
-              </Button>
-            </Reveal>
-          )}
         </div>
 
         {/* List */}

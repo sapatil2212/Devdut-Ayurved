@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { MapPin, Clock, Phone, Mail, MessageCircle } from "lucide-react";
 import { NAV, SITE } from "@/lib/site";
 import { Ornament } from "./Ornament";
+import logoLight from "@/assets/logo/devdut-ayurved-logo-light.png";
 
 export function SiteFooter() {
   return (
@@ -18,6 +19,13 @@ export function SiteFooter() {
       <div className="relative container-page pt-24 pb-10">
         <div className="grid gap-16 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div>
+            <Link to="/" className="inline-block mb-6">
+              <img
+                src={logoLight}
+                alt="Devdut Ayurved Clinic"
+                className="h-12 md:h-14 w-auto object-contain"
+              />
+            </Link>
             <div className="text-[var(--gold)] font-sanskrit text-xl mb-3">सर्वे भवन्तु सुखिनः</div>
             <h3 className="font-display text-3xl md:text-4xl text-[var(--parchment)] max-w-md leading-tight">
               Let ancient wisdom care for your modern life.
@@ -37,8 +45,6 @@ export function SiteFooter() {
                   </Link>
                 </li>
               ))}
-              <li><Link to="/faq" className="text-[var(--parchment)]/80 hover:text-[var(--gold)]">FAQ</Link></li>
-              <li><Link to="/testimonials" className="text-[var(--parchment)]/80 hover:text-[var(--gold)]">Testimonials</Link></li>
             </ul>
           </div>
 
@@ -49,14 +55,9 @@ export function SiteFooter() {
               <li className="flex gap-3"><Clock className="size-4 mt-0.5 text-[var(--gold)]" /><span>{SITE.hours}</span></li>
               <li className="flex gap-3">
                 <Phone className="size-4 mt-0.5 text-[var(--gold)]" />
-                <div className="flex flex-col gap-1">
-                  <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="hover:text-[var(--gold)]">
-                    Call Dr. Ganeshkumar: {SITE.phone}
-                  </a>
-                  <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noreferrer" className="hover:text-[var(--gold)]">
-                    WhatsApp: {SITE.whatsapp}
-                  </a>
-                </div>
+                <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="hover:text-[var(--gold)]">
+                  {SITE.phone}
+                </a>
               </li>
               <li className="flex gap-3"><Mail className="size-4 mt-0.5 text-[var(--gold)]" /><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
             </ul>

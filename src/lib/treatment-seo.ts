@@ -177,7 +177,7 @@ export const TREATMENT_SEO: Record<string, TreatmentSeo> = {
     overviewTitle: "Nadipariksha — Classical Pulse Diagnosis",
     overview: [
       "Nadipariksha is the classical Ayurvedic pulse examination used to understand Doshas, tissues and vital channels. It is the USP of Devdut Ayurved Clinic and the starting point of personalised care.",
-      "Dr. Ganesh Kumar Patil uses three-finger pulse reading to map Prakriti and Vikriti, then designs herbs, diet and therapies around those findings.",
+      "Dr. Ganeshkumar Patil uses three-finger pulse reading to map Prakriti and Vikriti, then designs herbs, diet and therapies around those findings.",
       "Dedicated Nadipariksha sessions are highlighted every month on the 1st and 15th — ideal for first consultations and treatment reviews in Pune.",
     ],
     conditionsTitle: "What Nadipariksha Helps Reveal",
@@ -195,7 +195,7 @@ export const TREATMENT_SEO: Record<string, TreatmentSeo> = {
       "Detects imbalance early, before chronic disease sets in",
       "Guides safer, more precise herbal choices",
       "Explains why symptoms recur despite temporary fixes",
-      "Clinic USP practised with 30+ years of clinical experience",
+      "Clinic USP practised with 26+ years of clinical experience",
     ],
     faqs: [
       { q: "How long does Nadipariksha take?", a: "Pulse reading itself is focused; a full first consultation including history typically lasts around 45–60 minutes." },

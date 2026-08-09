@@ -20,12 +20,17 @@ import virechanaImg from "@/assets/panchkarma/virechana.png";
 import bastiImg from "@/assets/panchkarma/basti.png";
 import vamanaImg from "@/assets/panchkarma/vamana.png";
 import greenEarthImg from "@/assets/green-earth.png";
+import wellnessGlowImg from "@/assets/wellness-glow.png";
 import skinHairImg from "@/assets/treatments/skin-hair.png";
 import skinHeroShirodharaImg from "@/assets/treatments/skin-hero-shirodhara.png";
 import humanHealthImg from "@/assets/treatments/human-Health.png";
 import jointImg from "@/assets/treatments/joint.png";
+import jointArthritisImg from "@/assets/treatments/joint-arthritis.png";
+import jointPainCareImg from "@/assets/treatments/joint-pain-care.png";
+import migraineImg from "@/assets/treatments/migraine.png";
 import childImg from "@/assets/treatments/child.png";
 import digestiveImg from "@/assets/treatments/digestive.png";
+import lifestyleChronicImg from "@/assets/treatments/Lifestyle-Chronic.png";
 import aboutHeroImg from "@/assets/about-hero.png";
 import homeAboutImg from "@/assets/home-about.png";
 import paralysisAboutImg from "@/assets/treatments/paralysis-about.png";
@@ -41,6 +46,16 @@ import mentalAnxietyImg from "@/assets/treatments/mental-anxiety.png";
 import mentalInsomniaImg from "@/assets/treatments/mental-insomnia.png";
 import mentalBurnoutImg from "@/assets/treatments/mental-burnout.png";
 import mentalNightmaresImg from "@/assets/treatments/mental-nightmares.png";
+import kidneyCareImg from "@/assets/treatments/kidney-care.png";
+import kidneyRenalCalculiImg from "@/assets/treatments/kidney-renal-calculi.png";
+import kidneyRenalFailureImg from "@/assets/treatments/kidney-renal-failure.png";
+import kidneyUrinaryTractImg from "@/assets/treatments/kidney-urinary-tract.png";
+import kidneyRecurrentStonesImg from "@/assets/treatments/kidney-recurrent-stones.png";
+import kidneyEdemaFluidImg from "@/assets/treatments/kidney-edema-fluid.png";
+import kidneyPostProcedureImg from "@/assets/treatments/kidney-post-procedure.png";
+import kidneyMethodologyImg from "@/assets/treatments/kidney-methodology.png";
+import kidneyBenefitsImg from "@/assets/treatments/kidney-benefits.png";
+import kidneySacredHealingImg from "@/assets/treatments/kidney-sacred-healing.png";
 
 
 export const Route = createFileRoute("/treatments/$slug")({
@@ -55,9 +70,9 @@ export const Route = createFileRoute("/treatments/$slug")({
       : null;
     return {
       meta: [
-        { title: `${loaderData?.name ?? "Treatment"} | Ayurvedic Treatment in Pune â€” Devdut Ayurved` },
+        { title: `${loaderData?.name ?? "Treatment"} | Ayurvedic Treatment in Pune — Devdut Ayurved` },
         { name: "description", content: seo?.metaDescription ?? loaderData?.short ?? "" },
-        { property: "og:title", content: `${loaderData?.name} â€” Devdut Ayurved Clinic` },
+        { property: "og:title", content: `${loaderData?.name} — Devdut Ayurved Clinic` },
         { property: "og:description", content: seo?.metaDescription ?? loaderData?.short ?? "" },
         { property: "og:url", content: `/treatments/${loaderData?.slug}` },
         { property: "og:type", content: "article" },
@@ -199,9 +214,17 @@ function TreatmentDetail() {
     );
   }
 
+  if (t.slug === "kidney") {
+    return (
+      <PageShell>
+        <KidneySpecialDetail t={t} related={related} />
+      </PageShell>
+    );
+  }
+
   return (
     <PageShell>
-      {/* Full-bleed image hero â€” title + description only */}
+      {/* Full-bleed image hero — title + description only */}
       <section className="relative overflow-hidden -mt-20 border-b border-[var(--border)]">
         <img
           src={therapyImg}
@@ -254,7 +277,7 @@ function GenericTreatmentSeoBody({ t, related }: { t: any; related: any[] }) {
 
   const approachSteps = (t.approach || []).map((step: string, i: number) => ({
     step: String(i + 1).padStart(2, "0"),
-    title: step.split(" â€” ")[0] || step.split(" for ")[0] || step,
+    title: step.split(" — ")[0] || step.split(" for ")[0] || step,
     desc: step,
   }));
 
@@ -384,7 +407,7 @@ function GenericTreatmentSeoBody({ t, related }: { t: any; related: any[] }) {
                 Why Choose <br className="hidden sm:inline" /> Ayurvedic {t.name}?
               </h2>
               <p className="text-sm md:text-base text-[var(--parchment)]/80 leading-relaxed mb-8 max-w-lg">
-                {seo.why[0] || `Ayurveda treats ${t.name.toLowerCase()} at the root cause â€” balancing Doshas, clearing channels, and promoting sustainable, natural recovery without harmful side effects.`}
+                {seo.why[0] || `Ayurveda treats ${t.name.toLowerCase()} at the root cause — balancing Doshas, clearing channels, and promoting sustainable, natural recovery without harmful side effects.`}
               </p>
               <BookAppointmentDialog
                 trigger={
@@ -532,7 +555,7 @@ function PanchakarmaSpecialDetail({ t, related }: { t: any; related: any[] }) {
     {
       title: "Poorva Karma",
       subtitle: "The Preparation",
-      sanskrit: "à¤ªà¥‚à¤°à¥à¤µ à¤•à¤°à¥à¤®",
+      sanskrit: "पूर्व कर्म",
       desc: "Before cleansing can begin, stagnant toxins (Ama) must be loosened from deep tissues and guided to the main digestive channels.",
       steps: [
         { name: "Snehana (Oleation)", detail: "Drinking customized medicated ghee daily in increasing doses to bind and liquefy fat-soluble cellular waste." },
@@ -543,7 +566,7 @@ function PanchakarmaSpecialDetail({ t, related }: { t: any; related: any[] }) {
     {
       title: "Pradhana Karma",
       subtitle: "The Cleansing",
-      sanskrit: "à¤ªà¥à¤°à¤§à¤¾à¤¨ à¤•à¤°à¥à¤®",
+      sanskrit: "प्रधान कर्म",
       desc: "The core purification process where the accumulated doshas are carefully eliminated from the body using the 5 classical methods.",
       steps: [
         { name: "Vamana & Virechana", detail: "Congested Kapha is eliminated from the upper digestive tract; Pitta and liver toxins are purged through the lower tract." },
@@ -554,7 +577,7 @@ function PanchakarmaSpecialDetail({ t, related }: { t: any; related: any[] }) {
     {
       title: "Paschat Karma",
       subtitle: "The Restoration",
-      sanskrit: "à¤ªà¤¶à¥à¤šà¤¾à¤¤à¥ à¤•à¤°à¥à¤®",
+      sanskrit: "पश्चात् कर्म",
       desc: "The recovery phase to rekindle digestive fire (Agni), restore strength, and sustain the results of the deep purification.",
       steps: [
         { name: "Samsarjana Krama (Diet Scale)", detail: "Gradually re-introducing foods starting from thin rice water (Manda), progressing to light lentils, and then solid food." },
@@ -574,7 +597,7 @@ function PanchakarmaSpecialDetail({ t, related }: { t: any; related: any[] }) {
   const karmas = [
     {
       name: "Vamana",
-      sanskrit: "à¤µà¤®à¤¨",
+      sanskrit: "वमन",
       translation: "Therapeutic Emesis",
       dosha: "Kapha Dosha (Congestion, Mucus)",
       description: "Eliminates excess Kapha and Ama from the stomach and upper respiratory tract. Highly effective for chronic chest congestion and metabolic blockages.",
@@ -583,7 +606,7 @@ function PanchakarmaSpecialDetail({ t, related }: { t: any; related: any[] }) {
     },
     {
       name: "Virechana",
-      sanskrit: "à¤µà¤¿à¤°à¥‡à¤šà¤¨",
+      sanskrit: "विरेचन",
       translation: "Therapeutic Purgation",
       dosha: "Pitta Dosha (Heat, Inflammation)",
       description: "Cleanses excess Pitta, heat, and bile from the small intestine, liver, and blood channels. Resets systemic digestion.",
@@ -592,7 +615,7 @@ function PanchakarmaSpecialDetail({ t, related }: { t: any; related: any[] }) {
     },
     {
       name: "Basti",
-      sanskrit: "à¤¬à¤¸à¥à¤¤à¤¿",
+      sanskrit: "बस्ति",
       translation: "Medicated Enemas",
       dosha: "Vata Dosha (Pain, Degeneration)",
       description: "Considered the 'Half of all Treatments' in Ayurveda. Cleanses the colon (the primary seat of Vata), lubricating nerves, joints, and balancing the nervous system.",
@@ -601,7 +624,7 @@ function PanchakarmaSpecialDetail({ t, related }: { t: any; related: any[] }) {
     },
     {
       name: "Nasya",
-      sanskrit: "à¤¨à¤¸à¥à¤¯",
+      sanskrit: "नस्य",
       translation: "Nasal Administration",
       dosha: "Head & Neck Prana (Sinuses, Mind)",
       description: "Administers medicated drops through the nostrils to clear accumulated toxins above the collarbone. Stimulates neurological and mental clarity.",
@@ -610,7 +633,7 @@ function PanchakarmaSpecialDetail({ t, related }: { t: any; related: any[] }) {
     },
     {
       name: "Raktamokshana",
-      sanskrit: "à¤°à¤•à¥à¤¤à¤®à¥‹à¤•à¥à¤·à¤£",
+      sanskrit: "रक्तमोक्षण",
       translation: "Bloodletting / Leech Therapy",
       dosha: "Rakta Dhatu (Blood purification)",
       description: "Eliminates highly concentrated, deep blood-borne toxins. Leeches (Jalauka) gently draw out localized stagnant blood while releasing healing enzymes.",
@@ -647,7 +670,7 @@ function PanchakarmaSpecialDetail({ t, related }: { t: any; related: any[] }) {
               <span className="block text-2xl md:text-3xl text-[var(--parchment)]">The Sacred Path of Purification</span>
             </h1>
             <p className="mt-5 text-sm md:text-lg text-[var(--parchment)]/80 leading-relaxed max-w-3xl mx-auto">
-              Beyond relaxation â€” Panchakarma is a complete Ayurvedic detox.<br />
+              Beyond relaxation — Panchakarma is a complete Ayurvedic detox.<br />
               It eliminates toxins, revitalizes metabolism, and restores natural balance.
             </p>
           </Reveal>
@@ -668,7 +691,7 @@ function PanchakarmaSpecialDetail({ t, related }: { t: any; related: any[] }) {
                 Panchakarma is Ayurveda's classical detoxification and rejuvenation therapy. Derived from the Sanskrit words <strong className="text-[var(--forest-deep)]">"Pancha" (five)</strong> and <strong className="text-[var(--forest-deep)]">"Karma" (therapeutic actions)</strong>, it consists of five specialized cleansing procedures that eliminate toxins, restore dosha balance, and promote overall wellness.
               </p>
               <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
-                Unlike a regular spa treatment, Panchakarma is a personalized medical therapy performed in three stagesâ€”preparation, detoxification, and rejuvenationâ€”under expert Ayurvedic supervision to support long-term health and vitality.
+                Unlike a regular spa treatment, Panchakarma is a personalized medical therapy performed in three stages — preparation, detoxification, and rejuvenation — under expert Ayurvedic supervision to support long-term health and vitality.
               </p>
             </div>
 
@@ -905,7 +928,7 @@ function PanchakarmaSpecialDetail({ t, related }: { t: any; related: any[] }) {
                         Targeting: {karmas[activeKarma].dosha}
                       </span>
                       <h3 className="font-display text-xl md:text-2xl text-[var(--gold)] mb-1.5">
-                        {karmas[activeKarma].name} â€” <span className="italic text-[var(--parchment)]/90 text-sm md:text-base font-normal">{karmas[activeKarma].translation}</span>
+                        {karmas[activeKarma].name} — <span className="italic text-[var(--parchment)]/90 text-sm md:text-base font-normal">{karmas[activeKarma].translation}</span>
                       </h3>
                       <p className="text-xs text-[var(--parchment)]/85 leading-relaxed max-w-2xl">
                         {karmas[activeKarma].description}
@@ -918,7 +941,7 @@ function PanchakarmaSpecialDetail({ t, related }: { t: any; related: any[] }) {
                         <ul className="grid grid-cols-2 gap-x-2 gap-y-1">
                           {karmas[activeKarma].indications.map((ind, i) => (
                             <li key={i} className="flex items-center gap-1.5 text-[11px] text-[var(--parchment)]/75">
-                              <span className="text-[var(--gold)] text-[8px]">âœ¦</span> {ind}
+                              <span className="text-[var(--gold)] text-[8px]">✦</span> {ind}
                             </li>
                           ))}
                         </ul>
@@ -1003,16 +1026,22 @@ function SkinSpecialDetail({ t, related }: { t: any; related: any[] }) {
       tab: "Skin Care",
       Icon: Droplets,
       heading: "Dermatological & Skin Disorders (Tvak Roga)",
-      intro: "Chronic skin conditions like Acne, Psoriasis, Eczema, and Fungal Infections are driven by internal blood toxins (Rakta Dushya) and Pitta-Kaphic imbalance. We treat root causes through Raktamokshana and herbal detox.",
+      intro: "Chronic skin conditions like Acne, Psoriasis, Eczema, Fungal Infections, and Cracked Heels (Padadari) are driven by internal blood toxins (Rakta Dushya), Vata dryness, and Pitta-Kaphic imbalance. We treat root causes through Raktamokshana, medicated lepas, and herbal detox.",
       image: skinHairImg,
       points: [
+        "Cracked Heels Treatment (Padadari)",
+        "Painful Fissured Heel Healing",
         "Acne & Pimple Recovery",
         "Eczema & Inflammatory Soothing",
         "Psoriasis Flare Management",
         "Fungal Infection Prevention",
         "Blood Purification (Raktamokshana)",
-        "Herbal Lepa & Phytotherapy",
+        "Skin Allergy & Rash Relief",
       ],
+      highlight: {
+        title: "Cracked Heels Treatment (Padadari)",
+        desc: "Ayurvedic care for dry, painful, fissured heels using local oleation, herbal pastes (lepas), Vata-pacifying oils, and internal nourishment to restore soft, healthy skin and prevent recurrence.",
+      },
     },
     {
       tab: "Hair Care",
@@ -1080,7 +1109,7 @@ function SkinSpecialDetail({ t, related }: { t: any; related: any[] }) {
               <span className="block text-2xl md:text-3xl text-[var(--parchment)] font-sans font-light tracking-wide">with Authentic Ayurveda</span>
             </h1>
             <p className="mt-5 text-sm md:text-lg text-[var(--parchment)]/80 leading-relaxed max-w-3xl mx-auto">
-              Treating chronic skin disorders and hair concerns from the root. Personalized therapies designed to resolve internal imbalances for radiant, lasting health.
+              Treating chronic skin disorders, hair concerns, and cracked heels (Padadari) from the root. Personalized therapies designed to resolve internal imbalances for radiant, lasting health.
             </p>
           </Reveal>
         </div>
@@ -1161,6 +1190,14 @@ function SkinSpecialDetail({ t, related }: { t: any; related: any[] }) {
                 <h3 className="font-display text-2xl text-[var(--forest-deep)]">{active.heading}</h3>
               </div>
               <p className="text-sm text-[var(--muted-foreground)] leading-relaxed mb-6">{active.intro}</p>
+
+              {"highlight" in active && active.highlight && (
+                <div className="mb-6 rounded-2xl border border-[var(--gold)]/40 bg-[var(--gold)]/10 p-4">
+                  <div className="text-xs font-semibold uppercase tracking-widest text-[var(--gold)] mb-1.5">Featured Treatment</div>
+                  <h4 className="font-display text-xl text-[var(--forest-deep)] mb-1.5">{active.highlight.title}</h4>
+                  <p className="text-sm text-[var(--muted-foreground)] leading-relaxed">{active.highlight.desc}</p>
+                </div>
+              )}
 
               <div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-[var(--forest-deep)]/60 mb-3">Our treatment focuses on:</p>
@@ -1317,7 +1354,7 @@ function RespiratorySpecialDetail({ t, related }: { t: any; related: any[] }) {
       Icon: Wind,
       heading: "Asthma & Chronic Bronchitis (Tamaka Shwasa)",
       intro: "Chronic breathlessness, wheezing, and chest tightness driven by Kapha accumulation and Vata obstruction in Pranavaha Srotas (respiratory channels). Addressed through gentle lung cleansing, herbs, and steam therapy.",
-      image: humanHealthImg,
+      image: vamanaImg,
       points: [
         "Bronchial Channel Airway Expansion",
         "Mucus & Phlegm Clearing (Kaphaghna)",
@@ -1347,7 +1384,7 @@ function RespiratorySpecialDetail({ t, related }: { t: any; related: any[] }) {
       Icon: ShieldAlert,
       heading: "Chronic Cough & Respiratory Immunity (Kasa Roga)",
       intro: "Recurrent dry or wet cough, post-viral airway weakness, and seasonal respiratory vulnerability. Restored through digestive fire (Agni) correction and lung-strengthening Rasayana.",
-      image: therapyImg,
+      image: lifestyleChronicImg,
       points: [
         "Recurrent Cough & Irritation Soothing",
         "Post-Viral Respiratory Recovery",
@@ -1378,7 +1415,7 @@ function RespiratorySpecialDetail({ t, related }: { t: any; related: any[] }) {
       <section className="relative overflow-hidden -mt-20 border-b border-[var(--border)]">
         {/* Background image with overlay */}
         <img
-          src={treatmentsImg}
+          src={wellnessGlowImg}
           alt="Ayurvedic Respiratory Care Therapy"
           aria-hidden
           className="absolute inset-0 size-full object-cover object-center"
@@ -1410,17 +1447,17 @@ function RespiratorySpecialDetail({ t, related }: { t: any; related: any[] }) {
                 Ayurvedic Lung &amp; Respiratory Wellness
               </h2>
               <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
-                In classical Ayurveda, healthy breathing depends on the clarity of the respiratory channels (Pranavaha Srotas). Environmental pollution, seasonal shifts, allergens, and weak digestive fire (Agni) lead to toxin buildup (Ama) and excessive Kapha accumulation â€” causing airway blockage, wheezing, sinusitis, and persistent cough.
+                In classical Ayurveda, healthy breathing depends on the clarity of the respiratory channels (Pranavaha Srotas). Environmental pollution, seasonal shifts, allergens, and weak digestive fire (Agni) lead to toxin buildup (Ama) and excessive Kapha accumulation — causing airway blockage, wheezing, sinusitis, and persistent cough.
               </p>
               <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
-                Devdut Ayurved Clinic provides gentle, authentic respiratory treatments using Nasya (nasal oil drops), medicated herbal steam, and lung-strengthening Rasayanas â€” helping you regain vital lung capacity and long-term allergic resistance naturally.
+                Devdut Ayurved Clinic provides gentle, authentic respiratory treatments using Nasya (nasal oil drops), medicated herbal steam, and lung-strengthening Rasayanas — helping you regain vital lung capacity and long-term allergic resistance naturally.
               </p>
             </div>
 
             {/* Right Column: Image */}
             <div className="relative rounded-3xl overflow-hidden aspect-[4/3] border border-[var(--border)]/30">
               <img
-                src={humanHealthImg}
+                src={aboutHeroImg}
                 alt="Ayurvedic Respiratory Wellness"
                 className="w-full h-full object-cover"
               />
@@ -1555,7 +1592,7 @@ function RespiratorySpecialDetail({ t, related }: { t: any; related: any[] }) {
                   "Safe, chemical-free & non-sedating herbal medicines",
                   "Authentic Nasya & Swedana therapies",
                   "Allergy resistance & seasonal immunity building",
-                  "30+ years of classical Ayurvedic expertise",
+                  "26+ years of classical Ayurvedic expertise",
                   "Long-term lung health & vital endurance"
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3.5 text-sm md:text-base text-[var(--forest-deep)] font-medium">
@@ -1765,7 +1802,7 @@ function ChildSpecialDetail({ t, related }: { t: any; related: any[] }) {
                     <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5">
                       {commonDiseases.map((d, i) => (
                         <li key={i} className="flex items-center gap-2.5 text-xs md:text-sm text-[var(--forest-deep)]">
-                          <span className="text-[var(--gold)] font-bold">âœ¦</span> {d}
+                          <span className="text-[var(--gold)] font-bold">✦</span> {d}
                         </li>
                       ))}
                     </ul>
@@ -1808,7 +1845,7 @@ function ChildSpecialDetail({ t, related }: { t: any; related: any[] }) {
                     <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5">
                       {intellectualSkills.map((sk, i) => (
                         <li key={i} className="flex items-center gap-2.5 text-xs md:text-sm text-[var(--forest-deep)]">
-                          <span className="text-[var(--gold)] font-bold">âœ¦</span> {sk}
+                          <span className="text-[var(--gold)] font-bold">✦</span> {sk}
                         </li>
                       ))}
                     </ul>
@@ -2037,10 +2074,10 @@ function WomensMensHealthSpecialDetail({ t, related }: { t: any; related: any[] 
       tab: "Women's Wellness",
       Icon: Heart,
       heading: "Women's Wellness",
-      intro: "Holistic Ayurvedic care for maintaining long-term women's health through personalized preventive programs, including management of white discharge (Leucorrhoea).",
+      intro: "Holistic Ayurvedic care for maintaining long-term women's health through personalized preventive programs, including management of white discharge (Leucorrhoea) and nightmares.",
       conditions: [
         { name: "White Discharge (Leucorrhoea)", desc: "Manage abnormal vaginal discharge naturally by improving reproductive health and immunity." },
-        { name: "Nightmares & Sleep Disturbance", desc: "Address nightmares and restless sleep linked to hormonal and emotional imbalance." },
+        { name: "Nightmares", desc: "Ayurvedic care for disturbing dreams and restless sleep linked to hormonal imbalance, stress, and emotional strain." },
         { name: "Stress Management", desc: "Address stress-linked hormonal disruption with Shirodhara, Medhya Rasayana, and lifestyle design." },
         { name: "Preventive Health Care", desc: "Seasonal Panchakarma and Rasayana protocols to maintain lifelong reproductive wellness." },
         { name: "Hormonal Detox", desc: "Clear accumulated toxins affecting hormonal axes through targeted Shodhana therapies." },
@@ -2053,11 +2090,11 @@ function WomensMensHealthSpecialDetail({ t, related }: { t: any; related: any[] 
       tab: "Sexual Wellness",
       Icon: Zap,
       heading: "Sexual Weakness & Vitality",
-      intro: "Our Ayurvedic therapies help improve vitality, stamina, confidence, and overall reproductive health using natural herbal medicines and lifestyle modifications.",
+      intro: "Our Ayurvedic therapies help improve vitality, stamina, confidence, and overall reproductive health using natural herbal medicines and lifestyle modifications — including care for nightmares linked to vitality imbalance.",
       conditions: [
         { name: "Low Vitality & Energy", desc: "Restore physical strength and stamina with classical Vajikarana (aphrodisiac) Rasayana formulations." },
         { name: "Stress-Related Weakness", desc: "Address performance anxiety and mental fatigue with adaptogenic herbs and Shirodhara." },
-        { name: "Nightmares & Disturbed Sleep", desc: "Calm the mind and reduce nightmares linked to stress, sexual weakness and vitality imbalance." },
+        { name: "Nightmares", desc: "Calm the mind and reduce nightmares linked to stress, sexual weakness, and vitality imbalance." },
         { name: "Reproductive Health", desc: "Improve reproductive health and sperm quality with targeted Ayurvedic protocols." },
         { name: "Hormonal Balance", desc: "Regulate testosterone and related hormones naturally through diet, herbs, and lifestyle." },
       ],
@@ -2066,9 +2103,10 @@ function WomensMensHealthSpecialDetail({ t, related }: { t: any; related: any[] 
       tab: "Men's Wellness",
       Icon: Shield,
       heading: "Men's Reproductive Wellness",
-      intro: "Our holistic approach supports natural vitality, hormonal balance, improved general health, better physical performance, and long-term wellness â€” confidentially and naturally.",
+      intro: "Our holistic approach supports natural vitality, hormonal balance, improved general health, better physical performance, and long-term wellness — confidentially and naturally.",
       conditions: [
         { name: "Natural Vitality", desc: "Build sustained energy and physical strength with personalized Rasayana programs." },
+        { name: "Nightmares", desc: "Support peaceful sleep and reduce nightmares connected to stress, overwork, and vitality depletion." },
         { name: "Better Physical Performance", desc: "Optimize metabolic health and physical performance through Ayurvedic diet and exercise guidance." },
         { name: "Improved General Health", desc: "Address lifestyle-related conditions like obesity, diabetes, and hypertension holistically." },
         { name: "Long-Term Wellness", desc: "Preventive Panchakarma and seasonal Shodhana to maintain optimal health as you age." },
@@ -2084,7 +2122,7 @@ function WomensMensHealthSpecialDetail({ t, related }: { t: any; related: any[] 
 
   const pillars: Pillar[] = [
     { Icon: Stethoscope, title: "Comprehensive Consultation", desc: "In-depth Nadi Pariksha (pulse reading), Prakriti assessment, medical history, and lifestyle evaluation before any treatment." },
-    { Icon: Leaf, title: "Classical Herbal Medicines", desc: "Authentic Ayurvedic formulations â€” Ashokarishta, Shatavari, Ashwagandha, and more â€” compounded for your unique constitution." },
+    { Icon: Leaf, title: "Classical Herbal Medicines", desc: "Authentic Ayurvedic formulations — Ashokarishta, Shatavari, Ashwagandha, and more — compounded for your unique constitution." },
     { Icon: Flame, title: "Panchakarma Therapies", desc: "Targeted detox procedures like Uttarbasti, Virechana, and Basti where clinically indicated to address root imbalances." },
     { Icon: Salad, title: "Diet & Nutrition Guidance", desc: "Cycle-phase aware nutrition for women and performance-focused meal plans for men, aligned with Ayurvedic principles." },
     { Icon: PersonStanding, title: "Lifestyle & Stress Management", desc: "Pranayama, Yoga, Dinacharya (daily routine), and Ritucharya (seasonal routine) to sustain hormonal and reproductive health." },
@@ -2129,7 +2167,8 @@ function WomensMensHealthSpecialDetail({ t, related }: { t: any; related: any[] 
             </h1>
             <p className="mt-2 max-w-2xl mx-auto text-sm md:text-base text-[var(--parchment)]/75 leading-relaxed">
               Good reproductive and hormonal health is essential for overall physical, emotional, and mental well-being.
-              Our personalized Ayurvedic care supports women and men through every stage of life â€” identifying the root
+              Our personalized Ayurvedic care supports women and men through every stage of life — including menstrual care,
+              fertility, pregnancy, women's wellness, sexual weakness & vitality, and nightmares — identifying the root
               cause and restoring the body's natural balance.
             </p>
           </motion.div>
@@ -2250,7 +2289,7 @@ function WomensMensHealthSpecialDetail({ t, related }: { t: any; related: any[] 
                       <div className="grid grid-cols-2 gap-2">
                         {activeSection.conditions.map((c, i) => (
                           <div key={i} className="flex items-center gap-1.5 text-[11px] text-[var(--parchment)]/75">
-                            <span className="text-[var(--gold)] text-[8px]">âœ¦</span>
+                            <span className="text-[var(--gold)] text-[8px]">✦</span>
                             {c.name}
                           </div>
                         ))}
@@ -2316,7 +2355,7 @@ function WomensMensHealthSpecialDetail({ t, related }: { t: any; related: any[] 
               <h2 className="font-display text-3xl md:text-4xl text-[var(--forest-deep)] mb-4">Why Choose Devdut Ayurved Clinic?</h2>
               <p className="text-sm text-[var(--muted-foreground)] leading-relaxed mb-8">
                 Whether you seek relief from menstrual disorders, plan for parenthood, need pregnancy care, want to manage
-                hormonal imbalances, or improve men's vitality â€” we offer comprehensive Ayurvedic solutions tailored to your unique needs.
+                hormonal imbalances, address nightmares, or improve men's vitality — we offer comprehensive Ayurvedic solutions tailored to your unique needs.
               </p>
               <div className="grid grid-cols-1 gap-2.5">
                 {whyChoose.map((w, i) => (
@@ -2328,7 +2367,7 @@ function WomensMensHealthSpecialDetail({ t, related }: { t: any; related: any[] 
                     transition={{ delay: i * 0.06 }}
                     className="flex items-center gap-3 text-sm font-medium text-[var(--forest-deep)]"
                   >
-                    <span className="size-5 rounded-full bg-[var(--gold)]/20 text-[var(--gold)] flex items-center justify-center text-[10px] shrink-0">âœ“</span>
+                    <span className="size-5 rounded-full bg-[var(--gold)]/20 text-[var(--gold)] flex items-center justify-center text-[10px] shrink-0">✓</span>
                     {w}
                   </motion.div>
                 ))}
@@ -2340,11 +2379,11 @@ function WomensMensHealthSpecialDetail({ t, related }: { t: any; related: any[] 
             <div className="absolute top-0 right-0 w-56 h-56 rounded-full bg-[var(--gold)]/8 blur-3xl" />
             <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-[#c084fc]/8 blur-3xl" />
             <div className="relative z-10 text-center">
-              <div className="font-sanskrit text-[var(--gold)] text-3xl mb-4 font-semibold">à¤¸à¥à¤¤à¥à¤°à¥€-à¤ªà¥à¤°à¥à¤· à¤¸à¥à¤µà¤¾à¤¸à¥à¤¥à¥à¤¯</div>
+              <div className="font-sanskrit text-[var(--gold)] text-3xl mb-4 font-semibold">स्त्री-पुरुष स्वास्थ्य</div>
               <h3 className="font-display text-2xl text-[var(--parchment)] mb-3">Begin Your Journey Towards Better Reproductive Health</h3>
               <p className="text-sm text-[var(--parchment)]/70 leading-relaxed mb-6">
                 Through personalized care, authentic herbal medicines, Panchakarma therapies, and holistic lifestyle guidance,
-                we help you achieve lasting wellness â€” naturally and safely.
+                we help you achieve lasting wellness — naturally and safely.
               </p>
               <BookAppointmentDialog
                 trigger={
@@ -2417,7 +2456,7 @@ function LifestyleChronicSpecialDetail({ t, related }: { t: any; related: any[] 
       Icon: Droplets,
       heading: "Diabetes Management",
       intro: "Ayurveda helps manage diabetes by improving metabolism, supporting healthy blood sugar regulation, strengthening digestion, and reducing the risk of long-term complications.",
-      image: humanHealthImg,
+      image: lifestyleChronicImg,
       points: [
         "Blood Sugar Management",
         "Improved Metabolism",
@@ -2432,7 +2471,7 @@ function LifestyleChronicSpecialDetail({ t, related }: { t: any; related: any[] 
       Icon: Activity,
       heading: "Thyroid Disorders",
       intro: "Hormonal imbalance can affect metabolism, energy levels, weight, and overall health. Our Ayurvedic treatments aim to support healthy thyroid function naturally by restoring internal balance.",
-      image: skinHeroShirodharaImg,
+      image: humanHealthImg,
       points: [
         "Personalized Herbal Medicines",
         "Diet & Nutrition Guidance",
@@ -2462,7 +2501,7 @@ function LifestyleChronicSpecialDetail({ t, related }: { t: any; related: any[] 
       Icon: TrendingUp,
       heading: "Weight Gain Management",
       intro: "For individuals struggling with low body weight, Ayurveda helps improve digestion, nutrient absorption, and overall strength through personalized nutrition and herbal therapies.",
-      image: whyChooseUsImg,
+      image: homeAboutImg,
       points: [
         "Improved Nutrient Absorption",
         "Digestive Strengthening",
@@ -2492,7 +2531,7 @@ function LifestyleChronicSpecialDetail({ t, related }: { t: any; related: any[] 
       Icon: Moon,
       heading: "Insomnia & Stress-Related Disorders",
       intro: "Quality sleep is essential for physical and mental well-being. Ayurveda addresses insomnia by calming the nervous system, balancing the mind, and promoting restful sleep through natural therapies.",
-      image: mentalHealthBenefitsImg,
+      image: mentalInsomniaImg,
       points: [
         "Herbal Sleep Support",
         "Relaxation Therapies",
@@ -2536,7 +2575,7 @@ function LifestyleChronicSpecialDetail({ t, related }: { t: any; related: any[] 
 
   const approachSteps = [
     { step: "01", title: "Prakriti & Dosha Assessment", desc: "In-depth Prakriti evaluation, Dosha analysis, medical history review, dietary habits, stress levels, and lifestyle evaluation." },
-    { step: "02", title: "Classical Herbal Medicines", desc: "Authentic formulations â€” Guduchi, Haritaki, Triphala, Nishakathakadi â€” tailored to your specific chronic condition." },
+    { step: "02", title: "Classical Herbal Medicines", desc: "Authentic formulations — Guduchi, Haritaki, Triphala, Nishakathakadi — tailored to your specific chronic condition." },
     { step: "03", title: "Panchakarma Detox", desc: "Targeted cleansing procedures like Virechana, Basti, and Udwartana to reverse deep-seated metabolic imbalances." },
     { step: "04", title: "Diet, Lifestyle & Monitoring", desc: "Condition-specific Ayurvedic diet plans, Dinacharya routines, Yoga, and regular progress reviews for sustained outcomes." },
   ];
@@ -2687,7 +2726,7 @@ function LifestyleChronicSpecialDetail({ t, related }: { t: any; related: any[] 
                 Why Choose <br className="hidden sm:inline" /> Ayurvedic Chronic Care?
               </h2>
               <p className="text-sm md:text-base text-[var(--parchment)]/80 leading-relaxed mb-8 max-w-lg">
-                Ayurveda treats the root cause of chronic disease â€” correcting Dosha imbalances, restoring metabolic fire, and eliminating deep-seated toxins for sustainable, drug-free healing.
+                Ayurveda treats the root cause of chronic disease — correcting Dosha imbalances, restoring metabolic fire, and eliminating deep-seated toxins for sustainable, drug-free healing.
               </p>
               <BookAppointmentDialog
                 trigger={
@@ -2764,7 +2803,7 @@ function LifestyleChronicSpecialDetail({ t, related }: { t: any; related: any[] 
                 Benefits of Ayurvedic Care
               </h2>
               <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
-                Whether managing diabetes, thyroid disorders, obesity, or chronic acidity â€” our holistic protocols restore metabolic balance and promote long-term disease-free living.
+                Whether managing diabetes, thyroid disorders, obesity, or chronic acidity — our holistic protocols restore metabolic balance and promote long-term disease-free living.
               </p>
               <div className="divide-y divide-[var(--border)]/50 pt-2">
                 {benefits.map((b) => (
@@ -2826,7 +2865,7 @@ function BoneJointNeurologicalSpecialDetail({ t, related }: { t: any; related: a
       Icon: Activity,
       heading: "Arthritis (Sandhigata Vata)",
       intro: "Arthritis causes chronic joint pain, stiffness, swelling, and cartilage wear due to Vata imbalance. Our Ayurvedic treatments focus on deep Snehana, reducing inflammation, improving joint lubrication, and enhancing flexibility naturally.",
-      image: jointImg,
+      image: jointArthritisImg,
       points: [
         "Osteoarthritis Cartilage Support",
         "Rheumatoid Inflammation Calming",
@@ -2841,7 +2880,7 @@ function BoneJointNeurologicalSpecialDetail({ t, related }: { t: any; related: a
       Icon: Heart,
       heading: "Joint Pain & Musculoskeletal Care",
       intro: "Persistent knee, shoulder, wrist, or ankle pain can severely affect daily mobility. We apply classical Abhyanga, Pinda Swedana, and Vata-pacifying herbal pastes to relieve discomfort at the root.",
-      image: humanHealthImg,
+      image: jointPainCareImg,
       points: [
         "Knee Pain & Degeneration Relief",
         "Shoulder & Cervical Discomfort",
@@ -2856,7 +2895,7 @@ function BoneJointNeurologicalSpecialDetail({ t, related }: { t: any; related: a
       Icon: Compass,
       heading: "Sciatica & Spinal Cord Nerve Care (Gridhrasi)",
       intro: "Sciatica occurs due to nerve root compression or spinal Vata blockage, causing radiating pain, numbness, and difficulty walking. Kati Basti and spinal decompressing herbs provide fast, lasting relief.",
-      image: paralysisParaplegiaImg,
+      image: bastiImg,
       points: [
         "Kati Basti Spinal Oil Retention",
         "Radiating Leg Pain Pacification",
@@ -2871,7 +2910,7 @@ function BoneJointNeurologicalSpecialDetail({ t, related }: { t: any; related: a
       Icon: Sparkles,
       heading: "Migraine & Headaches (Suryavarta & Shiro Roga)",
       intro: "Recurring vascular and tension headaches stem from Vata-Pitta turbulence in cerebral channels. Shirodhara, Nasya nasal drops, and Medhya Rasayana calm vascular spasms and prevent recurrent attacks.",
-      image: skinHeroShirodharaImg,
+      image: migraineImg,
       points: [
         "Shirodhara Medicated Oil Pouring",
         "Nasya Nasal Cleansing Drops",
@@ -2886,7 +2925,7 @@ function BoneJointNeurologicalSpecialDetail({ t, related }: { t: any; related: a
       Icon: Brain,
       heading: "Epilepsy & Neurological Support (Apasmara)",
       intro: "Supportive Ayurvedic care for brain channel stability through personalized Medhya Rasayana herbs, nervous system calming, and Dinacharya daily rhythm redesign to complement neurological recovery.",
-      image: mentalHealthAboutImg,
+      image: paralysisImg,
       points: [
         "Manovaha Channel Calming",
         "Cognitive Balance & Focus",
@@ -2927,7 +2966,7 @@ function BoneJointNeurologicalSpecialDetail({ t, related }: { t: any; related: a
           <Reveal>
             <h1 className="font-display leading-[1.1] max-w-4xl mx-auto">
               <span className="block text-4xl md:text-6xl text-[var(--gold)] mb-2 italic">Bone, Joint &amp; Neurological Care</span>
-              <span className="block text-2xl md:text-3xl text-[var(--parchment)] font-sans font-light tracking-wide">à¤…à¤¸à¥à¤¥à¤¿-à¤¸à¤¨à¥à¤§à¤¿-à¤¸à¥à¤¨à¤¾à¤¯à¥ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾</span>
+              <span className="block text-2xl md:text-3xl text-[var(--parchment)] font-sans font-light tracking-wide">अस्थि-सन्धि-स्नायु चिकित्सा</span>
             </h1>
             <p className="mt-5 text-sm md:text-lg text-[var(--parchment)]/80 leading-relaxed max-w-3xl mx-auto">
               Addressing the root cause of Vata imbalances, joint degeneration, sciatica, migraine, and nerve pain through Kati Basti, Abhyanga, and Rasayana support.
@@ -2946,7 +2985,7 @@ function BoneJointNeurologicalSpecialDetail({ t, related }: { t: any; related: a
                 Ayurvedic Care for Joint Pain &amp; Nerve Concerns
               </h2>
               <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
-                In classical Ayurveda, bone, joint, and nerve disorders â€” known as <strong className="text-[var(--forest-deep)]">Sandhigata Vata</strong> and Vata Vyadhi â€” stem from aggravated Vata dosha causing dry, stiff, inflamed joints and nerve compression.
+                In classical Ayurveda, bone, joint, and nerve disorders — known as <strong className="text-[var(--forest-deep)]">Sandhigata Vata</strong> and Vata Vyadhi — stem from aggravated Vata dosha causing dry, stiff, inflamed joints and nerve compression.
               </p>
               <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
                 At Devdut Ayurved Clinic, our specialized protocols combine warm medicated oil pooling (Kati, Janu &amp; Greeva Basti), Abhyanga, Pinda Swedana poultice therapy, and classical Vata-pacifying herbs to lubricate joints, relieve nerve pain, and rebuild strength naturally.
@@ -3051,7 +3090,7 @@ function BoneJointNeurologicalSpecialDetail({ t, related }: { t: any; related: a
                 Why Choose <br className="hidden sm:inline" /> Ayurvedic Joint Care?
               </h2>
               <p className="text-sm md:text-base text-[var(--parchment)]/80 leading-relaxed mb-8 max-w-lg">
-                Ayurveda treats bone, joint, and nerve disorders at the root cause â€” nourishing dried cartilage, easing nerve compression, and promoting pain-free mobility without dependency on painkillers.
+                Ayurveda treats bone, joint, and nerve disorders at the root cause — nourishing dried cartilage, easing nerve compression, and promoting pain-free mobility without dependency on painkillers.
               </p>
               <BookAppointmentDialog
                 trigger={
@@ -3304,7 +3343,7 @@ function PreventiveCareSpecialDetail({ t, related }: { t: any; related: any[] })
           <Reveal>
             <h1 className="font-display leading-[1.1] max-w-4xl mx-auto">
               <span className="block text-4xl md:text-6xl text-[var(--gold)] mb-2 italic">Prevent Today, Thrive Tomorrow</span>
-              <span className="block text-2xl md:text-3xl text-[var(--parchment)] font-sans font-light tracking-wide">à¤¸à¥à¤µà¤¸à¥à¤¥à¤µà¥ƒà¤¤à¥à¤¤ à¤à¤µà¤‚ à¤°à¥‹à¤—à¤ªà¥à¤°à¤¤à¤¿à¤°à¥‹à¤§ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾</span>
+              <span className="block text-2xl md:text-3xl text-[var(--parchment)] font-sans font-light tracking-wide">स्वस्थवृत्त एवं रोगप्रतिरोध चिकित्सा</span>
             </h1>
             <p className="mt-5 text-sm md:text-lg text-[var(--parchment)]/80 leading-relaxed max-w-3xl mx-auto">
               Strengthen your body's natural defenses, improve immunity, support organ health, and prevent lifestyle-related illness through the timeless wisdom of Ayurveda.
@@ -3323,10 +3362,10 @@ function PreventiveCareSpecialDetail({ t, related }: { t: any; related: any[] })
                 Ayurvedic Preventive Care & Wellness
               </h2>
               <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
-                In classical Ayurveda, prevention is known as <strong className="text-[var(--forest-deep)]">Swasthavritta</strong> â€” the science of maintaining health and preventing disease before it manifests. This holistic approach integrates personalized diet, daily routines, seasonal detox, and Rasayana herbs to keep the body in perfect balance.
+                In classical Ayurveda, prevention is known as <strong className="text-[var(--forest-deep)]">Swasthavritta</strong> — the science of maintaining health and preventing disease before it manifests. This holistic approach integrates personalized diet, daily routines, seasonal detox, and Rasayana herbs to keep the body in perfect balance.
               </p>
               <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
-                At Devdut Ayurved Clinic, our wellness programs include Prakriti evaluation, customized dietary prescriptions, Panchakarma detox, immunity enhancement, heart health support, and lifestyle counseling â€” all designed to prevent chronic illness and promote lifelong vitality.
+                At Devdut Ayurved Clinic, our wellness programs include Prakriti evaluation, customized dietary prescriptions, Panchakarma detox, immunity enhancement, heart health support, and lifestyle counseling — all designed to prevent chronic illness and promote lifelong vitality.
               </p>
             </div>
 
@@ -3434,7 +3473,7 @@ function PreventiveCareSpecialDetail({ t, related }: { t: any; related: any[] })
                 Why Choose <br className="hidden sm:inline" /> Preventive Ayurveda?
               </h2>
               <p className="text-sm md:text-base text-[var(--parchment)]/80 leading-relaxed mb-8 max-w-lg">
-                Ayurveda treats the root cause of illness before symptoms even appear â€” strengthening immunity, balancing doshas, and aligning your body with natural rhythms for lasting vitality.
+                Ayurveda treats the root cause of illness before symptoms even appear — strengthening immunity, balancing doshas, and aligning your body with natural rhythms for lasting vitality.
               </p>
               <BookAppointmentDialog
                 trigger={
@@ -4114,7 +4153,7 @@ function ParalysisSpecialDetail({ t, related }: { t: any; related: any[] }) {
                 Ayurvedic Care for Paralysis &amp; Stroke
               </h2>
               <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
-                In classical Ayurveda, paralysis is known as <strong className="text-[var(--forest-deep)]">Pakshaghata</strong> â€” a condition caused by severe Vata imbalance that impairs sensory and motor channels (Vatavaha Srotas). Whether resulting from ischemic stroke, spinal injury, hemiplegia, or nerve compression, Ayurveda focuses on reviving weakened nerve pathways, preventing muscle atrophy, and rekindling cellular strength.
+                In classical Ayurveda, paralysis is known as <strong className="text-[var(--forest-deep)]">Pakshaghata</strong> — a condition caused by severe Vata imbalance that impairs sensory and motor channels (Vatavaha Srotas). Whether resulting from ischemic stroke, spinal injury, hemiplegia, or nerve compression, Ayurveda focuses on reviving weakened nerve pathways, preventing muscle atrophy, and rekindling cellular strength.
               </p>
               <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
                 Our specialized protocols at Devdut Ayurved Clinic integrate external oleation (Snehana), warm poultice sudation (Pinda Swedana), targeted medicated enemas (Basti), and neuro-rejuvenating herbs to support mobility and long-term recovery.
@@ -4219,7 +4258,7 @@ function ParalysisSpecialDetail({ t, related }: { t: any; related: any[] }) {
                 Why Choose <br className="hidden sm:inline" /> Ayurvedic Neuro Care?
               </h2>
               <p className="text-sm md:text-base text-[var(--parchment)]/80 leading-relaxed mb-8 max-w-lg">
-                Ayurveda treats nerve paralysis at the cellular level â€” nourishing dried channels, balancing Vata, and promoting sustainable motor recovery without invasive side effects.
+                Ayurveda treats nerve paralysis at the cellular level — nourishing dried channels, balancing Vata, and promoting sustainable motor recovery without invasive side effects.
               </p>
               <BookAppointmentDialog
                 trigger={
@@ -4482,7 +4521,7 @@ function MentalHealthSpecialDetail({ t, related }: { t: any; related: any[] }) {
                 In classical Ayurveda, mental health is inseparable from physical Dosha balance. Modern stress, overstimulation, and broken sleep cycles disturb Vata and Pitta in the brain channels (Manovaha Srotas), triggering anxiety, insomnia, nightmares, and emotional exhaustion.
               </p>
               <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
-                Devdut Ayurved Clinic offers gentle, authentic mental healthcare using Shirodhara, Medhya Rasayana herbs, and mind-gut axis correction â€” helping you regain deep rest and mental clarity without reliance on habit-forming sedatives.
+                Devdut Ayurved Clinic offers gentle, authentic mental healthcare using Shirodhara, Medhya Rasayana herbs, and mind-gut axis correction — helping you regain deep rest and mental clarity without reliance on habit-forming sedatives.
               </p>
             </div>
 
@@ -4584,7 +4623,7 @@ function MentalHealthSpecialDetail({ t, related }: { t: any; related: any[] }) {
                 Why Choose <br className="hidden sm:inline" /> Ayurvedic Mind Care?
               </h2>
               <p className="text-sm md:text-base text-[var(--parchment)]/80 leading-relaxed mb-8 max-w-lg">
-                Ayurveda treats mental distress at its root â€” settling nervous turbulence, restoring sleep, and empowering emotional resilience naturally.
+                Ayurveda treats mental distress at its root — settling nervous turbulence, restoring sleep, and empowering emotional resilience naturally.
               </p>
               <BookAppointmentDialog
                 trigger={
@@ -4817,7 +4856,7 @@ function AgniksharSpecialDetail({ t, related }: { t: any; related: any[] }) {
                 In classical Ayurveda, Agnikarma (thermal cauterization) and Kshara Karma (herbal alkaline application) are time-tested parasurgical procedures described in Sushruta Samhita. They provide instant pain relief and root-cause excision for deep-seated tendon, joint, and anorectal conditions where conventional oral medicines have limited reach.
               </p>
               <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
-                Devdut Ayurved Clinic offers expert parasurgical care using sterilized gold/copper Shalakas and authentic Kshara Sutra threads â€” delivering safe, minimally invasive healing with fast recovery and extremely low recurrence rates.
+                Devdut Ayurved Clinic offers expert parasurgical care using sterilized gold/copper Shalakas and authentic Kshara Sutra threads — delivering safe, minimally invasive healing with fast recovery and extremely low recurrence rates.
               </p>
             </div>
 
@@ -4994,6 +5033,458 @@ function AgniksharSpecialDetail({ t, related }: { t: any; related: any[] }) {
             </p>
             <p className="text-[var(--gold)]/80 italic text-[11px] md:text-xs mb-5 font-semibold">
               Precision healing. Permanent relief. Reclaim comfort.
+            </p>
+
+            <BookAppointmentDialog
+              trigger={
+                <button className="bg-[var(--gold)] hover:bg-[var(--gold)]/90 text-[var(--forest-deep)] font-semibold py-2.5 px-6 rounded-full inline-flex items-center gap-1.5 transition-all shadow-gold hover:-translate-y-0.5 active:translate-y-0 text-xs cursor-pointer">
+                  Book my Consultation
+                  <Calendar className="size-3.5" />
+                </button>
+              }
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.6, x: 100, rotate: 25 }}
+            whileInView={{ opacity: 1, scale: 1, x: 0, rotate: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            className="w-36 h-36 md:w-48 md:h-48 relative shrink-0 z-20 flex items-center justify-center mr-20 md:mr-56"
+          >
+            <img
+              src={greenEarthImg}
+              alt="Lush Green Earth Globe"
+              className="w-full h-full object-contain scale-[2.2] md:scale-[3.0] drop-shadow-[0_20px_50px_rgba(0,0,0,0.55)]"
+            />
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function KidneySpecialDetail({ t, related }: { t: any; related: any[] }) {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const kidneyConditionsData = [
+    {
+      tab: "Renal Calculi",
+      Icon: Shield,
+      heading: "Kidney Stones (Ashmari)",
+      intro: "Renal calculi occur when aggravated Vata dries up Kapha in the urinary channels, forming hardened crystal stones. Our protocols use Varunadi and Pashanbhed to dissolve and expel stones safely.",
+      image: kidneyRenalCalculiImg,
+      points: [
+        "Natural Stone Dissolution & Flushes",
+        "Pashanbhed & Varunadi Formulations",
+        "Ureteric Spasm & Acute Pain Relief",
+        "Crystal Aggregation Prevention",
+        "Urinary pH Normalization",
+        "Non-Surgical Stone Management",
+      ],
+    },
+    {
+      tab: "Renal Support",
+      Icon: HeartPulse,
+      heading: "Chronic Kidney Support (Vrikka Roga)",
+      intro: "Nourishing weakened nephrons and restoring micro-vascular filtration in the kidneys. Potent Rasayanas help maintain healthy urea and serum creatinine levels naturally.",
+      image: kidneyRenalFailureImg,
+      points: [
+        "Nephro-Protective Cellular Support",
+        "Urea & Serum Creatinine Stabilization",
+        "Microalbuminuria & Protein Loss Reduction",
+        "Punarnava & Rasayana Rejuvenation",
+        "Glomerular Filtration (eGFR) Support",
+        "Safe Integrative Co-Management",
+      ],
+    },
+    {
+      tab: "Urinary Health",
+      Icon: Droplets,
+      heading: "Urinary Tract Health (Mutrakrichra / UTI)",
+      intro: "Burning micturition, frequent urination, and recurring UTIs arise from excess Pitta and bacteria in the urinary tract. Cooling herbal tonics soothe irritated membranes and flush infection.",
+      image: kidneyUrinaryTractImg,
+      points: [
+        "Burning Micturition (Dysuria) Relief",
+        "Chandanasava & Pitta-Cooling Tonics",
+        "Recurrent Bacterial Cleansing",
+        "Bladder Mucosal Soothing",
+        "Natural Urinary Antiseptic Herbs",
+        "Pelvic & Bladder Channel Detox",
+      ],
+    },
+    {
+      tab: "Recurrent Stones",
+      Icon: Sparkles,
+      heading: "Recurrent Stone Prevention",
+      intro: "Breaking the chronic cycle of stone formation by correcting digestive fire (Agni), clearing metabolic Ama, and prescribing personalized low-oxalate hydration and dietary protocols.",
+      image: kidneyRecurrentStonesImg,
+      points: [
+        "Metabolic Ama & Uric Acid Clearance",
+        "Oxalate & Calcium Balance",
+        "Personalized Hydration & Mineral Regimen",
+        "Kulattha (Horse Gram) Dietary Protocols",
+        "Long-Term Relapse Prevention",
+        "Seasonal Detoxification Guidance",
+      ],
+    },
+    {
+      tab: "Edema & Fluid",
+      Icon: Waves,
+      heading: "Edema & Fluid Retention (Shotha)",
+      intro: "Fluid accumulation causing pedal swelling and puffiness occurs when water metabolism is obstructed. Natural Ayurvedic diuretics (Mutrala) restore fluid drainage without side effects.",
+      image: kidneyEdemaFluidImg,
+      points: [
+        "Natural Diuretic Herbal Support (Mutrala)",
+        "Punarnavadi Kwath & Guggulu Therapies",
+        "Pedal & Facial Swelling Relief",
+        "Electrolyte Balance Maintenance",
+        "Lymphatic & Venous Drainage Support",
+        "Low-Sodium Ayurvedic Diet Guidance",
+      ],
+    },
+    {
+      tab: "Post-Procedure",
+      Icon: Leaf,
+      heading: "Post-Procedure Nephrocare",
+      intro: "Accelerating internal tissue healing, overcoming fatigue, and rebuilding renal strength following lithotripsy (ESWL), PCNL surgery, or DJ stent placement.",
+      image: kidneyPostProcedureImg,
+      points: [
+        "Post-Lithotripsy & DJ Stent Tissue Recovery",
+        "Urothelial Mucosa Regeneration",
+        "Anti-Inflammatory Herbal Decoctions",
+        "Vital Tissue (Dhatu) Nourishment",
+        "Fatigue & Weakness Overcoming",
+        "Sustained Renal Vitality Plans",
+      ],
+    },
+  ];
+
+  const methodologyItems = [
+    {
+      step: "01",
+      title: "Prakriti & Urinary Channel Diagnostics",
+      desc: "Detailed pulse assessment (Nadipariksha) and evaluation of Mutravaha Srotas (urinary channels), stone matrix, and digestive fire."
+    },
+    {
+      step: "02",
+      title: "Targeted Lithotriptic & Nephrocare Formulations",
+      desc: "Customized classical herbs like Varun, Pashanbhed, Gokshura, and Punarnava to break stone bonds and protect kidney cells."
+    },
+    {
+      step: "03",
+      title: "Gentle Cleansing & Channel Detoxification",
+      desc: "Mild therapeutic purification (Virechana or Basti) to purge systemic Ama, reduce systemic acidity, and cleanse renal pathways."
+    },
+    {
+      step: "04",
+      title: "Pathya-Apathya Diet & Hydration Regimen",
+      desc: "Personalized low-oxalate nutritional guidelines, electrolyte balancing, and daily fluid routines to prevent stone recurrence."
+    }
+  ];
+
+  const benefitsItems = [
+    {
+      num: "01",
+      title: "Non-Surgical Stone Expulsion & Relief",
+      desc: "Facilitates natural breakdown and smooth passage of renal calculi while easing sharp spasm pain."
+    },
+    {
+      num: "02",
+      title: "Strengthens & Protects Nephrons",
+      desc: "Potent nephro-protective antioxidants preserve renal micro-tubules and support healthy filtration."
+    },
+    {
+      num: "03",
+      title: "Soothes Burning & Urinary Discomfort",
+      desc: "Rapidly relieves dysuria, urethral irritation, and recurrent bacterial infections with cooling tonics."
+    },
+    {
+      num: "04",
+      title: "Alleviates Fluid Retention & Swelling",
+      desc: "Promotes natural, balanced fluid elimination and reduces pedal edema without synthetic diuretic fatigue."
+    },
+    {
+      num: "05",
+      title: "Prevents Chronic Stone Recurrence",
+      desc: "Addresses the underlying metabolic errors and mineral accumulation for lasting kidney wellness."
+    },
+    {
+      num: "06",
+      title: "Safe Integrative Co-Management",
+      desc: "Works seamlessly alongside modern diagnostic reports, ultrasound reviews, and nephrology guidance."
+    }
+  ];
+
+  const active = kidneyConditionsData[activeTab];
+
+  return (
+    <div className="bg-[var(--parchment)] min-h-screen text-[var(--foreground)]">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden -mt-20 border-b border-[var(--border)]">
+        <img
+          src={kidneyCareImg}
+          alt="Ayurvedic Kidney and Renal Care"
+          aria-hidden
+          className="absolute inset-0 size-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--forest-deep)]/90 via-[var(--forest-deep)]/85 to-[var(--forest-deep)]/95" />
+
+        <div className="container-page relative z-10 flex min-h-[60vh] flex-col justify-center pt-36 pb-20 text-center text-[var(--parchment)]">
+          <Reveal>
+            <h1 className="font-display leading-[1.1] max-w-4xl mx-auto">
+              <span className="block text-4xl md:text-6xl text-[var(--gold)] mb-2 italic">Renal &amp; Kidney Health Care</span>
+              <span className="block text-2xl md:text-3xl text-[var(--parchment)] font-sans font-light tracking-wide">वृक्क एवं मूत्र संस्थान चिकित्सा</span>
+            </h1>
+            <p className="mt-5 text-sm md:text-lg text-[var(--parchment)]/80 leading-relaxed max-w-3xl mx-auto">
+              Ayurvedic care for renal calculi (kidney stones), renal insufficiency supportive treatment, urinary tract health, and fluid retention — personalized herbal protocols with diet and lifestyle guidance.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Understanding Kidney Diseases Section */}
+      <section className="container-page pt-20 pb-10 border-b border-[var(--border)]/30">
+        <Reveal>
+          <div className="grid gap-12 lg:grid-cols-2 items-center">
+            <div className="space-y-6">
+              <div className="eyebrow text-[var(--gold)]">Understanding Kidney Health</div>
+              <h2 className="font-display text-3xl md:text-5xl text-[var(--forest-deep)] leading-tight">
+                Ayurvedic Kidney Disease Treatment in Pune
+              </h2>
+              <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
+                In classical Ayurveda, the kidneys (<strong className="text-[var(--forest-deep)]">Vrikka</strong>) are formed from the essence of blood (<strong className="text-[var(--forest-deep)]">Rakta</strong>) and fat tissue (<strong className="text-[var(--forest-deep)]">Medas</strong>), governing the vital water-carrying channels (<strong className="text-[var(--forest-deep)]">Mutravaha Srotas</strong>). Aggravated Vata, Pitta, and accumulation of metabolic toxins (<strong className="text-[var(--forest-deep)]">Ama</strong>) impair filtration, leading to stone crystallization (<strong className="text-[var(--forest-deep)]">Ashmari</strong>), burning micturition, and cellular stress on the nephrons.
+              </p>
+              <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
+                At Devdut Ayurved Clinic, we treat kidney and urinary disorders from the root. By combining potent nephro-protective herbs (<em>Punarnava, Gokshura, Varun, Pashanbhed</em>), targeted cleansing therapies, and customized fluid and dietary regimens (<strong className="text-[var(--forest-deep)]">Pathya-Apathya</strong>), we support natural stone dissolution, restore urinary comfort, and preserve renal vitality safely.
+              </p>
+            </div>
+
+            <div className="relative">
+              <div className="absolute -inset-3 rounded-[32px] border border-[var(--gold)]/20 pointer-events-none scale-[1.01] hidden sm:block" />
+              <img
+                src={kidneyCareImg}
+                alt="Ayurvedic Kidney Disease Treatment in Pune"
+                loading="lazy"
+                className="w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] object-cover rounded-3xl border border-[var(--border)]"
+              />
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Conditions We Treat (Pill Tab Bar) */}
+      <section className="container-page py-16">
+        <Reveal>
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <div className="eyebrow text-[var(--gold)] mb-2">Conditions We Treat</div>
+            <h2 className="font-display text-3xl md:text-4xl text-[var(--forest-deep)]">Kidney &amp; Urinary Conditions</h2>
+            <Ornament className="mt-3" />
+          </div>
+        </Reveal>
+
+        <div className="flex flex-wrap justify-center gap-2 mb-10 max-w-4xl mx-auto">
+          {kidneyConditionsData.map((c, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveTab(i)}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
+                activeTab === i
+                  ? "bg-[var(--forest-deep)] text-[var(--parchment)] border-[var(--forest-deep)] shadow-md"
+                  : "bg-[var(--parchment)] text-[var(--muted-foreground)] border-[var(--border)] hover:border-[var(--forest-deep)]"
+              }`}
+            >
+              <c.Icon className="size-3.5" />
+              {c.tab}
+            </button>
+          ))}
+        </div>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3 }}
+            className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+          >
+            <div>
+              <div className="flex items-center gap-4 mb-4">
+                <span className="size-12 rounded-2xl bg-[var(--forest-deep)]/10 text-[var(--forest-deep)] flex items-center justify-center shrink-0">
+                  <active.Icon className="size-6" />
+                </span>
+                <h3 className="font-display text-2xl text-[var(--forest-deep)]">{active.heading}</h3>
+              </div>
+              <p className="text-sm text-[var(--muted-foreground)] leading-relaxed mb-6">{active.intro}</p>
+
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-widest text-[var(--forest-deep)]/60 mb-3">Our treatment focuses on:</p>
+                <div className="grid grid-cols-2 gap-2.5">
+                  {active.points.map((pt, i) => (
+                    <div key={i} className="flex items-center gap-2.5 p-3 rounded-xl border border-[var(--border)] bg-[var(--parchment)]">
+                      <span className="size-1.5 rounded-full bg-[var(--gold)] shrink-0" />
+                      <span className="text-xs font-medium text-[var(--forest-deep)]">{pt}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="relative rounded-3xl overflow-hidden border border-[var(--border)] group min-h-[300px] h-full shadow-sm">
+              <img
+                src={active.image}
+                alt={active.heading}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute -inset-3 rounded-[32px] border border-[var(--gold)]/20 pointer-events-none scale-[1.01] hidden sm:block" />
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </section>
+
+      {/* Sacred Healing Full-Bleed Split Banner */}
+      <section className="w-full bg-[var(--forest-deep)] overflow-hidden border-y border-[var(--border)]/20">
+        <div className="grid lg:grid-cols-2 min-h-[500px]">
+          <div className="relative min-h-[350px] lg:min-h-full w-full">
+            <img
+              src={kidneySacredHealingImg}
+              alt="Ayurvedic Kidney Care Purification"
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-l from-[var(--forest-deep)]/40 via-transparent to-transparent pointer-events-none lg:block hidden" />
+          </div>
+          <div className="flex flex-col justify-center px-6 py-16 sm:px-12 md:px-20 text-left max-w-2xl lg:max-w-none mx-auto lg:mx-0">
+            <Reveal>
+              <span className="text-[11px] font-sans font-bold text-[var(--gold)] uppercase tracking-widest mb-3 block">
+                The Sacred Healing
+              </span>
+              <h2 className="font-display text-4xl md:text-5xl text-[var(--parchment)] leading-[1.1] mb-6">
+                Why Choose <br className="hidden sm:inline" /> Ayurvedic Kidney Care?
+              </h2>
+              <p className="text-sm md:text-base text-[var(--parchment)]/80 leading-relaxed mb-8 max-w-lg">
+                Ayurveda treats renal and urinary conditions at their metabolic root — dissolving stone matrices naturally, reducing inflammation in micro-vascular channels, and strengthening nephron vitality without aggressive invasive dependency.
+              </p>
+              <div>
+                <BookAppointmentDialog
+                  trigger={
+                    <button className="bg-[var(--gold)] text-[var(--forest-deep)] hover:bg-[var(--gold)]/90 px-8 py-3 rounded-full font-semibold text-sm transition-all shadow-lg shadow-[var(--gold)]/20 cursor-pointer">
+                      Book My Consultation
+                    </button>
+                  }
+                />
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Methodology Section */}
+      <section className="bg-[#fbf7eb] border-y border-[var(--border)] py-20">
+        <div className="container-page">
+          <Reveal>
+            <div className="grid gap-12 lg:grid-cols-2 items-center">
+              <div className="space-y-6">
+                <div className="eyebrow text-[var(--gold)]">The Methodology</div>
+                <h2 className="font-display text-3xl md:text-5xl text-[var(--forest-deep)] leading-tight">
+                  Our Treatment Approach
+                </h2>
+                <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
+                  Restoring renal health and clearing urinary channels requires a structured, personalized Ayurvedic protocol:
+                </p>
+
+                <div className="divide-y divide-[var(--border)]/50 pt-2">
+                  {methodologyItems.map((s, i) => (
+                    <div key={i} className="flex gap-4 py-4 first:pt-0 last:pb-0">
+                      <span className="shrink-0 grid size-9 place-items-center rounded-full bg-[var(--gold)]/15 text-[var(--gold)] font-display text-sm font-bold">
+                        {s.step}
+                      </span>
+                      <div>
+                        <h4 className="font-display text-base text-[var(--forest-deep)]">{s.title}</h4>
+                        <p className="text-xs text-[var(--muted-foreground)] mt-1">{s.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="absolute -inset-3 rounded-[32px] border border-[var(--gold)]/20 pointer-events-none scale-[1.01] hidden sm:block" />
+                <img
+                  src={kidneyMethodologyImg}
+                  alt="Our Treatment Approach for Kidney Care"
+                  loading="lazy"
+                  className="w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] object-cover rounded-3xl border border-[var(--border)]"
+                />
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Key Benefits Section */}
+      <section className="container-page py-20 border-b border-[var(--border)]/30">
+        <Reveal>
+          <div className="grid gap-12 lg:grid-cols-2 items-center">
+            <div className="relative">
+              <div className="absolute -inset-3 rounded-[32px] border border-[var(--gold)]/20 pointer-events-none scale-[1.01] hidden sm:block" />
+              <img
+                src={kidneyBenefitsImg}
+                alt="Benefits of Ayurvedic Kidney Care"
+                loading="lazy"
+                className="w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] object-cover rounded-3xl border border-[var(--border)]"
+              />
+            </div>
+
+            <div className="space-y-6">
+              <div className="eyebrow text-[var(--gold)]">Key Benefits</div>
+              <h2 className="font-display text-3xl md:text-5xl text-[var(--forest-deep)] leading-tight">
+                Benefits of Ayurvedic Kidney Care
+              </h2>
+              <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
+                Our classical Ayurvedic approach delivers sustainable relief and long-term renal vitality:
+              </p>
+
+              <div className="divide-y divide-[var(--border)]/50 pt-2">
+                {benefitsItems.map((b, i) => (
+                  <div key={i} className="flex gap-4 py-3.5 first:pt-0 last:pb-0">
+                    <span className="shrink-0 grid size-8 place-items-center rounded-full bg-[var(--forest-deep)]/10 text-[var(--forest-deep)] font-display text-xs font-bold">
+                      {b.num}
+                    </span>
+                    <div>
+                      <h4 className="font-display text-base text-[var(--forest-deep)]">{b.title}</h4>
+                      <p className="text-xs text-[var(--muted-foreground)] mt-0.5">{b.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Green Earth CTA */}
+      <section className="container-page pb-20 mt-10">
+        <div className="w-full bg-[var(--forest-deep)] rounded-[30px] md:rounded-[36px] md:rounded-r-[150px] p-6 pl-10 md:p-9 md:pl-16 md:pr-10 flex flex-col md:flex-row items-center justify-between gap-8 relative border border-[var(--border)]/10">
+          <div className="absolute -left-20 -top-20 w-80 h-80 rounded-full bg-[var(--gold)]/5 blur-3xl pointer-events-none" />
+
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="flex-1 text-left relative z-10"
+          >
+            <h2 className="font-display text-xl md:text-2xl text-[var(--parchment)] mb-2.5 leading-tight">
+              Ready to restore natural kidney &amp; urinary health?
+            </h2>
+            <p className="text-[var(--parchment)]/75 text-xs md:text-sm max-w-lg mb-2 leading-relaxed">
+              Whether you are managing renal calculi (kidney stones), seeking CKD supportive care, or addressing recurrent urinary discomfort, our senior Vaidyas will guide you with pulse diagnosis and customized herbal healing.
+            </p>
+            <p className="text-[var(--gold)]/80 italic text-[11px] md:text-xs mb-5 font-semibold">
+              Healing with nature. Restoring vital balance. Reclaiming wellness.
             </p>
 
             <BookAppointmentDialog

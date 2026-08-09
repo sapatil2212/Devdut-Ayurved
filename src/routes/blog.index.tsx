@@ -14,7 +14,7 @@ export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
       { title: "Journal — Devdut Ayurved Clinic" },
-      { name: "description", content: "Essays on Ayurveda, Panchakarma, daily routine and modern healing, written by Dr. Ganesh Kumar Patil and team." },
+      { name: "description", content: "Essays on Ayurveda, Panchakarma, daily routine and modern healing, written by Dr. Ganeshkumar Patil and team." },
       { property: "og:url", content: "/blog" },
     ],
     links: [{ rel: "canonical", href: "/blog" }],

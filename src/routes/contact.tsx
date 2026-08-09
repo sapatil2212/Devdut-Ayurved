@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -8,10 +8,18 @@ import { PageShell } from "@/components/site/PageShell";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
-import { SITE } from "@/lib/site";
+import { APPOINTMENT_TIME_SLOTS, SITE } from "@/lib/site";
 import { TREATMENTS } from "@/lib/treatments";
 import contactHeroImg from "@/assets/contact-hero.png";
 import type { ReactNode } from "react";
+
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+    </svg>
+  );
+}
 
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
@@ -63,7 +71,7 @@ function ContactPage() {
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { treatment: "", email: "" },
+    defaultValues: { treatment: "", email: "", preferredTime: "" },
   });
 
   const onSubmit = async (_: FormValues) => {
@@ -97,8 +105,8 @@ function ContactPage() {
                   <Phone className="size-5 text-[var(--gold)]" />
                   <span>Call: {SITE.phone}</span>
                 </a>
-                <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-[var(--copper)]">
-                  <MessageCircle className="size-5 text-green-500 fill-green-500" />
+                <a href={`https://wa.me/${SITE.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-[var(--copper)]">
+                  <WhatsAppIcon className="size-5 text-[#25D366]" />
                   <span>WhatsApp: {SITE.whatsapp}</span>
                 </a>
               </div>
@@ -112,7 +120,7 @@ function ContactPage() {
               <div className="flex items-center gap-3"><Clock className="size-5 text-[var(--gold)]" />{SITE.hours}</div>
             </div>
             <a href={`https://wa.me/${SITE.whatsapp.replace(/\D/g, "")}`} className="mt-4 inline-flex items-center gap-2 rounded-full bg-forest-gradient text-[var(--parchment)] px-5 py-3 font-medium">
-              <MessageCircle className="size-4" /> Chat on WhatsApp
+              <WhatsAppIcon className="size-4" /> Chat on WhatsApp
             </a>
           </div>
         </Reveal>
@@ -158,7 +166,20 @@ function ContactPage() {
             </div>
 
             <Field label="Preferred time" error={errors.preferredTime?.message}>
-              <input type="time" {...register("preferredTime")} className={inputCls} />
+              <select {...register("preferredTime")} className={inputCls}>
+                <option value="">Select a time</option>
+                <optgroup label="Morning · 9:00 AM – 2:00 PM">
+                  {APPOINTMENT_TIME_SLOTS.filter((s) => s.value <= "14:00").map((slot) => (
+                    <option key={slot.value} value={slot.value}>{slot.label}</option>
+                  ))}
+                </optgroup>
+                <optgroup label="Evening · 4:00 PM – 9:00 PM">
+                  {APPOINTMENT_TIME_SLOTS.filter((s) => s.value >= "16:00").map((slot) => (
+                    <option key={slot.value} value={slot.value}>{slot.label}</option>
+                  ))}
+                </optgroup>
+              </select>
+              <span className="mt-1 block text-xs text-[var(--muted-foreground)]">{SITE.hours}</span>
             </Field>
 
             <Field label="Anything we should know?">

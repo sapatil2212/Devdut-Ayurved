@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
 import { TREATMENTS } from "@/lib/treatments";
+import { APPOINTMENT_TIME_SLOTS, SITE } from "@/lib/site";
 
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
@@ -29,7 +30,7 @@ export const Route = createFileRoute("/book")({
   head: () => ({
     meta: [
       { title: "Book an Appointment — Devdut Ayurved Clinic" },
-      { name: "description", content: "Book an in-clinic consultation with Dr. Ganesh Kumar Patil. We confirm within a working day." },
+      { name: "description", content: "Book an in-clinic consultation with Dr. Ganeshkumar Patil. We confirm within a working day." },
       { property: "og:url", content: "/book" },
     ],
     links: [{ rel: "canonical", href: "/book" }],
@@ -41,7 +42,7 @@ function BookPage() {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { mode: "in-clinic", treatment: "", email: "" },
+    defaultValues: { mode: "in-clinic", treatment: "", email: "", preferredTime: "" },
   });
 
   const onSubmit = async (_: FormValues) => {
@@ -51,7 +52,7 @@ function BookPage() {
 
   return (
     <PageShell>
-      <PageHeader eyebrow="Book an appointment" title="Reserve your consultation." intro="60 minutes with Dr. Ganesh Kumar Patil. Kindly call first to check availability, then visit the clinic in Pune." />
+      <PageHeader eyebrow="Book an appointment" title="Reserve your consultation." intro="60 minutes with Dr. Ganeshkumar Patil. Kindly call first to check availability, then visit the clinic in Pune." />
 
       <section className="container-page py-16 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
         <Reveal>
@@ -94,7 +95,20 @@ function BookPage() {
                 <input type="date" {...register("preferredDate")} className={input} />
               </Field>
               <Field label="Preferred time" error={errors.preferredTime?.message}>
-                <input type="time" {...register("preferredTime")} className={input} />
+                <select {...register("preferredTime")} className={input}>
+                  <option value="">Select a time</option>
+                  <optgroup label="Morning · 9:00 AM – 2:00 PM">
+                    {APPOINTMENT_TIME_SLOTS.filter((s) => s.value <= "14:00").map((slot) => (
+                      <option key={slot.value} value={slot.value}>{slot.label}</option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="Evening · 4:00 PM – 9:00 PM">
+                    {APPOINTMENT_TIME_SLOTS.filter((s) => s.value >= "16:00").map((slot) => (
+                      <option key={slot.value} value={slot.value}>{slot.label}</option>
+                    ))}
+                  </optgroup>
+                </select>
+                <span className="mt-1 block text-xs text-[var(--muted-foreground)]">{SITE.hours}</span>
               </Field>
             </div>
             <Field label="Anything we should know?">
@@ -112,7 +126,7 @@ function BookPage() {
             <div className="font-sanskrit text-[var(--gold)] text-lg">◈ प्रथम-मीलनम्</div>
             <h2 className="font-display text-3xl text-[var(--parchment)]">What to expect</h2>
             <ul className="space-y-4 text-[var(--parchment)]/85 text-sm leading-relaxed">
-              <li>60 unhurried minutes with Dr. Ganesh Kumar Patil.</li>
+              <li>60 unhurried minutes with Dr. Ganeshkumar Patil.</li>
               <li>Nadi Pariksha (pulse) and full Prakriti assessment.</li>
               <li>Written plan with herbs, therapies and daily routine.</li>
               <li>Follow-up scheduling and continued care.</li>

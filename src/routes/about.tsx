@@ -16,7 +16,7 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — Devdut Ayurved Clinic" },
-      { name: "description", content: "The story, mission and values of Devdut Ayurved Clinic — 30+ years of classical Ayurveda with Nadipariksha at the heart of every consultation." },
+      { name: "description", content: "The story, mission and values of Devdut Ayurved Clinic — 26+ years of classical Ayurveda with Nadipariksha at the heart of every consultation." },
       { property: "og:title", content: "About — Devdut Ayurved Clinic" },
       { property: "og:url", content: "/about" },
     ],
@@ -43,10 +43,10 @@ function AboutPage() {
           </div>
         </Reveal>
         <Reveal delay={0.1}>
-          <div className="eyebrow mb-4">Ayurvedic Expert</div>
-          <h2 className="font-display text-4xl md:text-5xl leading-tight">Meet Our Ayurvedic Expert</h2>
+          <div className="eyebrow mb-4">Ayurvedic Practitioner in Pune.</div>
+          <h2 className="font-display text-4xl md:text-5xl leading-tight">Meet Our Ayurvedic Practitioner</h2>
           <p className="mt-6 text-lg text-[var(--muted-foreground)]">
-            Dr. Ganesh Kumar Patil (B.A.M.S.) is a dedicated Ayurvedic physician committed to providing authentic, patient-centered healthcare through the timeless principles of Ayurveda. With expertise in classical Ayurvedic treatments, Panchakarma therapies, and Nadipariksha (pulse diagnosis), he focuses on restoring health naturally by addressing the root cause of disease.
+            Dr. Ganeshkumar Patil (BAMS, M.D.(A.M.), DNYS, M.D. (EH)) is a dedicated Ayurvedic physician committed to providing authentic, patient-centered healthcare through the timeless principles of Ayurveda. With expertise in classical Ayurvedic treatments, Panchakarma therapies, and Nadipariksha (pulse diagnosis), he focuses on restoring health naturally by addressing the root cause of disease.
           </p>
           <p className="mt-4 text-lg text-[var(--muted-foreground)]">
             Based in Pune, Maharashtra, Dr. Patil offers personalized Ayurvedic consultations, customized herbal treatments, Panchakarma therapies, and diet &amp; lifestyle guidance tailored to each individual's unique body constitution (Prakriti) and health needs.
@@ -57,8 +57,8 @@ function AboutPage() {
 
           <div className="mt-8 grid grid-cols-2 gap-4">
             {[
-              { t: "Qualification", d: "B.A.M.S." },
-              { t: "Experience", d: "30+ years of clinical practice" },
+              { t: "Qualification", d: "BAMS, M.D.(A.M.), DNYS, M.D. (EH)" },
+              { t: "Experience", d: "26+ years of clinical practice" },
               { t: "Specialty", d: "Nadipariksha & Panchakarma" },
               { t: "Focus", d: "Root-cause, Prakriti-based care" },
             ].map((q) => (
@@ -72,28 +72,66 @@ function AboutPage() {
       </section>
 
 
-      <section className="container-page pt-8 pb-24 grid gap-8 lg:grid-cols-3">
-        {[
-          { t: "Mission", d: "Deliver classical Ayurveda with Nadipariksha-led precision — every patient assessed, every formula personalised, every plan revisited until balance returns." },
-          { t: "Vision", d: "To be Pune's trusted home for authentic Ayurveda — where 30+ years of clinical wisdom meet compassionate, root-cause care." },
-          { t: "Values", d: "Honesty over hype. Slow over fast. Root cause over quick fix. Always, patient over protocol." },
-        ].map((v, i) => (
-          <Reveal key={v.t} delay={i * 0.08}>
-            <article className="relative h-full">
-              <img
-                src={aboutPaperImg}
-                alt=""
-                aria-hidden
-                className="absolute inset-0 w-full h-full object-fill pointer-events-none"
-              />
-              <div className="relative z-10 text-center px-8 py-14 md:px-10 md:py-16">
+      <section className="container-page pt-8 pb-24 space-y-8">
+        <div className="grid gap-8 lg:grid-cols-2">
+          {[
+            {
+              t: "Mission",
+              d: "For the past 26+ years, our mission has been to provide safe, natural, and effective Ayurvedic healthcare based on authentic Ayurvedic principles. We are committed to delivering personalized treatments and compassionate care, helping every patient achieve long-term health, balance, and overall well-being.",
+            },
+            {
+              t: "Vision",
+              d: "To be a trusted center of excellence in Ayurveda and set the standard for holistic healthcare by treating every individual as more than just a diagnosis.",
+            },
+          ].map((v, i) => (
+            <Reveal key={v.t} delay={i * 0.08}>
+              <article className="relative h-full">
+                <img
+                  src={aboutPaperImg}
+                  alt=""
+                  aria-hidden
+                  className="absolute inset-0 w-full h-full object-fill pointer-events-none"
+                />
+                <div className="relative z-10 text-center px-8 py-14 md:px-10 md:py-16">
+                  <div className="font-sanskrit text-[#a87c3b] text-xl mb-3">◈</div>
+                  <h3 className="font-display text-2xl md:text-3xl mb-3 text-[#4a3520]">{v.t}</h3>
+                  <p className="text-sm md:text-base text-[#6b5744] leading-relaxed">{v.d}</p>
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={0.12}>
+          <article className="relative">
+            <img
+              src={aboutPaperImg}
+              alt=""
+              aria-hidden
+              className="absolute inset-0 w-full h-full object-fill pointer-events-none"
+            />
+            <div className="relative z-10 px-8 py-14 md:px-12 md:py-16">
+              <div className="text-center mb-8">
                 <div className="font-sanskrit text-[#a87c3b] text-xl mb-3">◈</div>
-                <h3 className="font-display text-2xl md:text-3xl mb-3 text-[#4a3520]">{v.t}</h3>
-                <p className="text-sm md:text-base text-[#6b5744] leading-relaxed">{v.d}</p>
+                <h3 className="font-display text-2xl md:text-3xl text-[#4a3520]">Values</h3>
               </div>
-            </article>
-          </Reveal>
-        ))}
+              <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+                {[
+                  { t: "Integrity", d: "Upholding honesty, ethics, and transparency in every aspect of care." },
+                  { t: "Compassion", d: "Providing empathetic, patient-centered treatment with kindness and respect." },
+                  { t: "Trust", d: "Building lasting relationships through reliability, confidentiality, and excellence in care." },
+                  { t: "Excellence", d: "Striving for the highest standards in Ayurvedic treatment and patient outcomes." },
+                  { t: "Holistic Care", d: "Treating the mind, body, and spirit to promote complete health and long-term wellness." },
+                ].map((item) => (
+                  <li key={item.t} className="text-center sm:text-left">
+                    <div className="font-display text-lg text-[#4a3520] mb-1">{item.t}</div>
+                    <p className="text-sm text-[#6b5744] leading-relaxed">{item.d}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        </Reveal>
       </section>
 
       <section className="relative overflow-hidden bg-forest-gradient text-[var(--parchment)]">
@@ -106,7 +144,7 @@ function AboutPage() {
             <blockquote className="font-display text-3xl md:text-4xl leading-tight text-[var(--parchment)]">
               "The most powerful thing a physician can do is give patients back the sense that their body is on their side. Every therapy we practise here is in service of that."
             </blockquote>
-            <div className="mt-8 text-[var(--parchment)]/70">— Dr. Ganesh Kumar Patil, Founder · B.A.M.S.</div>
+            <div className="mt-8 text-[var(--parchment)]/70">— Dr. Ganeshkumar Patil, Founder · BAMS, M.D.(A.M.), DNYS, M.D. (EH)</div>
           </Reveal>
         </div>
       </section>

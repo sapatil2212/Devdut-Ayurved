@@ -235,14 +235,16 @@ export const TREATMENTS: Treatment[] = [
     name: "Women's & Men's Health",
     sanskrit: "स्त्री-पुरुष स्वास्थ्य",
     category: "Women",
-    short: "Comprehensive Ayurvedic care for reproductive & hormonal health — from menstrual disorders and fertility to pregnancy and men's vitality.",
+    short:
+      "Comprehensive Ayurvedic care for reproductive & hormonal health — menstrual disorders, fertility, pregnancy, women's wellness, men's vitality, sexual weakness, and nightmares.",
     duration: "6 – 16 weeks",
-    benefits: ["Hormonal balance", "Reproductive wellness", "Natural fertility support", "Confidential & personalized care"],
+    benefits: ["Hormonal balance", "Reproductive wellness", "Fewer nightmares", "Natural fertility support", "Confidential & personalized care"],
     approach: [
       "Prakriti & Dosha assessment",
       "Personalized herbal medicines",
       "Panchakarma where indicated",
       "Diet, lifestyle & fertility counseling",
+      "Care for nightmares linked to vitality & hormonal imbalance",
     ],
   },
   {

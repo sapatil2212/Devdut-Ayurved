@@ -105,6 +105,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           email: SITE.email,
           address: { "@type": "PostalAddress", streetAddress: SITE.address },
           openingHours: "Mo-Sa 09:00-19:30",
+          employee: {
+            "@type": "Physician",
+            name: "Dr. Ganeshkumar Patil",
+            jobTitle: "Ayurvedic Practitioner in Pune.",
+            medicalSpecialty: "Ayurveda",
+          },
         }),
       },
     ],

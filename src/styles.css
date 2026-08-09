@@ -137,7 +137,10 @@
 
 @layer base {
   * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; overflow-x: hidden; }
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
   body {
     overflow-x: hidden;
     background-color: var(--color-background);
@@ -147,6 +150,17 @@
     -webkit-font-smoothing: antialiased;
     background-image: var(--paper-noise);
     background-size: 3px 3px;
+  }
+  /* Custom scrollbar (desktop) — hide native track */
+  @media (min-width: 1024px) {
+    html {
+      scrollbar-width: none;
+    }
+    html::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      display: none;
+    }
   }
   h1, h2, h3, h4, h5 {
     font-family: var(--font-display);

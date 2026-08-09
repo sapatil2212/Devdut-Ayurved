@@ -14,7 +14,9 @@ import {
   BookOpen, 
   UserCheck, 
   Award,
-  AlertCircle
+  AlertCircle,
+  IndianRupee,
+  Sun
 } from "lucide-react";
 import { PageShell } from "@/components/site/PageShell";
 import { PageHeader } from "@/components/site/PageHeader";
@@ -51,7 +53,7 @@ function NadiparikshaPage() {
     "Maps Prakriti (innate constitution) and Vikriti (current dosha imbalance)",
     "Guides highly personalised herbal formulations, diet, and Panchakarma care",
     "Detects early sub-clinical imbalances before they manifest into chronic disease",
-    "Forms the mandatory foundation of every treatment plan under Dr. Ganesh Kumar Patil",
+    "Forms the mandatory foundation of every treatment plan under Dr. Ganeshkumar Patil",
   ];
 
   const doshaPulses = [
@@ -100,7 +102,7 @@ function NadiparikshaPage() {
     {
       step: "02",
       title: "Three-Finger Palpation",
-      desc: "Dr. Ganesh Kumar Patil places three fingers over the radial artery to sense impulse waves across superficial, mid, and deep levels.",
+      desc: "Dr. Ganeshkumar Patil places three fingers over the radial artery to sense impulse waves across superficial, mid, and deep levels.",
       icon: HeartPulse,
     },
     {
@@ -155,7 +157,7 @@ function NadiparikshaPage() {
     },
     {
       q: "How long does a Nadipariksha session take?",
-      a: "The pulse reading itself takes 5–10 minutes, followed by a comprehensive 20–30 minute consultation where Dr. Ganesh Kumar Patil explains findings and prescribes a personalised plan.",
+      a: "The pulse reading itself takes 5–10 minutes, followed by a comprehensive 20–30 minute consultation where Dr. Ganeshkumar Patil explains findings and prescribes a personalised plan.",
     },
   ];
 
@@ -165,7 +167,7 @@ function NadiparikshaPage() {
       <PageHeader
         sanskrit="नाडी परीक्षा"
         title="Nadipariksha — Pulse Diagnosis That Listens to Your Body."
-        intro="The ancient Ayurvedic art of reading radial pulse waves to uncover your true constitution, root cause of health issues, and dosha balance. Precise. Personal. Practiced over 30+ years."
+        intro="The ancient Ayurvedic art of reading radial pulse waves to uncover your true constitution, root cause of health issues, and dosha balance. Precise. Personal. Practiced over 26+ years."
         image={pulseImg}
       />
 
@@ -178,7 +180,7 @@ function NadiparikshaPage() {
                 Free Nadipariksha every month on the 1st &amp; 15th
               </h2>
               <p className="mt-3 text-[var(--parchment)]/85 max-w-xl text-sm md:text-base leading-relaxed">
-                Reserve your dedicated pulse-diagnosis slot with Dr. Ganesh Kumar Patil (B.A.M.S.). Ideal for first consultations, health assessments, and treatment progress reviews.
+                Reserve your dedicated pulse-diagnosis slot with Dr. Ganeshkumar Patil (BAMS, M.D.(A.M.), DNYS, M.D. (EH)). Ideal for first consultations, health assessments, and treatment progress reviews.
               </p>
             </div>
             <div className="relative z-10 shrink-0">
@@ -194,6 +196,130 @@ function NadiparikshaPage() {
         </Reveal>
       </section>
 
+      {/* Interactive Daily Nadi Pariksha Highlight */}
+      <section className="container-page pb-10">
+        <Reveal>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="relative overflow-hidden rounded-[2rem] border-2 border-[var(--gold)]/50 bg-[var(--cream)] shadow-[0_0_0_4px_rgba(201,162,39,0.08)]"
+          >
+            {/* Soft gold glow accents */}
+            <div aria-hidden className="pointer-events-none absolute -top-24 -right-16 size-72 rounded-full bg-[var(--gold)]/20 blur-3xl" />
+            <div aria-hidden className="pointer-events-none absolute -bottom-20 -left-10 size-56 rounded-full bg-[var(--forest-deep)]/10 blur-3xl" />
+
+            <div className="relative z-10 grid gap-8 lg:grid-cols-[1.3fr_0.9fr] p-6 md:p-10 items-stretch">
+              <div className="flex flex-col justify-center">
+                <div className="inline-flex items-center gap-2 self-start rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/15 px-3.5 py-1.5 text-[11px] md:text-xs font-semibold uppercase tracking-widest text-[var(--forest-deep)] mb-4">
+                  <Activity className="size-3.5 text-[var(--gold)]" />
+                  Highlight · Pulse Diagnosis
+                </div>
+
+                <h2 className="font-display text-3xl md:text-5xl leading-tight text-[var(--forest-deep)]">
+                  Nadi Pariksha – Pulse Diagnosis
+                </h2>
+
+                <p className="mt-4 text-sm md:text-base text-[var(--muted-foreground)] leading-relaxed max-w-2xl">
+                  Experience the Ayurvedic science of Nadi Pariksha for a holistic understanding of your health and well-being.
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <motion.div
+                    whileHover={{ y: -3, scale: 1.02 }}
+                    className="inline-flex items-center gap-2 rounded-2xl border border-[var(--border)] bg-[var(--parchment)] px-4 py-3 shadow-sm"
+                  >
+                    <span className="grid size-9 place-items-center rounded-full bg-[var(--forest-deep)]/10 text-[var(--forest-deep)]">
+                      <Clock className="size-4" />
+                    </span>
+                    <div>
+                      <div className="text-[10px] uppercase tracking-widest text-[var(--muted-foreground)]">Available Daily</div>
+                      <div className="text-sm font-semibold text-[var(--forest-deep)]">9:00 AM – 11:00 AM</div>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    whileHover={{ y: -3, scale: 1.02 }}
+                    className="inline-flex items-center gap-2 rounded-2xl border border-[var(--gold)]/40 bg-gold-gradient px-4 py-3 shadow-gold"
+                  >
+                    <span className="grid size-9 place-items-center rounded-full bg-[var(--forest-deep)]/15 text-[var(--forest-deep)]">
+                      <IndianRupee className="size-4" />
+                    </span>
+                    <div>
+                      <div className="text-[10px] uppercase tracking-widest text-[var(--forest-deep)]/70">Consultation Fee</div>
+                      <div className="text-lg font-display font-semibold text-[var(--forest-deep)]">₹300</div>
+                    </div>
+                  </motion.div>
+                </div>
+
+                <motion.div
+                  whileHover={{ x: 2 }}
+                  className="mt-5 flex items-start gap-3 rounded-2xl border border-[var(--gold)]/30 bg-[var(--parchment)]/80 px-4 py-3.5"
+                >
+                  <Sun className="size-5 text-[var(--gold)] mt-0.5 shrink-0" />
+                  <p className="text-sm text-[var(--forest-deep)] leading-relaxed">
+                    <strong>Empty stomach recommended:</strong> Nadi Pariksha is performed on an empty stomach for a more accurate Ayurvedic assessment.
+                  </p>
+                </motion.div>
+
+                <div className="mt-7">
+                  <BookAppointmentDialog
+                    trigger={
+                      <button className="inline-flex items-center gap-2 rounded-full bg-forest-gradient text-[var(--parchment)] font-semibold py-3 px-6 shadow-elegant cursor-pointer hover:opacity-95 transition-opacity text-sm">
+                        Book Nadi Pariksha · ₹300 <ArrowRight className="size-4" />
+                      </button>
+                    }
+                  />
+                </div>
+              </div>
+
+              {/* Interactive info cards */}
+              <div className="grid gap-3 content-center">
+                {[
+                  {
+                    icon: HeartPulse,
+                    title: "Holistic Pulse Reading",
+                    desc: "Maps Vata, Pitta & Kapha to reveal root imbalance.",
+                  },
+                  {
+                    icon: Compass,
+                    title: "Prakriti Guidance",
+                    desc: "Understand your constitution and daily wellness path.",
+                  },
+                  {
+                    icon: Sparkles,
+                    title: "Morning Window",
+                    desc: "Daily slots from 9:00 AM to 11:00 AM for clearer pulse signals.",
+                  },
+                ].map((card, i) => (
+                  <motion.button
+                    key={card.title}
+                    type="button"
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 + i * 0.08, duration: 0.5 }}
+                    whileHover={{ y: -4, borderColor: "rgba(201, 162, 39, 0.55)" }}
+                    className="text-left rounded-2xl border border-[var(--border)] bg-[var(--parchment)] p-4 shadow-sm transition-colors cursor-default"
+                  >
+                    <div className="flex items-start gap-3">
+                      <span className="grid size-10 place-items-center rounded-xl bg-[var(--forest-deep)]/8 text-[var(--forest-deep)] shrink-0">
+                        <card.icon className="size-5" />
+                      </span>
+                      <div>
+                        <div className="font-display text-lg text-[var(--forest-deep)]">{card.title}</div>
+                        <p className="mt-1 text-xs md:text-sm text-[var(--muted-foreground)] leading-relaxed">{card.desc}</p>
+                      </div>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </Reveal>
+      </section>
+
       {/* Understanding Nadipariksha Section (Split Grid with Content Image) */}
       <section className="container-page py-16 border-b border-[var(--border)]/40">
         <Reveal>
@@ -205,7 +331,7 @@ function NadiparikshaPage() {
                 Listening to the Body's Internal Rhythm
               </h2>
               <p className="text-sm md:text-base leading-relaxed text-[var(--muted-foreground)]">
-                In classical Ayurveda, <strong className="text-[var(--forest-deep)]">Nadipariksha</strong> is much more than checking pulse rate. By placing three fingers over the radial artery, Dr. Ganesh Kumar Patil perceives subtle vibrational frequencies, temperature, and pulse wave speed to detect imbalances before symptoms manifest.
+                In classical Ayurveda, <strong className="text-[var(--forest-deep)]">Nadipariksha</strong> is much more than checking pulse rate. By placing three fingers over the radial artery, Dr. Ganeshkumar Patil perceives subtle vibrational frequencies, temperature, and pulse wave speed to detect imbalances before symptoms manifest.
               </p>
 
               <div className="pt-2">
@@ -458,7 +584,7 @@ function NadiparikshaPage() {
               Ready to Experience Classical Pulse Diagnosis?
             </h2>
             <p className="text-[var(--parchment)]/75 text-xs md:text-sm max-w-lg mb-2 leading-relaxed">
-              Uncover your true constitution (Prakriti) and root cause of health imbalances. Join us on the <strong>{SITE.nadiparikshaDates}</strong> for dedicated pulse diagnosis slots under Dr. Ganesh Kumar Patil.
+              Uncover your true constitution (Prakriti) and root cause of health imbalances. Join us on the <strong>{SITE.nadiparikshaDates}</strong> for dedicated pulse diagnosis slots under Dr. Ganeshkumar Patil (BAMS, M.D.(A.M.), DNYS, M.D. (EH)).
             </p>
             <p className="text-[var(--gold)]/80 italic text-[11px] md:text-xs mb-5 font-semibold">
               Healing with compassion, healing with purpose

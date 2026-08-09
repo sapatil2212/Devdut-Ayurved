@@ -6,6 +6,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { TREATMENTS } from "@/lib/treatments";
+import { APPOINTMENT_TIME_SLOTS, SITE } from "@/lib/site";
 import heroImg from "@/assets/hero-ayurveda.jpg";
 
 const schema = z.object({
@@ -25,24 +26,36 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 const inputCls =
-  "w-full rounded-full border border-[var(--border)] bg-[var(--parchment)] px-3 py-1.5 text-[11px] md:px-3.5 md:py-2 md:text-xs outline-none focus:border-[var(--gold)] focus:ring-2 focus:ring-[var(--gold)]/30 transition";
+  "w-full rounded-full border border-[var(--border)] bg-[var(--parchment)] px-3 py-1.5 text-[11px] outline-none focus:border-[var(--gold)] focus:ring-1 focus:ring-[var(--gold)]/30 transition";
 
 function Field({ label, error, children }: { label: string; error?: string; children: ReactNode }) {
   return (
     <label className="block">
-      <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-[var(--muted-foreground)]">{label}</span>
-      <div className="mt-0.5 md:mt-1">{children}</div>
-      {error && <span className="mt-0.5 block text-[9px] md:text-[10px] text-[var(--destructive)]">{error}</span>}
+      <span className="text-[9px] uppercase tracking-widest text-[var(--muted-foreground)] leading-none">{label}</span>
+      <div className="mt-0.5">{children}</div>
+      {error && <span className="mt-0.5 block text-[9px] text-[var(--destructive)] leading-none">{error}</span>}
     </label>
   );
 }
 
-export function BookAppointmentDialog({ trigger, onOpen }: { trigger: ReactNode; onOpen?: () => void }) {
-  const [open, setOpen] = useState(false);
+export function BookAppointmentDialog({
+  trigger,
+  onOpen,
+  open: controlledOpen,
+  onOpenChange,
+}: {
+  trigger?: ReactNode;
+  onOpen?: () => void;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}) {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+  const open = controlledOpen ?? uncontrolledOpen;
   const navigate = useNavigate();
 
   const handleOpenChange = (val: boolean) => {
-    setOpen(val);
+    if (onOpenChange) onOpenChange(val);
+    else setUncontrolledOpen(val);
     if (val && onOpen) {
       setTimeout(onOpen, 50);
     }
@@ -54,21 +67,21 @@ export function BookAppointmentDialog({ trigger, onOpen }: { trigger: ReactNode;
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { treatment: "", email: "" },
+    defaultValues: { treatment: "", email: "", preferredTime: "" },
   });
 
   const onSubmit = async (_: FormValues) => {
     await new Promise((r) => setTimeout(r, 700));
-    setOpen(false);
+    handleOpenChange(false);
     reset();
     navigate({ to: "/thank-you" });
   };
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="grid w-[92vw] max-w-4xl overflow-hidden p-0 border-0 rounded-2xl sm:rounded-3xl md:grid-cols-2 bg-[var(--parchment)]">
-        <div className="relative hidden md:block">
+      {trigger ? <DialogTrigger asChild>{trigger}</DialogTrigger> : null}
+      <DialogContent className="grid w-[92vw] max-w-4xl gap-0 overflow-hidden p-0 border-0 rounded-2xl sm:rounded-3xl md:grid-cols-2 bg-[var(--parchment)]">
+        <div className="relative hidden md:block self-stretch">
           <img
             src={heroImg}
             alt=""
@@ -77,18 +90,18 @@ export function BookAppointmentDialog({ trigger, onOpen }: { trigger: ReactNode;
           />
         </div>
 
-        <div className="max-h-[85vh] overflow-y-auto p-4 md:p-6">
-          <DialogTitle className="font-display text-lg md:text-2xl text-[var(--forest-deep)]">
+        <div className="p-3 sm:p-3.5">
+          <DialogTitle className="font-display text-base sm:text-lg text-[var(--forest-deep)] leading-tight">
             Book an appointment
           </DialogTitle>
           <DialogDescription className="sr-only">Appointment booking form</DialogDescription>
 
-          <p className="mt-2 mb-3 rounded-xl border border-[var(--gold)]/30 bg-[var(--cream)] px-3 py-2 text-[10px] md:text-xs text-[var(--forest-deep)] leading-relaxed">
+          <p className="mt-1.5 mb-2 rounded-lg border border-[var(--gold)]/30 bg-[var(--cream)] px-2.5 py-1.5 text-[10px] text-[var(--forest-deep)] leading-snug">
             Kindly call first to check availability, then come for your visit.
           </p>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="mt-1 space-y-2.5 md:space-y-3">
-            <div className="grid gap-2 sm:grid-cols-2 md:gap-3">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-1.5">
+            <div className="grid gap-1.5 sm:grid-cols-2">
               <Field label="Full name" error={errors.name?.message}>
                 <input {...register("name")} className={inputCls} />
               </Field>
@@ -97,7 +110,7 @@ export function BookAppointmentDialog({ trigger, onOpen }: { trigger: ReactNode;
               </Field>
             </div>
 
-            <div className="grid gap-2 sm:grid-cols-2 md:gap-3">
+            <div className="grid gap-1.5 sm:grid-cols-2">
               <Field label="Age" error={errors.age?.message}>
                 <input type="number" min={1} max={120} {...register("age")} className={inputCls} />
               </Field>
@@ -115,23 +128,38 @@ export function BookAppointmentDialog({ trigger, onOpen }: { trigger: ReactNode;
               </select>
             </Field>
 
-            <div className="grid gap-2 sm:grid-cols-2 md:gap-3">
+            <div className="grid gap-1.5 sm:grid-cols-2">
               <Field label="Preferred date" error={errors.preferredDate?.message}>
                 <input type="date" {...register("preferredDate")} className={inputCls} />
               </Field>
               <Field label="Preferred time" error={errors.preferredTime?.message}>
-                <input type="time" {...register("preferredTime")} className={inputCls} />
+                <select {...register("preferredTime")} className={inputCls}>
+                  <option value="">Select a time</option>
+                  <optgroup label="Morning · 9:00 AM – 2:00 PM">
+                    {APPOINTMENT_TIME_SLOTS.filter((s) => s.value <= "14:00").map((slot) => (
+                      <option key={slot.value} value={slot.value}>{slot.label}</option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="Evening · 4:00 PM – 9:00 PM">
+                    {APPOINTMENT_TIME_SLOTS.filter((s) => s.value >= "16:00").map((slot) => (
+                      <option key={slot.value} value={slot.value}>{slot.label}</option>
+                    ))}
+                  </optgroup>
+                </select>
+                <span className="mt-0.5 block text-[9px] text-[var(--muted-foreground)] leading-tight">
+                  {SITE.hours}
+                </span>
               </Field>
             </div>
 
             <Field label="Anything we should know?">
-              <textarea rows={2} {...register("notes")} className={`${inputCls} rounded-xl md:rounded-2xl`} />
+              <textarea rows={1} {...register("notes")} className={`${inputCls} rounded-xl resize-none`} />
             </Field>
 
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full rounded-full bg-forest-gradient text-[var(--parchment)] h-8 md:h-10 text-xs md:text-sm shadow-gold"
+              className="w-full rounded-full bg-forest-gradient text-[var(--parchment)] h-8 text-xs shadow-gold mt-0.5"
             >
               {isSubmitting ? "Sending…" : "Request appointment"}
             </Button>

@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, LayoutGroup } from "framer-motion";
 import { Phone, ChevronDown, ChevronRight, ArrowRight, Instagram, Facebook, Youtube, MessageCircle, Sparkles } from "lucide-react";
 import { NAV, SITE } from "@/lib/site";
 import { TREATMENTS } from "@/lib/treatments";
@@ -49,6 +49,15 @@ export function SiteHeader() {
   const [treatmentsOpen, setTreatmentsOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
+  // Pages without a dark hero need solid/dark nav from the start (light backgrounds).
+  const lightPage =
+    pathname === "/terms" ||
+    pathname === "/privacy" ||
+    pathname === "/book" ||
+    pathname === "/thank-you" ||
+    pathname.startsWith("/blog");
+  const solidNav = scrolled || lightPage;
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -77,7 +86,7 @@ export function SiteHeader() {
   return (
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-500 ${
-        scrolled
+        solidNav
           ? "bg-[var(--parchment)]/85 backdrop-blur-xl shadow-[0_1px_12px_rgba(0,0,0,0.06)]"
           : "bg-transparent"
       }`}
@@ -103,26 +112,56 @@ export function SiteHeader() {
       <div className="container-page flex h-20 items-center justify-between">
         <Link to="/" className="group flex items-center">
           <img 
-            src={scrolled ? logoDark : logoLight} 
+            src={solidNav ? logoDark : logoLight} 
             alt="Devdut Ayurved Clinic" 
             className="h-10 md:h-12 w-auto object-contain transition-all duration-300" 
           />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1">
+        <LayoutGroup id="desktop-nav">
+        <nav className="hidden lg:flex items-center gap-0.5 relative">
           {NAV.map((n) => {
+            const navKey = n.label === "Panchakarma" ? "panchakarma" : n.to;
+            const isActive =
+              n.to === "/"
+                ? pathname === "/"
+                : n.label === "Panchakarma"
+                  ? pathname === "/treatments/panchakarma"
+                  : "dropdown" in n && n.dropdown
+                    ? pathname.startsWith("/treatments") && pathname !== "/treatments/panchakarma"
+                    : pathname === n.to || pathname.startsWith(`${n.to}/`);
+
+            const linkTone = isActive
+              ? solidNav
+                ? "text-[var(--forest-deep)]"
+                : "text-[var(--gold)]"
+              : solidNav
+                ? "text-[var(--muted-foreground)] hover:text-[var(--forest-deep)]"
+                : "text-[var(--parchment)]/85 hover:text-[var(--gold)]";
+
+            const pill = isActive ? (
+              <motion.span
+                layoutId="nav-active-pill"
+                className={`absolute inset-0 rounded-full ${
+                  solidNav
+                    ? "bg-[var(--forest-deep)]/10 shadow-sm"
+                    : "bg-[var(--parchment)]/15 ring-1 ring-[var(--parchment)]/20"
+                }`}
+                transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.8 }}
+              />
+            ) : null;
+
             if ("dropdown" in n && n.dropdown) {
               return (
                 <div key={n.to} className="group relative">
                   <Link
                     to={n.to}
                     activeOptions={{ exact: false }}
-                    activeProps={{ className: scrolled ? "text-[var(--forest-deep)]" : "text-[var(--gold)]" }}
-                    inactiveProps={{ className: scrolled ? "text-[var(--muted-foreground)]" : "text-[var(--parchment)]/85" }}
-                    className={`relative flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors ${scrolled ? "hover:text-[var(--forest-deep)]" : "hover:text-[var(--gold)]"}`}
+                    className={`relative flex items-center gap-0.5 px-3 py-2 text-sm font-medium transition-colors duration-300 ${linkTone}`}
                   >
-                    {n.label}
-                    <ChevronDown className="size-3.5 transition-transform duration-300 group-hover:rotate-180" />
+                    {pill}
+                    <span className="relative z-10">{n.label}</span>
+                    <ChevronDown className="relative z-10 size-3.5 transition-transform duration-300 group-hover:rotate-180" />
                   </Link>
                   <div className="absolute left-1/2 -translate-x-[45%] top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0 z-50">
                     <div className="w-[850px] rounded-3xl border border-[var(--border)] bg-[var(--parchment)] p-6 shadow-elegant flex gap-8">
@@ -165,7 +204,9 @@ export function SiteHeader() {
                         <div className="flex flex-col gap-2">
                           {[
                             { name: "Paralysis Treatment", to: "/treatments/$slug", params: { slug: "paralysis" } },
-                            { name: "Skin, Hair & Cosmetic Care", to: "/treatments/$slug", params: { slug: "skin" } },
+                            { name: "Skin Care", to: "/treatments/$slug", params: { slug: "skin" } },
+                            { name: "Hair Care", to: "/treatments/$slug", params: { slug: "hair" } },
+                            { name: "Cosmetic & Wellness", to: "/treatments/$slug", params: { slug: "cosmetic" } },
                             { name: "Women's & Men's Health", to: "/treatments/$slug", params: { slug: "womens-health" } },
                             { name: "Digestive Care", to: "/treatments/$slug", params: { slug: "digestion" } },
                             { name: "Kidney Diseases", to: "/treatments/$slug", params: { slug: "kidney" } },
@@ -214,31 +255,30 @@ export function SiteHeader() {
 
             return (
               <Link
-                key={n.to}
+                key={navKey}
                 to={n.to as any}
                 params={("params" in n ? n.params : undefined) as any}
-                activeOptions={{ exact: n.to === "/" }}
-                activeProps={{ className: scrolled ? "text-[var(--forest-deep)]" : "text-[var(--gold)]" }}
-                inactiveProps={{ className: scrolled ? "text-[var(--muted-foreground)]" : "text-[var(--parchment)]/85" }}
-                className={`relative px-4 py-2 text-sm font-medium transition-colors ${scrolled ? "hover:text-[var(--forest-deep)]" : "hover:text-[var(--gold)]"}`}
+                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 ${linkTone}`}
               >
-                {n.label}
+                {pill}
+                <span className="relative z-10">{n.label}</span>
               </Link>
             );
           })}
         </nav>
+        </LayoutGroup>
 
         <div className="hidden lg:flex items-center gap-3">
           <a
             href={`tel:${SITE.phone.replace(/\s/g, "")}`}
-            className={`flex items-center gap-2 text-sm ${scrolled ? "text-[var(--muted-foreground)] hover:text-[var(--forest-deep)]" : "text-[var(--parchment)]/85 hover:text-[var(--gold)]"}`}
+            className={`flex items-center gap-2 text-sm ${solidNav ? "text-[var(--muted-foreground)] hover:text-[var(--forest-deep)]" : "text-[var(--parchment)]/85 hover:text-[var(--gold)]"}`}
           >
             <Phone className="size-4" />
             {SITE.phone}
           </a>
           <BookAppointmentDialog
             trigger={
-              <Button className={`bg-forest-gradient text-[var(--parchment)] hover:opacity-95 shadow-gold rounded-full px-6 transition-colors ${!scrolled ? 'border border-[var(--gold)]/30' : 'border border-transparent'}`}>
+              <Button className={`bg-forest-gradient text-[var(--parchment)] hover:opacity-95 shadow-gold rounded-full px-6 transition-colors ${!solidNav ? 'border border-[var(--gold)]/30' : 'border border-transparent'}`}>
                 Book Appointment
               </Button>
             }
@@ -246,12 +286,12 @@ export function SiteHeader() {
         </div>
 
         <button
-          className={`lg:hidden relative grid place-items-center size-11 rounded-full border transition-colors duration-300 ${scrolled ? "border-[var(--border)] bg-[var(--card)]" : "border-[var(--parchment)]/30 bg-white/10"}`}
+          className={`lg:hidden relative grid place-items-center size-11 rounded-full border transition-colors duration-300 ${solidNav ? "border-[var(--border)] bg-[var(--card)]" : "border-[var(--parchment)]/30 bg-white/10"}`}
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
         >
-          <BurgerIcon open={open} dark={scrolled} />
+          <BurgerIcon open={open} dark={solidNav} />
         </button>
 
       </div>

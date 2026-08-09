@@ -33,6 +33,9 @@ import humanHealthImg from "@/assets/treatments/human-Health.png";
 import jointImg from "@/assets/treatments/joint.png";
 import skinHairImg from "@/assets/treatments/skin-hair.png";
 import digestiveImg from "@/assets/treatments/digestive.png";
+import nadiCardImg from "@/assets/treatments/nadipariksha-card.png";
+import kidneyCareImg from "@/assets/treatments/kidney-care.png";
+import wellnessGlowImg from "@/assets/wellness-glow.png";
 
 
 export const Route = createFileRoute("/")({
@@ -514,28 +517,24 @@ function NadiparikshaHighlight() {
           <Mandala className="absolute -right-24 -bottom-24 size-[360px] text-[var(--gold)]/10 pointer-events-none" />
           <div className="relative z-10 grid gap-8 lg:grid-cols-[1.4fr_1fr] items-center">
             <div>
-              <div className="text-[var(--gold)] text-xs uppercase tracking-widest font-semibold mb-3">Clinic USP</div>
               <h2 className="font-display text-3xl md:text-5xl leading-tight text-[var(--parchment)]">
-                Nadipariksha — pulse diagnosis that designs your care
+                Free Nadipariksha every month on the 1st &amp; 15th
               </h2>
               <p className="mt-4 text-[var(--parchment)]/80 max-w-2xl leading-relaxed">
-                Classical three-finger pulse reading to map Prakriti, doshas and early imbalance — the starting point of every protocol with Dr. Ganesh Kumar Patil.
+                Reserve your dedicated pulse-diagnosis slot with Dr. Ganeshkumar Patil (BAMS, M.D.(A.M.), DNYS, M.D. (EH)). Ideal for first consultations, health assessments, and treatment progress reviews.
               </p>
-              <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-4 py-2 text-sm text-[var(--gold)] font-medium">
-                Promo: Every month on the {SITE.nadiparikshaDates}
-              </div>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">
-              <Button asChild className="rounded-full bg-gold-gradient text-[var(--forest-deep)] h-12 px-6">
-                <Link to="/nadipariksha">Explore Nadipariksha <ArrowRight className="ml-2 size-4" /></Link>
-              </Button>
               <BookAppointmentDialog
                 trigger={
-                  <Button variant="outline" className="rounded-full border-white/25 bg-white/5 text-[var(--parchment)] hover:bg-white/10 h-12 px-6 cursor-pointer">
-                    Book session
+                  <Button className="rounded-full bg-gold-gradient text-[var(--forest-deep)] h-12 px-6 cursor-pointer">
+                    Book Nadipariksha Session <ArrowRight className="ml-2 size-4" />
                   </Button>
                 }
               />
+              <Button asChild variant="outline" className="rounded-full border-white/25 bg-white/5 text-[var(--parchment)] hover:bg-white/10 h-12 px-6">
+                <Link to="/nadipariksha">Learn more</Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -550,7 +549,7 @@ function TreatmentsShowcase() {
     {
       title: "Nadipariksha",
       slug: "nadipariksha",
-      image: therapyImg,
+      image: nadiCardImg,
       items: ["Pulse Diagnosis", "Prakriti Mapping", "Dosha Assessment", "1st & 15th Promo"],
     },
     {
@@ -604,7 +603,7 @@ function TreatmentsShowcase() {
     {
       title: "Kidney Diseases",
       slug: "kidney",
-      image: digestiveImg,
+      image: kidneyCareImg,
       items: ["Renal Calculi", "Renal Failure", "Urinary Disorders", "Stone Support"],
     },
     {
@@ -616,7 +615,7 @@ function TreatmentsShowcase() {
     {
       title: "Respiratory Care",
       slug: "respiratory",
-      image: templeImg,
+      image: wellnessGlowImg,
       items: ["Asthma", "Chronic Cold", "Sinusitis", "Tonsillitis", "Cough"],
     },
     {
@@ -713,7 +712,7 @@ function DoctorFeature() {
       <div className="container-page py-32 grid gap-16 lg:grid-cols-[1fr_1.2fr] items-center relative">
         <Reveal>
           <div className="relative">
-            <img src={doctorImg} alt="Dr. Ganesh Kumar Patil, Ayurvedic physician" width={1024} height={1280} loading="lazy" className="rounded-3xl shadow-elegant" />
+            <img src={doctorImg} alt="Dr. Ganeshkumar Patil, Ayurvedic physician" width={1024} height={1280} loading="lazy" className="rounded-3xl shadow-elegant" />
             <div className="absolute -bottom-6 -right-6 rounded-2xl bg-[var(--parchment)] text-[var(--forest-deep)] p-5 shadow-elegant">
               <div className="text-xs uppercase tracking-widest text-[var(--gold)] mb-1">Google reviews</div>
               <div className="flex items-center gap-2">
@@ -725,18 +724,18 @@ function DoctorFeature() {
           </div>
         </Reveal>
         <Reveal delay={0.15}>
-          <div className="eyebrow mb-4 text-[var(--gold)]">Meet the Vaidya</div>
+          <div className="eyebrow mb-4 text-[var(--gold)]">Ayurvedic Practitioner in Pune.</div>
           <h2 className="font-display text-3xl md:text-5xl leading-tight text-[var(--parchment)] text-balance">
-            Dr. Ganesh Kumar Patil, <span className="italic text-[var(--gold)]">B.A.M.S.</span>
+            Dr. Ganeshkumar Patil, <span className="italic text-[var(--gold)]">BAMS, M.D.(A.M.), DNYS, M.D. (EH)</span>
           </h2>
           <p className="mt-6 text-lg text-[var(--parchment)]/80">
-            30+ years of clinical practice. Expert in Nadipariksha, classical Panchakarma and personalised herbal care — restoring health by treating the root cause, not just the symptoms.
+            26+ years of clinical practice. Expert in Nadipariksha, classical Panchakarma and personalised herbal care — restoring health by treating the root cause, not just the symptoms.
           </p>
           <p className="mt-4 text-sm text-[var(--parchment)]/70">
             Every consultation begins with Nadipariksha. Promo sessions every month on the {SITE.nadiparikshaDates}.
           </p>
           <div className="mt-10 grid grid-cols-3 gap-6">
-            {[{ n: 30, s: "+", l: "Years practising" }, { n: 12000, s: "+", l: "Patients treated" }, { n: 15, s: "", l: "Awards & fellowships" }].map((s) => (
+            {[{ n: 26, s: "+", l: "Years practising" }, { n: 12000, s: "+", l: "Patients treated" }, { n: 15, s: "", l: "Awards & fellowships" }].map((s) => (
               <div key={s.l}>
                 <div className="font-display text-4xl md:text-5xl text-[var(--gold)]">
                   <CountUp end={s.n} duration={2.5} enableScrollSpy scrollSpyOnce separator="," />{s.s}
@@ -932,7 +931,7 @@ function FinalCTA() {
             <Ornament className="my-6 opacity-70" />
 
             <p className="mx-auto max-w-xl text-base md:text-lg text-[var(--parchment)]/90 leading-relaxed font-light">
-              Book a first consultation with Dr. Ganesh Kumar Patil. <br className="hidden md:block" />
+              Book a first consultation with Dr. Ganeshkumar Patil. <br className="hidden md:block" />
               In-clinic in Pune — kindly call first to check availability.
             </p>
 

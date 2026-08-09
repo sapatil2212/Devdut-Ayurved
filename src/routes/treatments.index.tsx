@@ -20,6 +20,9 @@ import jointImg from "@/assets/treatments/joint.png";
 import skinHairImg from "@/assets/treatments/skin-hair.png";
 import lifestyleChronicImg from "@/assets/treatments/Lifestyle-Chronic.png";
 import humanHealthImg from "@/assets/treatments/human-Health.png";
+import nadiCardImg from "@/assets/treatments/nadipariksha-card.png";
+import kidneyCareImg from "@/assets/treatments/kidney-care.png";
+import wellnessGlowImg from "@/assets/wellness-glow.png";
 
 export const Route = createFileRoute("/treatments/")({
   head: () => ({
@@ -84,7 +87,7 @@ function TreatmentsPage() {
   const categories = [
     {
       title: "Nadipariksha",
-      image: therapyImg,
+      image: nadiCardImg,
       learnMore: { to: "/treatments/$slug" as const, params: { slug: "nadipariksha" } },
       items: ["Pulse Diagnosis", "Prakriti Mapping", "Dosha Assessment", "1st & 15th Promo"],
     },
@@ -138,7 +141,7 @@ function TreatmentsPage() {
     },
     {
       title: "Kidney Diseases",
-      image: digestiveImg,
+      image: kidneyCareImg,
       learnMore: { to: "/treatments/$slug" as const, params: { slug: "kidney" } },
       items: ["Renal Calculi", "Renal Failure", "Urinary Disorders", "Stone Support"],
     },
@@ -150,7 +153,7 @@ function TreatmentsPage() {
     },
     {
       title: "Respiratory Care",
-      image: templeImg,
+      image: wellnessGlowImg,
       learnMore: { to: "/treatments/$slug" as const, params: { slug: "respiratory" } },
       items: ["Asthma", "Chronic Cold", "Sinusitis", "Tonsillitis", "Cough"],
     },

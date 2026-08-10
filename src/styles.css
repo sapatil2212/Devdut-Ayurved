@@ -215,6 +215,14 @@
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
+@keyframes btn-shimmer {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  35%, 100% { transform: translateX(250%) skewX(-20deg); }
+}
+@keyframes banner-shimmer {
+  0% { transform: translateX(-120%) skewX(-15deg); }
+  35%, 100% { transform: translateX(250%) skewX(-15deg); }
+}
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -234,3 +242,48 @@
   color: transparent;
   animation: shimmer 6s linear infinite;
 }
+@utility btn-shimmer {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 65%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.45) 50%,
+      transparent 100%
+    );
+    transform: translateX(-150%) skewX(-20deg);
+    animation: btn-shimmer 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    pointer-events: none;
+  }
+}
+@utility banner-shimmer {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(201, 168, 76, 0.15) 30%,
+      rgba(255, 255, 255, 0.25) 50%,
+      rgba(201, 168, 76, 0.15) 70%,
+      transparent 100%
+    );
+    transform: translateX(-120%) skewX(-15deg);
+    animation: banner-shimmer 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+

@@ -92,11 +92,11 @@ export function SiteHeader() {
       }`}
     >
       {/* Quick Announcement Banner */}
-      <div className="bg-[var(--forest-deep)] text-[var(--parchment)] border-b border-[var(--gold)]/20 py-2 px-4 text-xs font-medium relative z-50 shadow-sm">
+      <div className="banner-shimmer bg-[var(--forest-deep)] text-[var(--parchment)] border-b border-[var(--gold)]/20 py-2 px-4 text-xs font-medium relative z-50 shadow-sm overflow-hidden">
         <NadiparikshaBookingDialog
           trigger={
             <div className="container-page flex items-center justify-center gap-2.5 sm:gap-3 flex-wrap text-center cursor-pointer group">
-              <span className="inline-flex items-center gap-1 rounded-full bg-[var(--gold)] text-[var(--forest-deep)] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider shrink-0 shadow-sm group-hover:brightness-105 transition-all">
+              <span className="btn-shimmer relative inline-flex items-center gap-1 rounded-full bg-[var(--gold)] text-[var(--forest-deep)] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider shrink-0 shadow-sm group-hover:brightness-105 transition-all">
                 <Sparkles className="size-3" /> Special Offer
               </span>
               <span className="text-[11px] sm:text-xs text-[var(--parchment)]/95 group-hover:text-white transition-colors">
@@ -278,7 +278,7 @@ export function SiteHeader() {
           </a>
           <BookAppointmentDialog
             trigger={
-              <Button className={`bg-forest-gradient text-[var(--parchment)] hover:opacity-95 shadow-gold rounded-full px-6 transition-colors ${!solidNav ? 'border border-[var(--gold)]/30' : 'border border-transparent'}`}>
+              <Button className={`btn-shimmer relative bg-forest-gradient text-[var(--parchment)] hover:opacity-95 shadow-gold rounded-full px-6 transition-colors ${!solidNav ? 'border border-[var(--gold)]/30' : 'border border-transparent'}`}>
                 Book Appointment
               </Button>
             }
@@ -423,7 +423,7 @@ export function SiteHeader() {
                 <BookAppointmentDialog
                   trigger={
                     <Button
-                      className="w-full bg-forest-gradient text-[var(--parchment)] rounded-full h-12 shadow-gold"
+                      className="btn-shimmer relative w-full bg-forest-gradient text-[var(--parchment)] rounded-full h-12 shadow-gold"
                     >
                       Book Appointment <ArrowRight className="ml-2 size-4" />
                     </Button>

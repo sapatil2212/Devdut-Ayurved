@@ -184,7 +184,7 @@ function Hero() {
         <div className="mt-10 flex flex-wrap items-center gap-3 md:gap-4">
           <BookAppointmentDialog
             trigger={
-              <Button className="rounded-full bg-gold-gradient text-[var(--forest-deep)] hover:opacity-90 shadow-gold h-9 px-4 text-xs md:h-12 md:px-6 md:text-sm font-medium cursor-pointer">
+              <Button className="btn-shimmer relative rounded-full bg-gold-gradient text-[var(--forest-deep)] hover:opacity-90 shadow-gold h-9 px-4 text-xs md:h-12 md:px-6 md:text-sm font-semibold cursor-pointer">
                 Book Consultation <ArrowRight className="ml-1.5 size-3 md:ml-2 md:size-4" />
               </Button>
             }
@@ -823,7 +823,7 @@ function DoctorFeature() {
           <div className="mt-10 flex flex-wrap gap-4">
             <BookAppointmentDialog
               trigger={
-                <Button className="rounded-full bg-gold-gradient text-[var(--forest-deep)] h-12 px-6 cursor-pointer">
+                <Button className="btn-shimmer relative rounded-full bg-gold-gradient text-[var(--forest-deep)] h-12 px-6 font-semibold shadow-gold cursor-pointer">
                   Book consultation
                 </Button>
               }

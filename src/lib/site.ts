@@ -3,7 +3,7 @@ export const SITE = {
   short: "Devdut Ayurved",
   tagline: "Healing that begins in nature.",
   description:
-    "Devdut Ayurved Clinic offers authentic Panchakarma, personalised herbal treatments and modern Ayurvedic care rooted in 5,000-year-old wisdom.",
+    "Devdut Ayurved Clinic offers authentic Panchakarma, personalised herbal treatments and modern Ayurvedic care inspired by centuries of Ayurvedic knowledge.",
   /** Clinic / calling number (Dr. Ganeshkumar) */
   phone: "+91 84219 03259",
   phoneDisplay: "8421903259",
@@ -11,6 +11,8 @@ export const SITE = {
   whatsappDisplay: "8530911532",
   email: "devdutayurvedclinic@gmail.com",
   address: "Devdut Ayurved Clinic, Sinhagad Road, Suncity, Anand Nagar, opposite to Hotel Bird Valley, Pune - 411051",
+  /** Google Maps link for the clinic */
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Devdut+Ayurved+Clinic+Sinhagad+Road+Pune",
   hours: "Mon – Sun · 9:00 AM – 2:00 PM · 4:00 PM – 9:00 PM",
   emergency: "+91 84219 03259",
   /** Nadipariksha promo — every month on 1st & 15th */

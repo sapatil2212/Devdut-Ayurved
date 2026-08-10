@@ -1,9 +1,9 @@
+import { useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, CheckCircle2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useNavigate } from "@tanstack/react-router";
 import { PageShell } from "@/components/site/PageShell";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { APPOINTMENT_TIME_SLOTS, SITE } from "@/lib/site";
 import { TREATMENTS } from "@/lib/treatments";
 import contactHeroImg from "@/assets/contact-hero.png";
-import type { ReactNode } from "react";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -63,7 +62,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
-  const navigate = useNavigate();
+  const [submitted, setSubmitted] = useState(false);
   const {
     register,
     handleSubmit,
@@ -75,9 +74,9 @@ function ContactPage() {
   });
 
   const onSubmit = async (_: FormValues) => {
-    await new Promise((r) => setTimeout(r, 700));
+    await new Promise((r) => setTimeout(r, 600));
+    setSubmitted(true);
     reset();
-    navigate({ to: "/thank-you" });
   };
 
   return (
@@ -91,122 +90,174 @@ function ContactPage() {
         imageAlignClass="justify-center md:justify-start"
       />
 
-      <section className="container-page py-16 grid gap-10 lg:grid-cols-[1fr_1.4fr]">
-        <Reveal className="order-2 lg:order-1">
-          <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 space-y-6">
+      <section className="container-page py-12 md:py-16 grid gap-6 md:gap-8 lg:grid-cols-[1fr_1.35fr] items-stretch">
+        <Reveal className="order-2 lg:order-1 flex flex-col gap-4 h-full">
+          {/* Contact Details Card */}
+          <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 md:p-7 space-y-4">
             <div>
-              <div className="eyebrow mb-2">Visit</div>
-              <div className="flex items-start gap-3"><MapPin className="size-5 text-[var(--gold)] mt-0.5" /><span>{SITE.address}</span></div>
+              <div className="eyebrow mb-1">Visit</div>
+              <div className="flex items-start gap-2.5 text-xs md:text-sm">
+                <MapPin className="size-4 md:size-5 text-[var(--gold)] mt-0.5 shrink-0" />
+                <span>{SITE.address}</span>
+              </div>
             </div>
+
             <div>
-              <div className="eyebrow mb-2">Call / WhatsApp</div>
-              <div className="flex flex-col gap-3">
-                <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 hover:text-[var(--copper)]">
-                  <Phone className="size-5 text-[var(--gold)]" />
+              <div className="eyebrow mb-1">Call / WhatsApp</div>
+              <div className="flex flex-col gap-2 text-xs md:text-sm">
+                <a
+                  href={`tel:${SITE.phone.replace(/\s/g, "")}`}
+                  className="flex items-center gap-2.5 hover:text-[var(--copper)] transition-colors"
+                >
+                  <Phone className="size-4 md:size-5 text-[var(--gold)] shrink-0" />
                   <span>Call: {SITE.phone}</span>
                 </a>
-                <a href={`https://wa.me/${SITE.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-[var(--copper)]">
-                  <WhatsAppIcon className="size-5 text-[#25D366]" />
+                <a
+                  href={`https://wa.me/${SITE.whatsapp.replace(/\D/g, "")}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2.5 hover:text-[var(--copper)] transition-colors"
+                >
+                  <WhatsAppIcon className="size-4 md:size-5 text-[#25D366] shrink-0" />
                   <span>WhatsApp: {SITE.whatsapp}</span>
                 </a>
               </div>
             </div>
+
             <div>
-              <div className="eyebrow mb-2">Email</div>
-              <a href={`mailto:${SITE.email}`} className="flex items-center gap-3 hover:text-[var(--copper)]"><Mail className="size-5 text-[var(--gold)]" />{SITE.email}</a>
+              <div className="eyebrow mb-1">Email</div>
+              <a
+                href={`mailto:${SITE.email}`}
+                className="flex items-center gap-2.5 text-xs md:text-sm hover:text-[var(--copper)] transition-colors"
+              >
+                <Mail className="size-4 md:size-5 text-[var(--gold)] shrink-0" />
+                {SITE.email}
+              </a>
             </div>
+
             <div>
-              <div className="eyebrow mb-2">Hours</div>
-              <div className="flex items-center gap-3"><Clock className="size-5 text-[var(--gold)]" />{SITE.hours}</div>
+              <div className="eyebrow mb-1">Hours</div>
+              <div className="flex items-center gap-2.5 text-xs md:text-sm">
+                <Clock className="size-4 md:size-5 text-[var(--gold)] shrink-0" />
+                {SITE.hours}
+              </div>
             </div>
-            <a href={`https://wa.me/${SITE.whatsapp.replace(/\D/g, "")}`} className="mt-4 inline-flex items-center gap-2 rounded-full bg-forest-gradient text-[var(--parchment)] px-5 py-3 font-medium">
-              <WhatsAppIcon className="size-4" /> Chat on WhatsApp
-            </a>
+          </div>
+
+          {/* Map Card matching Contact Us card styling */}
+          <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-2.5 overflow-hidden flex-1 min-h-[220px] flex flex-col">
+            <div className="w-full h-full min-h-[200px] rounded-2xl overflow-hidden border border-[var(--border)]/60 flex-1">
+              <iframe
+                title="Devdut Ayurved Clinic location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3423.6060379698915!2d73.81741477465116!3d18.477474470490378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x29a99e98d39a0045%3A0x52e8e107c1e6218a!2sDevdut%20Ayurved%20Clinic!5e1!3m2!1sen!2sin!4v1786338401285!5m2!1sen!2sin"
+                className="size-full min-h-[200px]"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            </div>
           </div>
         </Reveal>
 
-        <Reveal delay={0.1} className="order-1 lg:order-2">
-          <form onSubmit={handleSubmit(onSubmit)} className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 space-y-5">
-            <h2 className="font-display text-3xl">Book an appointment</h2>
+        <Reveal delay={0.1} className="order-1 lg:order-2 h-full">
+          <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 md:p-8 h-full flex flex-col justify-between">
+            {submitted ? (
+              <div className="flex flex-col items-center justify-center p-6 text-center space-y-4 my-auto min-h-[380px]">
+                <div className="size-16 rounded-full bg-[var(--gold)]/15 border border-[var(--gold)]/40 grid place-items-center text-[var(--gold)] shadow-sm">
+                  <CheckCircle2 className="size-8" />
+                </div>
+                <div>
+                  <div className="font-sanskrit text-lg text-[var(--copper)] font-semibold">
+                    धन्यवादः
+                  </div>
+                  <h2 className="font-display text-3xl md:text-4xl text-[var(--forest-deep)] mt-1">
+                    Thank you.
+                  </h2>
+                </div>
+                <p className="text-sm text-[var(--muted-foreground)] max-w-md leading-relaxed">
+                  We have received your request. A member of our team will confirm your appointment personally within one working day.
+                </p>
+                <Button
+                  type="button"
+                  onClick={() => setSubmitted(false)}
+                  className="rounded-full bg-forest-gradient text-[var(--parchment)] px-8 h-11 text-xs shadow-gold mt-2 cursor-pointer font-semibold"
+                >
+                  Send another request
+                </Button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 h-full flex flex-col justify-between">
+                <div className="space-y-5">
+                  <h2 className="font-display text-3xl">Book an appointment</h2>
 
-            <p className="rounded-2xl border border-[var(--gold)]/30 bg-[var(--cream)] px-4 py-3 text-sm text-[var(--forest-deep)] leading-relaxed">
-              Kindly call first to check the availability and then come.
-            </p>
+                  <p className="rounded-2xl border border-[var(--gold)]/30 bg-[var(--cream)] px-4 py-3 text-sm text-[var(--forest-deep)] leading-relaxed">
+                    Kindly call first to check the availability and then come.
+                  </p>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Full name" error={errors.name?.message}>
-                <input {...register("name")} className={inputCls} />
-              </Field>
-              <Field label="Phone" error={errors.phone?.message}>
-                <input {...register("phone")} className={inputCls} />
-              </Field>
-            </div>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <Field label="Full name" error={errors.name?.message}>
+                      <input {...register("name")} className={inputCls} />
+                    </Field>
+                    <Field label="Phone" error={errors.phone?.message}>
+                      <input {...register("phone")} className={inputCls} />
+                    </Field>
+                  </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Age" error={errors.age?.message}>
-                <input type="number" min={1} max={120} {...register("age")} className={inputCls} />
-              </Field>
-              <Field label="Email (optional)" error={errors.email?.message}>
-                <input type="email" {...register("email")} className={inputCls} />
-              </Field>
-            </div>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <Field label="Age" error={errors.age?.message}>
+                      <input type="number" min={1} max={120} {...register("age")} className={inputCls} />
+                    </Field>
+                    <Field label="Email (optional)" error={errors.email?.message}>
+                      <input type="email" {...register("email")} className={inputCls} />
+                    </Field>
+                  </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Treatment" error={errors.treatment?.message}>
-                <select {...register("treatment")} className={inputCls}>
-                  <option value="">Select a treatment</option>
-                  {TREATMENTS.map((t) => (
-                    <option key={t.slug} value={t.slug}>{t.name}</option>
-                  ))}
-                </select>
-              </Field>
-              <Field label="Preferred date" error={errors.preferredDate?.message}>
-                <input type="date" {...register("preferredDate")} className={inputCls} />
-              </Field>
-            </div>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <Field label="Treatment" error={errors.treatment?.message}>
+                      <select {...register("treatment")} className={inputCls}>
+                        <option value="">Select a treatment</option>
+                        {TREATMENTS.map((t) => (
+                          <option key={t.slug} value={t.slug}>{t.name}</option>
+                        ))}
+                      </select>
+                    </Field>
+                    <Field label="Preferred date" error={errors.preferredDate?.message}>
+                      <input type="date" {...register("preferredDate")} className={inputCls} />
+                    </Field>
+                  </div>
 
-            <Field label="Preferred time" error={errors.preferredTime?.message}>
-              <select {...register("preferredTime")} className={inputCls}>
-                <option value="">Select a time</option>
-                <optgroup label="Morning · 9:00 AM – 2:00 PM">
-                  {APPOINTMENT_TIME_SLOTS.filter((s) => s.value <= "14:00").map((slot) => (
-                    <option key={slot.value} value={slot.value}>{slot.label}</option>
-                  ))}
-                </optgroup>
-                <optgroup label="Evening · 4:00 PM – 9:00 PM">
-                  {APPOINTMENT_TIME_SLOTS.filter((s) => s.value >= "16:00").map((slot) => (
-                    <option key={slot.value} value={slot.value}>{slot.label}</option>
-                  ))}
-                </optgroup>
-              </select>
-              <span className="mt-1 block text-xs text-[var(--muted-foreground)]">{SITE.hours}</span>
-            </Field>
+                  <Field label="Preferred time" error={errors.preferredTime?.message}>
+                    <select {...register("preferredTime")} className={inputCls}>
+                      <option value="">Select a time</option>
+                      <optgroup label="Morning · 9:00 AM – 2:00 PM">
+                        {APPOINTMENT_TIME_SLOTS.filter((s) => s.value <= "14:00").map((slot) => (
+                          <option key={slot.value} value={slot.value}>{slot.label}</option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="Evening · 4:00 PM – 9:00 PM">
+                        {APPOINTMENT_TIME_SLOTS.filter((s) => s.value >= "16:00").map((slot) => (
+                          <option key={slot.value} value={slot.value}>{slot.label}</option>
+                        ))}
+                      </optgroup>
+                    </select>
+                    <span className="mt-1 block text-xs text-[var(--muted-foreground)]">{SITE.hours}</span>
+                  </Field>
 
-            <Field label="Anything we should know?">
-              <textarea rows={4} {...register("notes")} className={`${inputCls} rounded-3xl`} />
-            </Field>
+                  <Field label="Anything we should know?">
+                    <textarea rows={4} {...register("notes")} className={`${inputCls} rounded-3xl`} />
+                  </Field>
+                </div>
 
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="rounded-full bg-forest-gradient text-[var(--parchment)] h-12 px-6 text-sm"
-            >
-              {isSubmitting ? "Sending…" : "Request appointment"}
-            </Button>
-          </form>
-        </Reveal>
-      </section>
-
-      <section className="container-page pb-24">
-        <Reveal>
-          <div className="overflow-hidden rounded-3xl border border-[var(--border)] aspect-[16/8]">
-            <iframe
-              title="Devdut clinic location"
-              src="https://www.google.com/maps?q=Pune+Maharashtra+India&output=embed"
-              className="size-full"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="rounded-full bg-forest-gradient text-[var(--parchment)] h-12 px-6 text-sm mt-2 font-semibold"
+                >
+                  {isSubmitting ? "Sending…" : "Request appointment"}
+                </Button>
+              </form>
+            )}
           </div>
         </Reveal>
       </section>

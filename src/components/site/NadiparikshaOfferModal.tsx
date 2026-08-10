@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Sparkles } from "lucide-react";
+import { Sparkles, IndianRupee } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { BookAppointmentDialog } from "./BookAppointmentDialog";
+import { NadiparikshaBookingDialog } from "./NadiparikshaBookingDialog";
 import { SITE } from "@/lib/site";
 import nadiCardImg from "@/assets/treatments/nadipariksha-card.png";
 
@@ -67,7 +67,7 @@ export function NadiparikshaOfferModal() {
                 Special Offer
               </span>
               <DialogTitle className="mt-3 font-display text-2xl leading-tight text-[var(--parchment)]">
-                Free Nadipariksha
+                Free Nadi Pariksha
               </DialogTitle>
               <DialogDescription className="mt-1 text-sm text-[var(--parchment)]/80">
                 Pulse diagnosis on the {SITE.nadiparikshaDates}
@@ -75,12 +75,27 @@ export function NadiparikshaOfferModal() {
             </div>
           </div>
 
-          <div className="space-y-5 p-5 md:p-6">
+          <div className="space-y-4 p-5 md:p-6">
             <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">
               Claim your complimentary Nadipariksha (pulse diagnosis) with Dr. Ganeshkumar Patil — available on the{" "}
-              <strong className="text-[var(--forest-deep)]">1st &amp; 15th</strong> of every month. Kindly call first to
-              check availability.
+              <strong className="text-[var(--forest-deep)]">1st &amp; 15th</strong> of every month.
             </p>
+
+            {/* ₹50 fee highlight */}
+            <div className="flex items-center gap-3 rounded-2xl border border-[var(--gold)]/30 bg-[var(--gold)]/8 px-4 py-3">
+              <IndianRupee className="size-7 text-[var(--gold)] shrink-0" />
+              <div>
+                <div className="text-[var(--gold)] text-[9px] uppercase tracking-widest font-semibold">
+                  Registration Fee
+                </div>
+                <div className="font-display text-2xl font-bold text-[var(--forest-deep)] leading-none mt-0.5">
+                  ₹50
+                </div>
+                <p className="text-xs text-[var(--muted-foreground)] mt-1 leading-snug">
+                  Register by paying only ₹50 to avail your free session.
+                </p>
+              </div>
+            </div>
 
             <div className="flex flex-col gap-2.5 sm:flex-row pt-1">
               <Button
@@ -88,7 +103,7 @@ export function NadiparikshaOfferModal() {
                 onClick={claimSlot}
                 className="w-full rounded-full bg-forest-gradient text-[var(--parchment)] shadow-gold h-11 cursor-pointer"
               >
-                Claim Free Slot
+                Claim Free Slot — Pay ₹50
               </Button>
               <Button
                 asChild
@@ -103,7 +118,7 @@ export function NadiparikshaOfferModal() {
         </DialogContent>
       </Dialog>
 
-      <BookAppointmentDialog open={bookOpen} onOpenChange={setBookOpen} />
+      <NadiparikshaBookingDialog open={bookOpen} onOpenChange={setBookOpen} />
     </>
   );
 }

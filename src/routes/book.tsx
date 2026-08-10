@@ -1,7 +1,9 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { CheckCircle2 } from "lucide-react";
 import { PageShell } from "@/components/site/PageShell";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
@@ -39,15 +41,16 @@ export const Route = createFileRoute("/book")({
 });
 
 function BookPage() {
-  const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormValues>({
+  const [submitted, setSubmitted] = useState(false);
+  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: { mode: "in-clinic", treatment: "", email: "", preferredTime: "" },
   });
 
   const onSubmit = async (_: FormValues) => {
-    await new Promise((r) => setTimeout(r, 700));
-    navigate({ to: "/thank-you" });
+    await new Promise((r) => setTimeout(r, 600));
+    setSubmitted(true);
+    reset();
   };
 
   return (
@@ -56,69 +59,103 @@ function BookPage() {
 
       <section className="container-page py-16 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
         <Reveal>
-          <form onSubmit={handleSubmit(onSubmit)} className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 space-y-5">
-            <p className="rounded-2xl border border-[var(--gold)]/30 bg-[var(--cream)] px-4 py-3 text-sm text-[var(--forest-deep)] leading-relaxed">
-              Kindly call first to check the availability and then come.
-            </p>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Full name" error={errors.name?.message}>
-                <input {...register("name")} className={input} />
-              </Field>
-              <Field label="Phone" error={errors.phone?.message}>
-                <input {...register("phone")} className={input} />
-              </Field>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Age" error={errors.age?.message}>
-                <input type="number" min={1} max={120} {...register("age")} className={input} />
-              </Field>
-              <Field label="Email (optional)" error={errors.email?.message}>
-                <input type="email" {...register("email")} className={input} />
-              </Field>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Consultation mode">
-                <select {...register("mode")} className={input}>
-                  <option value="in-clinic">In-clinic (Pune)</option>
-                  <option value="virtual">Virtual</option>
-                </select>
-              </Field>
-              <Field label="Interest" error={errors.treatment?.message}>
-                <select {...register("treatment")} className={input}>
-                  <option value="">Select an area</option>
-                  {TREATMENTS.map((t) => <option key={t.slug} value={t.slug}>{t.name}</option>)}
-                </select>
-              </Field>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Preferred date" error={errors.preferredDate?.message}>
-                <input type="date" {...register("preferredDate")} className={input} />
-              </Field>
-              <Field label="Preferred time" error={errors.preferredTime?.message}>
-                <select {...register("preferredTime")} className={input}>
-                  <option value="">Select a time</option>
-                  <optgroup label="Morning · 9:00 AM – 2:00 PM">
-                    {APPOINTMENT_TIME_SLOTS.filter((s) => s.value <= "14:00").map((slot) => (
-                      <option key={slot.value} value={slot.value}>{slot.label}</option>
-                    ))}
-                  </optgroup>
-                  <optgroup label="Evening · 4:00 PM – 9:00 PM">
-                    {APPOINTMENT_TIME_SLOTS.filter((s) => s.value >= "16:00").map((slot) => (
-                      <option key={slot.value} value={slot.value}>{slot.label}</option>
-                    ))}
-                  </optgroup>
-                </select>
-                <span className="mt-1 block text-xs text-[var(--muted-foreground)]">{SITE.hours}</span>
-              </Field>
-            </div>
-            <Field label="Anything we should know?">
-              <textarea rows={4} {...register("notes")} className={`${input} rounded-3xl`} />
-            </Field>
-            <Button type="submit" disabled={isSubmitting} className="rounded-full bg-forest-gradient text-[var(--parchment)] h-12 px-8 shadow-gold">
-              {isSubmitting ? "Sending…" : "Request appointment"}
-            </Button>
-            <p className="text-xs text-[var(--muted-foreground)]">We confirm every appointment personally, within one working day.</p>
-          </form>
+          <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8">
+            {submitted ? (
+              <div className="flex flex-col items-center justify-center p-6 text-center space-y-4 my-auto min-h-[380px]">
+                <div className="size-16 rounded-full bg-[var(--gold)]/15 border border-[var(--gold)]/40 grid place-items-center text-[var(--gold)] shadow-sm">
+                  <CheckCircle2 className="size-8" />
+                </div>
+                <div>
+                  <div className="font-sanskrit text-lg text-[var(--copper)] font-semibold">
+                    धन्यवादः
+                  </div>
+                  <h2 className="font-display text-3xl md:text-4xl text-[var(--forest-deep)] mt-1">
+                    Thank you.
+                  </h2>
+                </div>
+                <p className="text-sm text-[var(--muted-foreground)] max-w-md leading-relaxed">
+                  We have received your request. A member of our team will confirm your appointment personally within one working day.
+                </p>
+                <Button
+                  type="button"
+                  onClick={() => setSubmitted(false)}
+                  className="rounded-full bg-forest-gradient text-[var(--parchment)] px-8 h-11 text-xs shadow-gold mt-2 cursor-pointer font-semibold"
+                >
+                  Send another request
+                </Button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                <p className="rounded-2xl border border-[var(--gold)]/30 bg-[var(--cream)] px-4 py-3 text-sm text-[var(--forest-deep)] leading-relaxed">
+                  Kindly call first to check the availability and then come.
+                </p>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field label="Full name" error={errors.name?.message}>
+                    <input {...register("name")} className={input} />
+                  </Field>
+                  <Field label="Phone" error={errors.phone?.message}>
+                    <input {...register("phone")} className={input} />
+                  </Field>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field label="Age" error={errors.age?.message}>
+                    <input type="number" min={1} max={120} {...register("age")} className={input} />
+                  </Field>
+                  <Field label="Email (optional)" error={errors.email?.message}>
+                    <input type="email" {...register("email")} className={input} />
+                  </Field>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field label="Consultation mode">
+                    <div className="grid grid-cols-2 gap-3">
+                      <label className="flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--parchment)] px-4 py-3 text-sm cursor-pointer hover:border-[var(--gold)] transition">
+                        <input type="radio" value="in-clinic" {...register("mode")} /> In-clinic (Pune)
+                      </label>
+                      <label className="flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--parchment)] px-4 py-3 text-sm cursor-pointer hover:border-[var(--gold)] transition">
+                        <input type="radio" value="virtual" {...register("mode")} /> Online
+                      </label>
+                    </div>
+                  </Field>
+                  <Field label="Treatment / Interest" error={errors.treatment?.message}>
+                    <select {...register("treatment")} className={input}>
+                      <option value="">Select a treatment</option>
+                      {TREATMENTS.map((t) => (
+                        <option key={t.slug} value={t.slug}>{t.name}</option>
+                      ))}
+                    </select>
+                  </Field>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field label="Preferred date" error={errors.preferredDate?.message}>
+                    <input type="date" {...register("preferredDate")} className={input} />
+                  </Field>
+                  <Field label="Preferred time" error={errors.preferredTime?.message}>
+                    <select {...register("preferredTime")} className={input}>
+                      <option value="">Select a time</option>
+                      <optgroup label="Morning · 9:00 AM – 2:00 PM">
+                        {APPOINTMENT_TIME_SLOTS.filter((s) => s.value <= "14:00").map((slot) => (
+                          <option key={slot.value} value={slot.value}>{slot.label}</option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="Evening · 4:00 PM – 9:00 PM">
+                        {APPOINTMENT_TIME_SLOTS.filter((s) => s.value >= "16:00").map((slot) => (
+                          <option key={slot.value} value={slot.value}>{slot.label}</option>
+                        ))}
+                      </optgroup>
+                    </select>
+                    <span className="mt-1 block text-xs text-[var(--muted-foreground)]">{SITE.hours}</span>
+                  </Field>
+                </div>
+                <Field label="Anything we should know?">
+                  <textarea rows={4} {...register("notes")} className={`${input} rounded-3xl`} />
+                </Field>
+                <Button type="submit" disabled={isSubmitting} className="rounded-full bg-forest-gradient text-[var(--parchment)] h-12 px-8 shadow-gold font-semibold cursor-pointer">
+                  {isSubmitting ? "Sending…" : "Request appointment"}
+                </Button>
+                <p className="text-xs text-[var(--muted-foreground)]">We confirm every appointment personally, within one working day.</p>
+              </form>
+            )}
+          </div>
         </Reveal>
 
         <Reveal delay={0.1}>

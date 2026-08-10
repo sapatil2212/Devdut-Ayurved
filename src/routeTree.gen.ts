@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TreatmentsRouteImport } from './routes/treatments'
-import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -30,11 +29,6 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 const TreatmentsRoute = TreatmentsRouteImport.update({
   id: '/treatments',
   path: '/treatments',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ThankYouRoute = ThankYouRouteImport.update({
-  id: '/thank-you',
-  path: '/thank-you',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TestimonialsRoute = TestimonialsRouteImport.update({
@@ -125,7 +119,6 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/testimonials': typeof TestimonialsRoute
-  '/thank-you': typeof ThankYouRoute
   '/treatments': typeof TreatmentsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/treatments/$slug': typeof TreatmentsSlugRoute
@@ -143,7 +136,6 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/testimonials': typeof TestimonialsRoute
-  '/thank-you': typeof ThankYouRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/treatments/$slug': typeof TreatmentsSlugRoute
   '/blog': typeof BlogIndexRoute
@@ -162,7 +154,6 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/testimonials': typeof TestimonialsRoute
-  '/thank-you': typeof ThankYouRoute
   '/treatments': typeof TreatmentsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/treatments/$slug': typeof TreatmentsSlugRoute
@@ -183,7 +174,6 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/testimonials'
-    | '/thank-you'
     | '/treatments'
     | '/blog/$slug'
     | '/treatments/$slug'
@@ -201,7 +191,6 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/testimonials'
-    | '/thank-you'
     | '/blog/$slug'
     | '/treatments/$slug'
     | '/blog'
@@ -219,7 +208,6 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/testimonials'
-    | '/thank-you'
     | '/treatments'
     | '/blog/$slug'
     | '/treatments/$slug'
@@ -239,7 +227,6 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   TestimonialsRoute: typeof TestimonialsRoute
-  ThankYouRoute: typeof ThankYouRoute
   TreatmentsRoute: typeof TreatmentsRouteWithChildren
 }
 
@@ -250,13 +237,6 @@ declare module '@tanstack/react-router' {
       path: '/treatments'
       fullPath: '/treatments'
       preLoaderRoute: typeof TreatmentsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/thank-you': {
-      id: '/thank-you'
-      path: '/thank-you'
-      fullPath: '/thank-you'
-      preLoaderRoute: typeof ThankYouRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/testimonials': {
@@ -405,7 +385,6 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   TestimonialsRoute: TestimonialsRoute,
-  ThankYouRoute: ThankYouRoute,
   TreatmentsRoute: TreatmentsRouteWithChildren,
 }
 export const routeTree = rootRouteImport

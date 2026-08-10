@@ -6,6 +6,7 @@ import { NAV, SITE } from "@/lib/site";
 import { TREATMENTS } from "@/lib/treatments";
 import { Button } from "@/components/ui/button";
 import { BookAppointmentDialog } from "./BookAppointmentDialog";
+import { NadiparikshaBookingDialog } from "./NadiparikshaBookingDialog";
 import logoLight from "@/assets/logo/devdut-ayurved-logo-light.png";
 import logoDark from "@/assets/logo/devdut-ayurved-logo-dark.png";
 import therapyImg from "@/assets/therapy.jpg";
@@ -54,7 +55,6 @@ export function SiteHeader() {
     pathname === "/terms" ||
     pathname === "/privacy" ||
     pathname === "/book" ||
-    pathname === "/thank-you" ||
     pathname.startsWith("/blog");
   const solidNav = scrolled || lightPage;
 
@@ -93,21 +93,21 @@ export function SiteHeader() {
     >
       {/* Quick Announcement Banner */}
       <div className="bg-[var(--forest-deep)] text-[var(--parchment)] border-b border-[var(--gold)]/20 py-2 px-4 text-xs font-medium relative z-50 shadow-sm">
-        <div className="container-page flex items-center justify-center gap-2.5 sm:gap-3 flex-wrap text-center">
-          <span className="inline-flex items-center gap-1 rounded-full bg-[var(--gold)] text-[var(--forest-deep)] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider shrink-0 shadow-sm">
-            <Sparkles className="size-3" /> Special Offer
-          </span>
-          <span className="text-[11px] sm:text-xs text-[var(--parchment)]/95">
-            <strong className="text-[var(--gold)] font-semibold">Free Nadipariksha (Pulse Diagnosis)</strong> every month on the <span className="font-semibold text-white underline underline-offset-2 decoration-[var(--gold)] font-display">{SITE.nadiparikshaDates}</span>!
-          </span>
-          <BookAppointmentDialog
-            trigger={
-              <button className="text-[11px] font-semibold text-[var(--gold)] hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1 shrink-0">
-                Claim Free Slot <ArrowRight className="size-3" />
-              </button>
-            }
-          />
-        </div>
+        <NadiparikshaBookingDialog
+          trigger={
+            <div className="container-page flex items-center justify-center gap-2.5 sm:gap-3 flex-wrap text-center cursor-pointer group">
+              <span className="inline-flex items-center gap-1 rounded-full bg-[var(--gold)] text-[var(--forest-deep)] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider shrink-0 shadow-sm group-hover:brightness-105 transition-all">
+                <Sparkles className="size-3" /> Special Offer
+              </span>
+              <span className="text-[11px] sm:text-xs text-[var(--parchment)]/95 group-hover:text-white transition-colors">
+                <strong className="text-[var(--gold)] font-semibold">Free Nadipariksha (Pulse Diagnosis)</strong> every month on the <span className="font-semibold text-white underline underline-offset-2 decoration-[var(--gold)] font-display">{SITE.nadiparikshaDates}</span>!
+              </span>
+              <span className="text-[11px] font-semibold text-[var(--gold)] group-hover:text-white transition-colors inline-flex items-center gap-1 shrink-0">
+                Claim Free Slot <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </div>
+          }
+        />
       </div>
       <div className="container-page flex h-20 items-center justify-between">
         <Link to="/" className="group flex items-center">

@@ -22,6 +22,7 @@ import { PageShell } from "@/components/site/PageShell";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 import { BookAppointmentDialog } from "@/components/site/BookAppointmentDialog";
+import { NadiparikshaBookingDialog } from "@/components/site/NadiparikshaBookingDialog";
 import { SITE } from "@/lib/site";
 
 import { motion } from "framer-motion";
@@ -174,62 +175,114 @@ function NadiparikshaPage() {
       {/* Monthly Promo Banner */}
       <section className="container-page py-8">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-[var(--gold)]/40 bg-forest-gradient text-[var(--parchment)] p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6 shadow-elegant">
-            <div className="relative z-10">
-              <h2 className="font-display text-3xl md:text-4xl text-[var(--parchment)]">
-                Free Nadipariksha every month on the 1st &amp; 15th
-              </h2>
-              <p className="mt-3 text-[var(--parchment)]/85 max-w-xl text-sm md:text-base leading-relaxed">
-                Reserve your dedicated pulse-diagnosis slot with Dr. Ganeshkumar Patil (BAMS, M.D.(A.M.), DNYS, M.D. (EH)). Ideal for first consultations, health assessments, and treatment progress reviews.
-              </p>
+          <motion.div
+            animate={{
+              borderColor: [
+                "rgba(201, 168, 76, 0.4)",
+                "rgba(201, 168, 76, 0.8)",
+                "rgba(201, 168, 76, 0.4)",
+              ],
+              boxShadow: [
+                "0 10px 30px -10px rgba(26, 58, 42, 0.5), 0 0 0 0 rgba(201, 168, 76, 0)",
+                "0 10px 40px -5px rgba(26, 58, 42, 0.6), 0 0 25px 2px rgba(201, 168, 76, 0.25)",
+                "0 10px 30px -10px rgba(26, 58, 42, 0.5), 0 0 0 0 rgba(201, 168, 76, 0)",
+              ],
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="relative overflow-hidden rounded-3xl border bg-forest-gradient text-[var(--parchment)] p-8 md:p-10 shadow-elegant"
+          >
+            <div className="relative z-10 grid gap-8 lg:grid-cols-[1.3fr_1fr] items-center">
+              <div>
+                {/* Badge with pulse dot */}
+                <span className="inline-flex items-center gap-2 rounded-full bg-[var(--gold)] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--forest-deep)] mb-3">
+                  <span className="relative flex size-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--forest-deep)] opacity-75" />
+                    <span className="relative inline-flex rounded-full size-2 bg-[var(--forest-deep)]" />
+                  </span>
+                  Special Offer
+                </span>
+                <h2 className="font-display text-3xl md:text-4xl text-[var(--parchment)]">
+                  Free Nadi Pariksha
+                </h2>
+                <p className="mt-2 text-[var(--parchment)]/85 max-w-xl text-sm md:text-base leading-relaxed">
+                  Reserve your dedicated pulse-diagnosis slot with Dr. Ganeshkumar Patil — available on the{" "}
+                  <strong className="text-[var(--gold)]">1st &amp; 15th</strong> of every month.
+                </p>
+              </div>
+
+              {/* Right side fee card + button */}
+              <div className="flex flex-col gap-3.5 w-full max-w-md lg:ml-auto">
+                <motion.div
+                  animate={{
+                    scale: [1, 1.02, 1],
+                    boxShadow: [
+                      "0 0 0 0 rgba(201, 168, 76, 0.4)",
+                      "0 0 0 10px rgba(201, 168, 76, 0)",
+                      "0 0 0 0 rgba(201, 168, 76, 0)",
+                    ],
+                  }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                  className="rounded-2xl border border-[var(--gold)]/50 bg-[var(--gold)]/15 backdrop-blur-sm p-5"
+                >
+                  <div className="flex items-center justify-between gap-2 mb-1">
+                    <div className="text-[var(--gold)] text-xs uppercase tracking-widest font-bold flex items-center gap-1.5">
+                      <Sparkles className="size-3 text-[var(--gold)]" /> Registration Fee
+                    </div>
+                    <span className="relative flex size-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--gold)] opacity-75" />
+                      <span className="relative inline-flex rounded-full size-2 bg-[var(--gold)]" />
+                    </span>
+                  </div>
+                  <div className="font-display text-3xl font-bold text-[var(--gold)]">
+                    ₹50
+                  </div>
+                  <p className="text-[var(--parchment)]/80 text-xs mt-1.5 leading-relaxed">
+                    Register now and visit us for your Free Nadi Pariksha.
+                  </p>
+                </motion.div>
+
+                <NadiparikshaBookingDialog
+                  trigger={
+                    <button className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-gold-gradient text-[var(--forest-deep)] font-semibold py-3.5 px-7 shadow-gold cursor-pointer hover:opacity-95 transition-opacity text-sm">
+                      Register for Free Nadi Pariksha <ArrowRight className="size-4" />
+                    </button>
+                  }
+                />
+              </div>
             </div>
-            <div className="relative z-10 shrink-0">
-              <BookAppointmentDialog
-                trigger={
-                  <button className="inline-flex items-center gap-2 rounded-full bg-gold-gradient text-[var(--forest-deep)] font-semibold py-3.5 px-7 shadow-gold cursor-pointer hover:opacity-95 transition-opacity text-sm md:text-base">
-                    Book Nadipariksha Session <Calendar className="size-4" />
-                  </button>
-                }
-              />
-            </div>
-          </div>
+          </motion.div>
         </Reveal>
       </section>
 
       {/* Interactive Daily Nadi Pariksha Highlight */}
       <section className="container-page pb-10">
         <Reveal>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative overflow-hidden rounded-[2rem] border-2 border-[var(--gold)]/50 bg-[var(--cream)] shadow-[0_0_0_4px_rgba(201,162,39,0.08)]"
-          >
-            {/* Soft gold glow accents */}
-            <div aria-hidden className="pointer-events-none absolute -top-24 -right-16 size-72 rounded-full bg-[var(--gold)]/20 blur-3xl" />
-            <div aria-hidden className="pointer-events-none absolute -bottom-20 -left-10 size-56 rounded-full bg-[var(--forest-deep)]/10 blur-3xl" />
-
-            <div className="relative z-10 grid gap-8 lg:grid-cols-[1.3fr_0.9fr] p-6 md:p-10 items-stretch">
+          <div className="relative overflow-hidden rounded-[2rem] border border-[var(--gold)]/30 bg-[var(--cream)]">
+            <div className="relative z-10 grid gap-10 lg:grid-cols-[1.1fr_1fr] p-6 md:p-12 items-center">
+              
+              {/* Left Column: Quote, Context, Details, Booking */}
               <div className="flex flex-col justify-center">
-                <div className="inline-flex items-center gap-2 self-start rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/15 px-3.5 py-1.5 text-[11px] md:text-xs font-semibold uppercase tracking-widest text-[var(--forest-deep)] mb-4">
-                  <Activity className="size-3.5 text-[var(--gold)]" />
-                  Highlight · Pulse Diagnosis
+                {/* Classical Sanskrit Quote */}
+                <div className="mb-4">
+                  <div className="font-sanskrit text-sm md:text-base text-[var(--copper)] font-semibold tracking-wide">
+                    “रोगमादौ परीक्षेत ततोऽनन्तरमौषधम्”
+                  </div>
+                  <div className="text-[11px] uppercase tracking-widest text-[var(--muted-foreground)] mt-1">
+                    “First understand the root imbalance, only then administer the cure.” — Charaka Samhita
+                  </div>
                 </div>
 
                 <h2 className="font-display text-3xl md:text-5xl leading-tight text-[var(--forest-deep)]">
                   Nadi Pariksha – Pulse Diagnosis
                 </h2>
 
-                <p className="mt-4 text-sm md:text-base text-[var(--muted-foreground)] leading-relaxed max-w-2xl">
-                  Experience the Ayurvedic science of Nadi Pariksha for a holistic understanding of your health and well-being.
+                <p className="mt-4 text-sm md:text-base text-[var(--muted-foreground)] leading-relaxed max-w-xl">
+                  Experience the ancient Ayurvedic science of Nadi Pariksha for a holistic understanding of your health, vital organs, and constitutional balance.
                 </p>
 
+                {/* Timing & Fee badges */}
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <motion.div
-                    whileHover={{ y: -3, scale: 1.02 }}
-                    className="inline-flex items-center gap-2 rounded-2xl border border-[var(--border)] bg-[var(--parchment)] px-4 py-3 shadow-sm"
-                  >
+                  <div className="inline-flex items-center gap-2.5 rounded-2xl border border-[var(--border)] bg-[var(--parchment)] px-4 py-3">
                     <span className="grid size-9 place-items-center rounded-full bg-[var(--forest-deep)]/10 text-[var(--forest-deep)]">
                       <Clock className="size-4" />
                     </span>
@@ -237,36 +290,32 @@ function NadiparikshaPage() {
                       <div className="text-[10px] uppercase tracking-widest text-[var(--muted-foreground)]">Available Daily</div>
                       <div className="text-sm font-semibold text-[var(--forest-deep)]">9:00 AM – 11:00 AM</div>
                     </div>
-                  </motion.div>
+                  </div>
 
-                  <motion.div
-                    whileHover={{ y: -3, scale: 1.02 }}
-                    className="inline-flex items-center gap-2 rounded-2xl border border-[var(--gold)]/40 bg-gold-gradient px-4 py-3 shadow-gold"
-                  >
-                    <span className="grid size-9 place-items-center rounded-full bg-[var(--forest-deep)]/15 text-[var(--forest-deep)]">
+                  <div className="inline-flex items-center gap-2.5 rounded-2xl border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-4 py-3">
+                    <span className="grid size-9 place-items-center rounded-full bg-[var(--forest-deep)]/10 text-[var(--forest-deep)]">
                       <IndianRupee className="size-4" />
                     </span>
                     <div>
-                      <div className="text-[10px] uppercase tracking-widest text-[var(--forest-deep)]/70">Consultation Fee</div>
-                      <div className="text-lg font-display font-semibold text-[var(--forest-deep)]">₹300</div>
+                      <div className="text-[10px] uppercase tracking-widest text-[var(--forest-deep)]/80 font-medium">Consultation Fee</div>
+                      <div className="text-lg font-display font-bold text-[var(--forest-deep)]">₹300</div>
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
 
-                <motion.div
-                  whileHover={{ x: 2 }}
-                  className="mt-5 flex items-start gap-3 rounded-2xl border border-[var(--gold)]/30 bg-[var(--parchment)]/80 px-4 py-3.5"
-                >
+                {/* Empty Stomach Notice */}
+                <div className="mt-5 flex items-start gap-3 rounded-2xl border border-[var(--gold)]/30 bg-[var(--gold)]/5 px-4 py-3.5">
                   <Sun className="size-5 text-[var(--gold)] mt-0.5 shrink-0" />
-                  <p className="text-sm text-[var(--forest-deep)] leading-relaxed">
-                    <strong>Empty stomach recommended:</strong> Nadi Pariksha is performed on an empty stomach for a more accurate Ayurvedic assessment.
+                  <p className="text-xs md:text-sm text-[var(--forest-deep)] leading-relaxed">
+                    <strong>Empty stomach recommended:</strong> Nadi Pariksha is performed on an empty stomach for clear, accurate Ayurvedic assessment.
                   </p>
-                </motion.div>
+                </div>
 
+                {/* CTA Button */}
                 <div className="mt-7">
                   <BookAppointmentDialog
                     trigger={
-                      <button className="inline-flex items-center gap-2 rounded-full bg-forest-gradient text-[var(--parchment)] font-semibold py-3 px-6 shadow-elegant cursor-pointer hover:opacity-95 transition-opacity text-sm">
+                      <button className="inline-flex items-center gap-2 rounded-full bg-forest-gradient text-[var(--parchment)] font-semibold py-3.5 px-7 text-sm cursor-pointer hover:opacity-95 transition-opacity">
                         Book Nadi Pariksha · ₹300 <ArrowRight className="size-4" />
                       </button>
                     }
@@ -274,49 +323,73 @@ function NadiparikshaPage() {
                 </div>
               </div>
 
-              {/* Interactive info cards */}
-              <div className="grid gap-3 content-center">
-                {[
-                  {
-                    icon: HeartPulse,
-                    title: "Holistic Pulse Reading",
-                    desc: "Maps Vata, Pitta & Kapha to reveal root imbalance.",
-                  },
-                  {
-                    icon: Compass,
-                    title: "Prakriti Guidance",
-                    desc: "Understand your constitution and daily wellness path.",
-                  },
-                  {
-                    icon: Sparkles,
-                    title: "Morning Window",
-                    desc: "Daily slots from 9:00 AM to 11:00 AM for clearer pulse signals.",
-                  },
-                ].map((card, i) => (
-                  <motion.button
-                    key={card.title}
-                    type="button"
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 + i * 0.08, duration: 0.5 }}
-                    whileHover={{ y: -4, borderColor: "rgba(201, 162, 39, 0.55)" }}
-                    className="text-left rounded-2xl border border-[var(--border)] bg-[var(--parchment)] p-4 shadow-sm transition-colors cursor-default"
-                  >
-                    <div className="flex items-start gap-3">
-                      <span className="grid size-10 place-items-center rounded-xl bg-[var(--forest-deep)]/8 text-[var(--forest-deep)] shrink-0">
-                        <card.icon className="size-5" />
-                      </span>
-                      <div>
-                        <div className="font-display text-lg text-[var(--forest-deep)]">{card.title}</div>
-                        <p className="mt-1 text-xs md:text-sm text-[var(--muted-foreground)] leading-relaxed">{card.desc}</p>
-                      </div>
+              {/* Right Column: Non-card, Rich highlighted breakdown */}
+              <div className="lg:pl-8 lg:border-l border-[var(--border)] space-y-6">
+                <div className="border-b border-[var(--border)] pb-4">
+                  <div className="text-xs uppercase tracking-widest text-[var(--copper)] font-bold mb-1">
+                    ◈ The Diagnostic Insight
+                  </div>
+                  <h3 className="font-display text-xl md:text-2xl text-[var(--forest-deep)]">
+                    What Dr. Patil Reads Through Your Pulse
+                  </h3>
+                </div>
+
+                <div className="space-y-5">
+                  {/* Point 1 */}
+                  <div className="flex gap-4 items-start">
+                    <div className="grid size-9 place-items-center rounded-xl bg-[var(--forest-deep)] text-[var(--gold)] shrink-0 font-display text-sm font-bold mt-0.5">
+                      01
                     </div>
-                  </motion.button>
-                ))}
+                    <div>
+                      <h4 className="font-display text-base md:text-lg text-[var(--forest-deep)] font-semibold">
+                        Tridosha Imbalance Mapping
+                      </h4>
+                      <p className="mt-1 text-xs md:text-sm text-[var(--muted-foreground)] leading-relaxed">
+                        Reads exact levels of Vata (movement &amp; nerves), Pitta (metabolism &amp; heat), and Kapha (structure &amp; lubrication) across superficial and deep arterial channels.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Point 2 */}
+                  <div className="flex gap-4 items-start">
+                    <div className="grid size-9 place-items-center rounded-xl bg-[var(--forest-deep)] text-[var(--gold)] shrink-0 font-display text-sm font-bold mt-0.5">
+                      02
+                    </div>
+                    <div>
+                      <h4 className="font-display text-base md:text-lg text-[var(--forest-deep)] font-semibold">
+                        Prakriti &amp; Vikriti Assessment
+                      </h4>
+                      <p className="mt-1 text-xs md:text-sm text-[var(--muted-foreground)] leading-relaxed">
+                        Distinguishes your inborn constitutional blueprint from current lifestyle-induced distortions, pinpointing hidden Ama (metabolic toxins).
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Point 3 */}
+                  <div className="flex gap-4 items-start">
+                    <div className="grid size-9 place-items-center rounded-xl bg-[var(--forest-deep)] text-[var(--gold)] shrink-0 font-display text-sm font-bold mt-0.5">
+                      03
+                    </div>
+                    <div>
+                      <h4 className="font-display text-base md:text-lg text-[var(--forest-deep)] font-semibold">
+                        Organ &amp; Dhatu Health Signals
+                      </h4>
+                      <p className="mt-1 text-xs md:text-sm text-[var(--muted-foreground)] leading-relaxed">
+                        Detects early strain in vital organ systems (liver, kidneys, digestion, circulation) before physical symptoms manifest.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Daily Morning Window Accent */}
+                <div className="pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs text-[var(--forest-deep)] flex-wrap gap-2">
+                  <span className="font-semibold text-[var(--copper)]">Daily Morning Window:</span>
+                  <span className="text-[var(--muted-foreground)]">9:00 AM – 11:00 AM for purest pulse clarity</span>
+                </div>
               </div>
+
             </div>
-          </motion.div>
+          </div>
         </Reveal>
       </section>
 

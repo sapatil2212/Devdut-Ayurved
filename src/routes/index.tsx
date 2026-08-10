@@ -9,12 +9,13 @@ function unwrapCountUp(mod: any): any {
   return mod;
 }
 const CountUp = unwrapCountUp(CountUpModule);
-import { ArrowRight, Sparkles, Leaf, Heart, ShieldCheck, Star, Quote, ArrowDown, ChevronLeft, ChevronRight, Flame, Search, FlaskConical, HandHeart } from "lucide-react";
+import { ArrowRight, Sparkles, Leaf, Heart, ShieldCheck, Star, Quote, ArrowDown, ChevronLeft, ChevronRight, Flame, Search, FlaskConical, HandHeart, IndianRupee } from "lucide-react";
 import { PageShell } from "@/components/site/PageShell";
 import { Reveal } from "@/components/site/Reveal";
 import { Ornament, Mandala } from "@/components/site/Ornament";
 import { Button } from "@/components/ui/button";
 import { BookAppointmentDialog } from "@/components/site/BookAppointmentDialog";
+import { NadiparikshaBookingDialog } from "@/components/site/NadiparikshaBookingDialog";
 import { SITE } from "@/lib/site";
 import { TESTIMONIALS } from "@/lib/testimonials";
 import heroImg from "@/assets/hero-ayurveda.jpg";
@@ -282,8 +283,8 @@ function Philosophy() {
             {[
               { icon: Leaf, label: "Root cause, not symptoms" },
               { icon: Heart, label: "Personalised to your Prakriti" },
-              { icon: ShieldCheck, label: "Zero side effects, ever" },
-              { icon: Sparkles, label: "5,000 years of proof" },
+              { icon: ShieldCheck, label: "Personalised Ayurvedic care with a focus on safety and wellbeing" },
+              { icon: Sparkles, label: "Inspired by centuries of Ayurvedic knowledge" },
             ].map((f) => (
               <div key={f.label} className="flex items-center gap-3 text-sm font-medium">
                 <span className="grid size-9 place-items-center rounded-full bg-[var(--gold)]/15 text-[var(--gold)]"><f.icon className="size-4" /></span>
@@ -334,7 +335,7 @@ function VedicWisdom() {
           {[
             {
               title: "Natural Healing with Side-Benefit",
-              desc: "Powerful treatments without the side effects of conventional medicine.",
+              desc: "Personalised Ayurvedic care with a focus on safety and wellbeing.",
             },
             {
               title: "Holistic Care for Serious Conditions",
@@ -431,7 +432,7 @@ function AncientSecrets() {
 function WhyAyurveda() {
   const cards = [
     { num: "I", title: "Traditional healing", body: "Formulas refined over centuries — proven by generations, not marketing campaigns.", Icon: Flame, sanskrit: "परम्परा" },
-    { num: "II", title: "No side effects", body: "Plant-based, purified and personalised. We work with the body, never against it.", Icon: Leaf, sanskrit: "निर्दोष" },
+    { num: "II", title: "Safety focused", body: "Plant-based, purified and personalised. We work with the body, mindful of your overall wellbeing.", Icon: Leaf, sanskrit: "निर्दोष" },
     { num: "III", title: "Root cause treatment", body: "We look for what is causing the imbalance — not just what is loudest.", Icon: Search, sanskrit: "मूल" },
     { num: "IV", title: "Personalised care", body: "Your protocol is not our protocol. Every plan is designed from your assessment upward.", Icon: Sparkles, sanskrit: "प्रकृति" },
     { num: "V", title: "Natural medicines", body: "Formulated in-house from single herbs to complex Rasayana. Traceable, testable, pure.", Icon: FlaskConical, sanskrit: "औषधि" },
@@ -513,31 +514,106 @@ function NadiparikshaHighlight() {
   return (
     <section className="container-page py-16 md:py-20">
       <Reveal>
-        <div className="relative overflow-hidden rounded-[2rem] border border-[var(--gold)]/35 bg-forest-gradient text-[var(--parchment)] p-8 md:p-12">
+        <motion.div
+          animate={{
+            borderColor: [
+              "rgba(201, 168, 76, 0.35)",
+              "rgba(201, 168, 76, 0.75)",
+              "rgba(201, 168, 76, 0.35)",
+            ],
+            boxShadow: [
+              "0 10px 30px -10px rgba(26, 58, 42, 0.5), 0 0 0 0 rgba(201, 168, 76, 0)",
+              "0 10px 40px -5px rgba(26, 58, 42, 0.6), 0 0 25px 2px rgba(201, 168, 76, 0.25)",
+              "0 10px 30px -10px rgba(26, 58, 42, 0.5), 0 0 0 0 rgba(201, 168, 76, 0)",
+            ],
+          }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          className="relative overflow-hidden rounded-[2rem] border bg-forest-gradient text-[var(--parchment)] p-8 md:p-12"
+        >
           <Mandala className="absolute -right-24 -bottom-24 size-[360px] text-[var(--gold)]/10 pointer-events-none" />
-          <div className="relative z-10 grid gap-8 lg:grid-cols-[1.4fr_1fr] items-center">
+          <div className="relative z-10 grid gap-8 lg:grid-cols-[1.3fr_1fr] items-center">
+            {/* Left side: Heading & Description */}
             <div>
+              {/* Special Offer Badge with pulse dot */}
+              <span className="inline-flex items-center gap-2 rounded-full bg-[var(--gold)] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--forest-deep)] mb-4 shadow-sm">
+                <span className="relative flex size-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--forest-deep)] opacity-75" />
+                  <span className="relative inline-flex rounded-full size-2 bg-[var(--forest-deep)]" />
+                </span>
+                Special Offer
+              </span>
               <h2 className="font-display text-3xl md:text-5xl leading-tight text-[var(--parchment)]">
-                Free Nadipariksha every month on the 1st &amp; 15th
+                Free Nadi Pariksha
               </h2>
-              <p className="mt-4 text-[var(--parchment)]/80 max-w-2xl leading-relaxed">
-                Reserve your dedicated pulse-diagnosis slot with Dr. Ganeshkumar Patil (BAMS, M.D.(A.M.), DNYS, M.D. (EH)). Ideal for first consultations, health assessments, and treatment progress reviews.
+              <p className="mt-3 text-[var(--parchment)]/80 max-w-xl leading-relaxed text-sm md:text-base">
+                Reserve your dedicated pulse-diagnosis slot with Dr. Ganeshkumar Patil (BAMS, M.D.(A.M.), DNYS, M.D.&nbsp;(EH)) — available every month on the{" "}
+                <strong className="text-[var(--gold)]">1st &amp; 15th</strong>.
               </p>
+              <div className="mt-6 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-[var(--parchment)]/75">
+                <span className="flex items-center gap-2">
+                  <span className="size-1.5 rounded-full bg-[var(--gold)]" /> Root Cause Diagnosis
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="size-1.5 rounded-full bg-[var(--gold)]" /> Dosha &amp; Prakriti Mapping
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="size-1.5 rounded-full bg-[var(--gold)]" /> Personalised Treatment Plan
+                </span>
+              </div>
             </div>
-            <div className="flex flex-wrap gap-3 lg:justify-end">
-              <BookAppointmentDialog
-                trigger={
-                  <Button className="rounded-full bg-gold-gradient text-[var(--forest-deep)] h-12 px-6 cursor-pointer">
-                    Book Nadipariksha Session <ArrowRight className="ml-2 size-4" />
-                  </Button>
-                }
-              />
-              <Button asChild variant="outline" className="rounded-full border-white/25 bg-white/5 text-[var(--parchment)] hover:bg-white/10 h-12 px-6">
-                <Link to="/nadipariksha">Learn more</Link>
-              </Button>
+
+            {/* Right side: Registration Fee & Action Buttons */}
+            <div className="flex flex-col gap-4 w-full max-w-md lg:ml-auto">
+              {/* Pulsing Fee card */}
+              <motion.div
+                animate={{
+                  scale: [1, 1.02, 1],
+                  boxShadow: [
+                    "0 0 0 0 rgba(201, 168, 76, 0.4)",
+                    "0 0 0 10px rgba(201, 168, 76, 0)",
+                    "0 0 0 0 rgba(201, 168, 76, 0)",
+                  ],
+                }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                className="rounded-2xl border border-[var(--gold)]/50 bg-[var(--gold)]/15 backdrop-blur-sm p-5 md:p-6"
+              >
+                <div className="flex items-center justify-between gap-2 mb-1">
+                  <div className="text-[var(--gold)] text-xs uppercase tracking-widest font-bold flex items-center gap-1.5">
+                    <Sparkles className="size-3 text-[var(--gold)]" /> Registration Fee
+                  </div>
+                  <span className="relative flex size-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--gold)] opacity-75" />
+                    <span className="relative inline-flex rounded-full size-2 bg-[var(--gold)]" />
+                  </span>
+                </div>
+                <div className="font-display text-3xl md:text-4xl font-bold text-[var(--gold)]">
+                  ₹50
+                </div>
+                <p className="text-[var(--parchment)]/80 text-xs md:text-sm mt-2 leading-relaxed">
+                  Register now and visit us for your Free Nadi Pariksha.
+                </p>
+              </motion.div>
+
+              {/* Action buttons below fee card */}
+              <div className="flex flex-col sm:flex-row gap-3 w-full">
+                <NadiparikshaBookingDialog
+                  trigger={
+                    <Button className="flex-1 rounded-full bg-gold-gradient text-[var(--forest-deep)] h-12 px-6 font-semibold cursor-pointer text-sm shadow-gold hover:opacity-95 transition-opacity">
+                      Register for Free Nadi Pariksha <ArrowRight className="ml-1.5 size-4" />
+                    </Button>
+                  }
+                />
+                <Button
+                  asChild
+                  variant="outline"
+                  className="rounded-full border-white/25 bg-white/5 text-[var(--parchment)] hover:bg-white/10 h-12 px-6 shrink-0"
+                >
+                  <Link to="/nadipariksha">Learn more</Link>
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </Reveal>
     </section>
   );

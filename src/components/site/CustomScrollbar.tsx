@@ -1,35 +1,51 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 /**
- * Custom right-edge scrollbar with drag + click-to-jump and smooth scroll.
- * Replaces the native scrollbar on desktop (lg+).
+ * Sleek, interactive, compact side scroller with percentage tooltip,
+ * smooth click-to-jump, and refined grab-and-drag.
  */
 export function CustomScrollbar() {
   const trackRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
   const dragOffset = useRef(0);
+  const idleTimer = useRef<number | null>(null);
+
   const [metrics, setMetrics] = useState({
     visible: false,
-    thumbH: 48,
+    thumbH: 36,
     thumbTop: 0,
     progress: 0,
   });
   const [active, setActive] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [isIdle, setIsIdle] = useState(false);
+
+  const wakeUp = useCallback(() => {
+    setIsIdle(false);
+    if (idleTimer.current) window.clearTimeout(idleTimer.current);
+    idleTimer.current = window.setTimeout(() => {
+      if (!dragging.current) {
+        setIsIdle(true);
+      }
+    }, 2200);
+  }, []);
 
   const update = useCallback(() => {
     const doc = document.documentElement;
     const scrollable = doc.scrollHeight - window.innerHeight;
-    if (scrollable <= 8) {
+    if (scrollable <= 20) {
       setMetrics((m) => (m.visible ? { ...m, visible: false, progress: 0 } : m));
       return;
     }
 
-    const trackH = trackRef.current?.clientHeight ?? window.innerHeight * 0.7;
+    const track = trackRef.current;
+    const trackH = track?.clientHeight ?? window.innerHeight * 0.6;
     const ratio = window.innerHeight / doc.scrollHeight;
-    const thumbH = Math.max(40, Math.min(trackH * ratio, trackH * 0.45));
+    const thumbH = Math.max(28, Math.min(trackH * ratio, trackH * 0.35));
     const maxThumbTop = Math.max(1, trackH - thumbH);
     const progress = window.scrollY / scrollable;
-    const thumbTop = progress * maxThumbTop;
+    const thumbTop = Math.max(0, Math.min(maxThumbTop, progress * maxThumbTop));
 
     setMetrics({
       visible: true,
@@ -43,6 +59,7 @@ export function CustomScrollbar() {
     update();
     let ticking = false;
     const onScroll = () => {
+      wakeUp();
       if (dragging.current) return;
       if (ticking) return;
       ticking = true;
@@ -58,12 +75,15 @@ export function CustomScrollbar() {
     ro.observe(document.documentElement);
     if (document.body) ro.observe(document.body);
 
+    wakeUp();
+
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", update);
       ro.disconnect();
+      if (idleTimer.current) window.clearTimeout(idleTimer.current);
     };
-  }, [update]);
+  }, [update, wakeUp]);
 
   const scrollToThumbY = useCallback(
     (clientY: number, smooth: boolean) => {
@@ -101,6 +121,7 @@ export function CustomScrollbar() {
     e.stopPropagation();
     dragging.current = true;
     setActive(true);
+    wakeUp();
     const thumb = e.currentTarget.getBoundingClientRect();
     dragOffset.current = e.clientY - thumb.top;
 
@@ -118,6 +139,7 @@ export function CustomScrollbar() {
       html.style.scrollBehavior = prev;
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
+      wakeUp();
       update();
     };
     window.addEventListener("pointermove", onMove);
@@ -126,48 +148,81 @@ export function CustomScrollbar() {
 
   const onTrackPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     if ((e.target as HTMLElement).closest("[data-scrollbar-thumb]")) return;
+    wakeUp();
     dragOffset.current = metrics.thumbH / 2;
     scrollToThumbY(e.clientY, true);
   };
 
+  if (!metrics.visible) return null;
+
+  const percent = Math.round(metrics.progress * 100);
+
   return (
-    <div
-      className={`pointer-events-none fixed right-0 top-0 z-[60] hidden h-dvh w-4 items-center justify-center py-20 lg:flex ${
-        metrics.visible ? "opacity-100" : "opacity-0"
-      }`}
+    <aside
+      aria-label="Page scroll indicator"
+      className="pointer-events-none fixed right-2 top-0 z-[60] hidden h-dvh items-center justify-center py-24 lg:flex"
     >
       <div
-        ref={trackRef}
-        onPointerDown={onTrackPointerDown}
-        className={`pointer-events-auto relative h-full w-1.5 cursor-pointer rounded-full transition-colors duration-300 ${
-          active
-            ? "bg-[var(--forest-deep)]/20"
-            : "bg-[var(--forest-deep)]/10 hover:bg-[var(--forest-deep)]/15"
+        onMouseEnter={() => {
+          setHovered(true);
+          wakeUp();
+        }}
+        onMouseLeave={() => setHovered(false)}
+        className={`pointer-events-auto relative flex items-center justify-center transition-all duration-300 ${
+          isIdle && !hovered && !active ? "opacity-35 hover:opacity-100" : "opacity-100"
         }`}
-        role="scrollbar"
-        aria-controls="main"
-        aria-orientation="vertical"
-        aria-valuenow={Math.round(metrics.progress * 100)}
-        aria-valuemin={0}
-        aria-valuemax={100}
       >
-        <button
-          type="button"
-          data-scrollbar-thumb
-          aria-label="Drag to scroll"
-          onPointerDown={onThumbPointerDown}
-          className={`absolute left-1/2 w-3 -translate-x-1/2 cursor-grab rounded-full border border-[var(--gold)]/40 bg-[var(--forest-deep)] shadow-[0_2px_10px_rgba(26,58,42,0.25)] transition-[width,background-color,box-shadow] duration-200 active:cursor-grabbing ${
-            active
-              ? "w-3.5 bg-[var(--gold)] border-[var(--gold)] shadow-gold"
-              : "hover:w-3.5 hover:bg-[var(--forest)]"
+        {/* Track */}
+        <div
+          ref={trackRef}
+          onPointerDown={onTrackPointerDown}
+          className={`relative h-[55vh] min-h-[220px] max-h-[480px] cursor-pointer rounded-full transition-all duration-200 ${
+            hovered || active
+              ? "w-2.5 bg-[var(--forest-deep)]/20 shadow-sm"
+              : "w-1 bg-[var(--forest-deep)]/15"
           }`}
-          style={{
-            height: metrics.thumbH,
-            transform: `translate(-50%, 0)`,
-            top: metrics.thumbTop,
-          }}
-        />
+          role="scrollbar"
+          aria-controls="main"
+          aria-orientation="vertical"
+          aria-valuenow={percent}
+          aria-valuemin={0}
+          aria-valuemax={100}
+        >
+          {/* Thumb */}
+          <button
+            type="button"
+            data-scrollbar-thumb
+            aria-label={`Scroll to ${percent} percent`}
+            onPointerDown={onThumbPointerDown}
+            className={`group absolute left-1/2 -translate-x-1/2 rounded-full cursor-grab active:cursor-grabbing transition-[width,background-color,box-shadow,border-color] duration-150 ${
+              active
+                ? "w-3.5 bg-[var(--gold)] shadow-gold border border-[var(--gold)]"
+                : hovered
+                  ? "w-3 bg-gradient-to-b from-[var(--gold)] to-[var(--copper)] shadow-sm border border-[var(--gold)]/60"
+                  : "w-1.5 bg-[var(--forest-deep)] hover:bg-[var(--gold)]"
+            }`}
+            style={{
+              height: metrics.thumbH,
+              top: metrics.thumbTop,
+            }}
+          >
+            {/* Interactive percentage tooltip on hover/drag */}
+            <AnimatePresence>
+              {(hovered || active) && (
+                <motion.span
+                  initial={{ opacity: 0, x: 8, scale: 0.85 }}
+                  animate={{ opacity: 1, x: 0, scale: 1 }}
+                  exit={{ opacity: 0, x: 6, scale: 0.85 }}
+                  transition={{ duration: 0.15 }}
+                  className="pointer-events-none absolute right-full mr-2.5 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-full bg-[var(--forest-deep)] px-2 py-0.5 text-[10px] font-bold text-[var(--gold)] shadow-md border border-[var(--gold)]/30 font-mono tracking-tight"
+                >
+                  {percent}%
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
+        </div>
       </div>
-    </div>
+    </aside>
   );
 }

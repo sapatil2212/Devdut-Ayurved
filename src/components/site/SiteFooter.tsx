@@ -27,18 +27,18 @@ export function SiteFooter() {
       <div className="relative container-page pt-24 pb-10">
         <div className="grid gap-16 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <Link to="/" className="inline-block mb-6">
+            <Link to="/" className="inline-block mb-3">
               <img
                 src={logoLight}
                 alt="Devdut Ayurved Clinic"
-                className="h-12 md:h-14 w-auto object-contain"
+                className="h-10 md:h-12 w-auto object-contain"
               />
             </Link>
-            <div className="text-[var(--gold)] font-sanskrit text-xl mb-3">सर्वे भवन्तु सुखिनः</div>
-            <h3 className="font-display text-3xl md:text-4xl text-[var(--parchment)] max-w-md leading-tight">
+            <div className="text-[var(--gold)] font-sanskrit text-base md:text-lg mb-1">सर्वे भवन्तु सुखिनः</div>
+            <h3 className="font-display text-2xl md:text-3xl text-[var(--parchment)] max-w-md leading-snug">
               Let ancient wisdom care for your modern life.
             </h3>
-            <p className="mt-6 text-[var(--parchment)]/70 max-w-md">
+            <p className="mt-2.5 text-xs md:text-sm text-[var(--parchment)]/75 max-w-md leading-relaxed">
               {SITE.description}
             </p>
           </div>
@@ -80,6 +80,17 @@ export function SiteFooter() {
                 </a>
               </li>
               <li className="flex gap-3"><Mail className="size-4 mt-0.5 text-[var(--gold)] shrink-0" /><a href={`mailto:${SITE.email}`} className="hover:text-[var(--gold)] transition-colors">{SITE.email}</a></li>
+              <li>
+                <a
+                  href={SITE.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-2 rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 text-[var(--gold)] px-4 py-2 text-xs font-semibold hover:bg-[var(--gold)]/20 transition-colors"
+                >
+                  <MapPin className="size-3.5" />
+                  Open in Google Maps
+                </a>
+              </li>
             </ul>
           </div>
         </div>

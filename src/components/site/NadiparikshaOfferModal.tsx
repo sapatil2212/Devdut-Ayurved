@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/compone
 import { Button } from "@/components/ui/button";
 import { NadiparikshaBookingDialog } from "./NadiparikshaBookingDialog";
 import { SITE } from "@/lib/site";
-import nadiCardImg from "@/assets/treatments/nadipariksha-card.png";
+import nadiCardImg from "@/assets/nadipariksha/2.png";
 
 const STORAGE_KEY = "devdut-nadipariksha-offer-seen";
 

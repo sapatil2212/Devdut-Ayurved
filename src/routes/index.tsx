@@ -19,7 +19,7 @@ import { NadiparikshaBookingDialog } from "@/components/site/NadiparikshaBooking
 import { SITE } from "@/lib/site";
 import { TESTIMONIALS } from "@/lib/testimonials";
 import heroImg from "@/assets/hero-ayurveda.jpg";
-import doctorImg from "@/assets/doctor.jpg";
+import doctorImg from "@/assets/doctor-1.png";
 import treatmentsImg from "@/assets/treatments.jpg";
 import therapyImg from "@/assets/therapy.jpg";
 import templeImg from "@/assets/temple.jpg";
@@ -34,7 +34,7 @@ import humanHealthImg from "@/assets/treatments/human-Health.png";
 import jointImg from "@/assets/treatments/joint.png";
 import skinHairImg from "@/assets/treatments/skin-hair.png";
 import digestiveImg from "@/assets/treatments/digestive.png";
-import nadiCardImg from "@/assets/treatments/nadipariksha-card.png";
+import nadiCardImg from "@/assets/nadipariksha/2.png";
 import kidneyCareImg from "@/assets/treatments/kidney-care.png";
 import wellnessGlowImg from "@/assets/wellness-glow.png";
 
@@ -787,13 +787,22 @@ function DoctorFeature() {
       <Mandala className="absolute -left-40 top-0 size-[500px] text-[var(--gold)]/10" />
       <div className="container-page py-32 grid gap-16 lg:grid-cols-[1fr_1.2fr] items-center relative">
         <Reveal>
-          <div className="relative">
-            <img src={doctorImg} alt="Dr. Ganeshkumar Patil, Ayurvedic physician" width={1024} height={1280} loading="lazy" className="rounded-3xl shadow-elegant" />
-            <div className="absolute -bottom-6 -right-6 rounded-2xl bg-[var(--parchment)] text-[var(--forest-deep)] p-5 shadow-elegant">
-              <div className="text-xs uppercase tracking-widest text-[var(--gold)] mb-1">Google reviews</div>
+          <div className="relative group">
+            <div className="relative overflow-hidden rounded-3xl border border-[var(--gold)]/35 shadow-2xl">
+              <img
+                src={doctorImg}
+                alt="Dr. Ganeshkumar Patil, Ayurvedic physician"
+                width={1024}
+                height={1280}
+                loading="lazy"
+                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div className="absolute -bottom-6 -right-6 rounded-2xl bg-[var(--parchment)] text-[var(--forest-deep)] p-5 shadow-elegant border border-[var(--gold)]/30 z-20">
+              <div className="text-xs uppercase tracking-widest text-[var(--gold)] mb-1 font-bold">Google reviews</div>
               <div className="flex items-center gap-2">
                 <div className="flex text-[var(--gold)]">{[...Array(5)].map((_, i) => <Star key={i} className="size-4 fill-current" />)}</div>
-                <span className="font-display text-xl">4.9</span>
+                <span className="font-display text-xl font-bold">4.9</span>
               </div>
               <div className="text-xs text-[var(--muted-foreground)]">from 620+ patients</div>
             </div>

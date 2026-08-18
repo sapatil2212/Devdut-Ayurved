@@ -1,5 +1,5 @@
 import { Reveal } from "./Reveal";
-import doctorImg from "@/assets/doctor.jpg";
+import doctorImg from "@/assets/nadipariksha/2.png";
 import therapyImg from "@/assets/therapy.jpg";
 import treatmentsImg from "@/assets/treatments.jpg";
 import templeImg from "@/assets/temple.jpg";

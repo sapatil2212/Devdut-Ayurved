@@ -8,7 +8,7 @@ import { BookAppointmentDialog } from "@/components/site/BookAppointmentDialog";
 import greenEarthImg from "@/assets/green-earth.png";
 
 import heroImg from "@/assets/hero-ayurveda.jpg";
-import doctorImg from "@/assets/doctor.jpg";
+import doctorImg from "@/assets/doctor-2.png";
 import treatmentsImg from "@/assets/treatments.jpg";
 import therapyImg from "@/assets/therapy.jpg";
 import templeImg from "@/assets/temple.jpg";
@@ -20,7 +20,7 @@ import jointImg from "@/assets/treatments/joint.png";
 import skinHairImg from "@/assets/treatments/skin-hair.png";
 import lifestyleChronicImg from "@/assets/treatments/Lifestyle-Chronic.png";
 import humanHealthImg from "@/assets/treatments/human-Health.png";
-import nadiCardImg from "@/assets/treatments/nadipariksha-card.png";
+import nadiCardImg from "@/assets/nadipariksha/2.png";
 import kidneyCareImg from "@/assets/treatments/kidney-care.png";
 import wellnessGlowImg from "@/assets/wellness-glow.png";
 

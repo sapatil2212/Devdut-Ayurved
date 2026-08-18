@@ -12,7 +12,7 @@ import therapyImg from "@/assets/therapy.jpg";
 import panchkarmaHeroImg from "@/assets/panchkarma-hero.png";
 import treatmentsImg from "@/assets/treatments.jpg";
 import templeImg from "@/assets/temple.jpg";
-import doctorImg from "@/assets/doctor.jpg";
+import doctorImg from "@/assets/doctor-2.png";
 import whyChooseUsImg from "@/assets/panchkarma/why-choose-us.png";
 import nasyaImg from "@/assets/panchkarma/nasya.png";
 import raktmokshanImg from "@/assets/panchkarma/raktmokshan.png";

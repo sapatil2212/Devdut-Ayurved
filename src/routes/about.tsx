@@ -4,6 +4,8 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 import aboutHeroImg from "@/assets/about-hero.png";
 import aboutPaperImg from "@/assets/about-paper.png";
+import doctorImg from "@/assets/doctor-2.png";
+import { Mandala } from "@/components/site/Ornament";
 import homeAboutImg from "@/assets/home-about.png";
 import treatmentsImg from "@/assets/treatments.jpg";
 import { FaqSection } from "@/components/site/FaqSection";
@@ -38,20 +40,32 @@ function AboutPage() {
 
       <section className="container-page pt-24 pb-8 grid gap-16 lg:grid-cols-2 items-center">
         <Reveal>
-          <div className="max-w-md mx-auto">
-            <img src={homeAboutImg} alt="Ayurvedic Healthcare & Consultation" width={1600} height={900} loading="lazy" className="rounded-3xl shadow-md border border-[var(--border)]/40 object-cover aspect-[4/5]" />
+          <div className="relative flex justify-center items-end rounded-[2.5rem] bg-gradient-to-b from-[#fbf7ee] via-[#f5edd9] to-[#ebdcc4] border border-[var(--gold)]/40 px-6 pt-10 pb-0 shadow-lg overflow-hidden max-w-lg mx-auto group h-[480px] md:h-[550px]">
+            {/* Faint ambient gold background glow */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[var(--gold)]/20 via-transparent to-transparent pointer-events-none" />
+            <Mandala className="absolute -left-20 -top-20 size-[320px] text-[var(--gold)]/25 pointer-events-none" />
+            <Mandala className="absolute -right-20 -bottom-20 size-[260px] text-[var(--gold)]/15 pointer-events-none" />
+
+            <img
+              src={doctorImg}
+              alt="Dr. Ganeshkumar Patil, Ayurvedic Physician"
+              width={1024}
+              height={1280}
+              loading="lazy"
+              className="relative z-20 w-full max-w-[440px] md:max-w-[480px] h-full object-contain object-bottom block transition-transform duration-500 group-hover:scale-[1.03]"
+            />
           </div>
         </Reveal>
         <Reveal delay={0.1}>
           <div className="eyebrow mb-4">Ayurvedic Practitioner in Pune.</div>
           <h2 className="font-display text-4xl md:text-5xl leading-tight">Meet Our Ayurvedic Practitioner</h2>
-          <p className="mt-6 text-lg text-[var(--muted-foreground)]">
+          <p className="mt-5 text-sm md:text-base text-[var(--muted-foreground)] leading-relaxed">
             Dr. Ganeshkumar Patil (BAMS, M.D.(A.M.), DNYS, M.D. (EH)) is a dedicated Ayurvedic physician committed to providing authentic, patient-centered healthcare through the timeless principles of Ayurveda. With expertise in classical Ayurvedic treatments, Panchakarma therapies, and Nadipariksha (pulse diagnosis), he focuses on restoring health naturally by addressing the root cause of disease.
           </p>
-          <p className="mt-4 text-lg text-[var(--muted-foreground)]">
+          <p className="mt-3.5 text-sm md:text-base text-[var(--muted-foreground)] leading-relaxed">
             Based in Pune, Maharashtra, Dr. Patil offers personalized Ayurvedic consultations, customized herbal treatments, Panchakarma therapies, and diet &amp; lifestyle guidance tailored to each individual's unique body constitution (Prakriti) and health needs.
           </p>
-          <p className="mt-4 text-lg text-[var(--muted-foreground)]">
+          <p className="mt-3.5 text-sm md:text-base text-[var(--muted-foreground)] leading-relaxed">
             Driven by a vision of holistic healing, his approach combines traditional Ayurvedic wisdom with compassionate care to help patients achieve lasting wellness, improved quality of life, and a healthier future.
           </p>
 
@@ -59,8 +73,6 @@ function AboutPage() {
             {[
               { t: "Qualification", d: "BAMS, M.D.(A.M.), DNYS, M.D. (EH)" },
               { t: "Experience", d: "26+ years of clinical practice" },
-              { t: "Specialty", d: "Nadipariksha & Panchakarma" },
-              { t: "Focus", d: "Root-cause, Prakriti-based care" },
             ].map((q) => (
               <div key={q.t} className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
                 <div className="text-[10px] uppercase tracking-widest text-[var(--muted-foreground)]">{q.t}</div>

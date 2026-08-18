@@ -26,9 +26,11 @@ import { NadiparikshaBookingDialog } from "@/components/site/NadiparikshaBooking
 import { SITE } from "@/lib/site";
 
 import { motion } from "framer-motion";
-import pulseImg from "@/assets/nadipariksha-pulse.png";
-import therapyImg from "@/assets/therapy.jpg";
-import whyChooseUsImg from "@/assets/panchkarma/why-choose-us.png";
+import nadi1 from "@/assets/nadipariksha/1.png";
+import nadi2 from "@/assets/nadipariksha/2.png";
+import nadi3 from "@/assets/nadipariksha/3.png";
+import nadi4 from "@/assets/nadipariksha/4.png";
+import nadi5 from "@/assets/nadipariksha/5.png";
 import greenEarthImg from "@/assets/green-earth.png";
 
 export const Route = createFileRoute("/nadipariksha")({
@@ -169,7 +171,7 @@ function NadiparikshaPage() {
         sanskrit="नाडी परीक्षा"
         title="Nadipariksha — Pulse Diagnosis That Listens to Your Body."
         intro="The ancient Ayurvedic art of reading radial pulse waves to uncover your true constitution, root cause of health issues, and dosha balance. Precise. Personal. Practiced over 26+ years."
-        image={pulseImg}
+        image={nadi2}
       />
 
       {/* Monthly Promo Banner */}
@@ -428,7 +430,7 @@ function NadiparikshaPage() {
               <div className="absolute -inset-3 rounded-[36px] border border-[var(--gold)]/30 pointer-events-none scale-[1.01] hidden sm:block" />
               <div className="relative overflow-hidden rounded-3xl border border-[var(--border)] shadow-elegant group h-[480px] md:h-[560px]">
                 <img
-                  src={pulseImg}
+                  src={nadi1}
                   alt="Authentic Ayurvedic Nadipariksha pulse diagnosis session at Devdut Ayurved Clinic"
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -506,7 +508,7 @@ function NadiparikshaPage() {
           {/* Left: Image Block */}
           <div className="relative min-h-[360px] lg:min-h-full w-full">
             <img
-              src={pulseImg}
+              src={nadi5}
               alt="Ayurvedic doctor conducting consultation and pulse diagnosis"
               loading="lazy"
               className="absolute inset-0 w-full h-full object-cover"
@@ -603,6 +605,49 @@ function NadiparikshaPage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Authentic Clinic Consultation Gallery */}
+      <section className="container-page py-20 border-t border-[var(--border)]/40">
+        <Reveal>
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <div className="eyebrow mb-2">Authentic Clinical Practice</div>
+            <h2 className="font-display text-3xl md:text-5xl text-[var(--forest-deep)]">
+              Nadipariksha at Devdut Ayurved Clinic
+            </h2>
+            <p className="mt-4 text-sm md:text-base text-[var(--muted-foreground)] leading-relaxed">
+              Real consultation moments with Dr. Ganeshkumar Patil (BAMS, M.D.(A.M.), DNYS) conducting classical pulse diagnosis at Devdut Ayurved Clinic.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { img: nadi1, title: "Pulse Palpation Session", desc: "Dr. Patil reading radial artery pulse waves to assess Vata, Pitta, and Kapha." },
+              { img: nadi2, title: "In-Depth Consultation", desc: "Comprehensive patient evaluation with clinic logo backdrop at Devdut Ayurved." },
+              { img: nadi3, title: "Dosha & Organ Reading", desc: "Determining native constitution (Prakriti) vs current imbalance (Vikriti)." },
+              { img: nadi4, title: "Personalised Guidance", desc: "Explaining Ayurvedic diagnostic insights and prescribing herbal formulations." },
+              { img: nadi5, title: "Diagnostic Pulse Check", desc: "Fine-tuned radial pulse palpation for early disease prevention." },
+            ].map((item, idx) => (
+              <Reveal key={idx} delay={idx * 0.08}>
+                <div className="group relative overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)] shadow-subtle hover-lift">
+                  <div className="aspect-[4/3] w-full overflow-hidden relative">
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--forest-deep)]/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-display text-lg font-semibold text-[var(--forest-deep)]">{item.title}</h3>
+                    <p className="mt-1 text-xs text-[var(--muted-foreground)] leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </Reveal>
       </section>
 
       {/* FAQs Section */}

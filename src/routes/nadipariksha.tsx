@@ -28,8 +28,6 @@ import { SITE } from "@/lib/site";
 import { motion } from "framer-motion";
 import nadi1 from "@/assets/nadipariksha/1.png";
 import nadi2 from "@/assets/nadipariksha/2.png";
-import nadi3 from "@/assets/nadipariksha/3.png";
-import nadi4 from "@/assets/nadipariksha/4.png";
 import nadi5 from "@/assets/nadipariksha/5.png";
 import greenEarthImg from "@/assets/green-earth.png";
 
@@ -607,7 +605,7 @@ function NadiparikshaPage() {
         </div>
       </section>
 
-      {/* Authentic Clinic Consultation Gallery */}
+      {/* Authentic Clinic Consultation Framework */}
       <section className="container-page py-20 border-t border-[var(--border)]/40">
         <Reveal>
           <div className="text-center max-w-3xl mx-auto mb-14">
@@ -616,32 +614,84 @@ function NadiparikshaPage() {
               Nadipariksha at Devdut Ayurved Clinic
             </h2>
             <p className="mt-4 text-sm md:text-base text-[var(--muted-foreground)] leading-relaxed">
-              Real consultation moments with Dr. Ganeshkumar Patil (BAMS, M.D.(A.M.), DNYS) conducting classical pulse diagnosis at Devdut Ayurved Clinic.
+              Every consultation with Dr. Ganeshkumar Patil (BAMS, M.D.(A.M.), DNYS) follows time-tested classical diagnostic protocols designed to identify root metabolic and doshic dysfunctions.
             </p>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { img: nadi1, title: "Pulse Palpation Session", desc: "Dr. Patil reading radial artery pulse waves to assess Vata, Pitta, and Kapha." },
-              { img: nadi2, title: "In-Depth Consultation", desc: "Comprehensive patient evaluation with clinic logo backdrop at Devdut Ayurved." },
-              { img: nadi3, title: "Dosha & Organ Reading", desc: "Determining native constitution (Prakriti) vs current imbalance (Vikriti)." },
-              { img: nadi4, title: "Personalised Guidance", desc: "Explaining Ayurvedic diagnostic insights and prescribing herbal formulations." },
-              { img: nadi5, title: "Diagnostic Pulse Check", desc: "Fine-tuned radial pulse palpation for early disease prevention." },
+              {
+                step: "01",
+                icon: HeartPulse,
+                badge: "Classical Palpation",
+                title: "Tactile Pulse Palpation",
+                desc: "Precise reading of radial artery wave dynamics under three pressure levels to evaluate Vata, Pitta, and Kapha states.",
+              },
+              {
+                step: "02",
+                icon: Compass,
+                badge: "Constitutional Mapping",
+                title: "Prakriti & Vikriti Analysis",
+                desc: "Distinguishing your inherent baseline constitution (Prakriti) from active biological and seasonal imbalances (Vikriti).",
+              },
+              {
+                step: "03",
+                icon: ShieldCheck,
+                badge: "Subtle Diagnostics",
+                title: "Dhatu & Organ Assessment",
+                desc: "Evaluating the nourishment of deep tissues (Dhatus), cellular vitality (Ojas), and metabolic toxin accumulation (Ama).",
+              },
+              {
+                step: "04",
+                icon: Sparkles,
+                badge: "Early Detection",
+                title: "Sub-Clinical Pathology Reading",
+                desc: "Detecting energetic and functional disruptions long before conventional tests reveal structural tissue changes.",
+              },
+              {
+                step: "05",
+                icon: BookOpen,
+                badge: "Holistic Prescription",
+                title: "Personalised Treatment Plan",
+                desc: "Formulating customized classical herbal remedies, Panchakarma detox schedules, and tailored dietary regimens.",
+              },
+              {
+                step: "06",
+                icon: UserCheck,
+                badge: "Progress Tracking",
+                title: "Ongoing Pulse Monitoring",
+                desc: "Re-evaluating pulse wave patterns across follow-up visits to objectively measure internal healing and recovery.",
+              },
             ].map((item, idx) => (
-              <Reveal key={idx} delay={idx * 0.08}>
-                <div className="group relative overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)] shadow-subtle hover-lift">
-                  <div className="aspect-[4/3] w-full overflow-hidden relative">
-                    <img
-                      src={item.img}
-                      alt={item.title}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--forest-deep)]/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <Reveal key={idx} delay={idx * 0.06}>
+                <div className="group relative h-full rounded-3xl border border-[var(--border)] bg-[var(--card)] p-7 shadow-subtle hover-lift hover:border-[var(--gold)]/50 transition-all duration-300 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between gap-3 mb-5">
+                      <div className="size-12 rounded-2xl bg-[var(--gold)]/10 text-[var(--forest-deep)] border border-[var(--gold)]/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-[var(--gold)]/20 transition-all duration-300">
+                        <item.icon className="size-6 text-[var(--copper)]" />
+                      </div>
+                      <span className="font-display text-xs tracking-wider uppercase px-3 py-1 rounded-full bg-[var(--parchment)] border border-[var(--border)] text-[var(--muted-foreground)] font-semibold">
+                        Step {item.step}
+                      </span>
+                    </div>
+
+                    <div className="mb-2">
+                      <span className="text-[11px] uppercase tracking-wider font-semibold text-[var(--gold)]">
+                        {item.badge}
+                      </span>
+                      <h3 className="font-display text-xl font-semibold text-[var(--forest-deep)] mt-0.5 group-hover:text-[var(--copper)] transition-colors">
+                        {item.title}
+                      </h3>
+                    </div>
+
+                    <p className="mt-3 text-xs md:text-sm text-[var(--muted-foreground)] leading-relaxed">
+                      {item.desc}
+                    </p>
                   </div>
-                  <div className="p-6">
-                    <h3 className="font-display text-lg font-semibold text-[var(--forest-deep)]">{item.title}</h3>
-                    <p className="mt-1 text-xs text-[var(--muted-foreground)] leading-relaxed">{item.desc}</p>
+
+                  <div className="mt-6 pt-4 border-t border-[var(--border)]/50 flex items-center gap-2 text-xs font-medium text-[var(--forest-deep)] opacity-80 group-hover:opacity-100">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)]" />
+                    <span>Clinical Standard Protocol</span>
                   </div>
                 </div>
               </Reveal>

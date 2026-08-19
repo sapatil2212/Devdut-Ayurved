@@ -1,18 +1,18 @@
 import { Reveal } from "./Reveal";
-import doctorImg from "@/assets/nadipariksha/2.png";
 import therapyImg from "@/assets/therapy.jpg";
 import treatmentsImg from "@/assets/treatments.jpg";
 import templeImg from "@/assets/temple.jpg";
 import heroImg from "@/assets/hero-ayurveda.jpg";
+import panchkarmaHeroImg from "@/assets/panchkarma-hero.png";
+import aboutHeroImg from "@/assets/about-hero.png";
 
 const gallery = [
   { src: therapyImg, alt: "Ayurvedic therapy in session" },
-  { src: doctorImg, alt: "Consulting patients" },
+  { src: panchkarmaHeroImg, alt: "Authentic Panchakarma therapy" },
   { src: templeImg, alt: "Traditional healing sanctuary" },
-  { src: treatmentsImg, alt: "Herbal treatments" },
-  { src: heroImg, alt: "Panchakarma ritual" },
-  { src: therapyImg, alt: "Ayurvedic therapy in session" },
-  { src: doctorImg, alt: "Consulting patients" },
+  { src: treatmentsImg, alt: "Herbal treatments and oils" },
+  { src: heroImg, alt: "Classical Panchakarma ritual" },
+  { src: aboutHeroImg, alt: "Devdut Ayurvedic healing space" },
 ];
 
 export function TrustedIcons() {

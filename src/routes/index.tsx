@@ -32,9 +32,12 @@ import childImg from "@/assets/treatments/child.png";
 import lifestyleChronicImg from "@/assets/treatments/Lifestyle-Chronic.png";
 import humanHealthImg from "@/assets/treatments/human-Health.png";
 import jointImg from "@/assets/treatments/joint.png";
+import paralysisImg from "@/assets/treatments/paralysis.jpg";
 import skinHairImg from "@/assets/treatments/skin-hair.png";
 import digestiveImg from "@/assets/treatments/digestive.png";
-import nadiCardImg from "@/assets/nadipariksha/2.png";
+import nadiCardImg from "@/assets/treatments/nadipariksha.jpg";
+import mentalHealthImg from "@/assets/treatments/mental-health.jpg";
+import preventiveCareImg from "@/assets/treatments/preventive-care.jpg";
 import kidneyCareImg from "@/assets/treatments/kidney-care.png";
 import wellnessGlowImg from "@/assets/wellness-glow.png";
 
@@ -655,7 +658,7 @@ function TreatmentsShowcase() {
     {
       title: "Paralysis Treatment",
       slug: "paralysis",
-      image: jointImg,
+      image: paralysisImg,
       items: ["Hemiplegia", "Paraplegia", "Post-stroke Care", "Nerve Nourishment"],
     },
     {
@@ -685,7 +688,7 @@ function TreatmentsShowcase() {
     {
       title: "Mental Health Care",
       slug: "mental-health",
-      image: homeAboutImg,
+      image: mentalHealthImg,
       items: ["Anxiety", "Insomnia", "Nightmares", "Burnout", "Stress"],
     },
     {
@@ -703,7 +706,7 @@ function TreatmentsShowcase() {
     {
       title: "General Wellness & Preventive Care",
       slug: "preventive-care",
-      image: homeAboutImg,
+      image: preventiveCareImg,
       items: ["Heart Diseases", "Abscess Management", "Diet Consultation", "Preventive Check-ups"],
     },
   ];

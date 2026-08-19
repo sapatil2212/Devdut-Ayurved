@@ -47,6 +47,8 @@ import g42 from "@/assets/gallery/42.png";
 import g43 from "@/assets/gallery/43.png";
 import g44 from "@/assets/gallery/44.png";
 import g45 from "@/assets/gallery/45.png";
+import g46 from "@/assets/gallery/46.png";
+import g47 from "@/assets/gallery/47.png";
 import gHomeAbout from "@/assets/gallery/home-about.png";
 
 export const Route = createFileRoute("/gallery")({
@@ -98,6 +100,8 @@ const items: GalleryItem[] = [
   { img: heroImg, cat: "Pharmacy & Medicines", title: "Authentic Ayurvedic Herbs" },
 
   // Consultation & Care
+  { img: g47, cat: "Consultation & Care", title: "Clinical Examination & Auscultation" },
+  { img: g46, cat: "Consultation & Care", title: "Dr. Patil Consultation Desk" },
   { img: g44, cat: "Consultation & Care", title: "Dr. Patil Conducting Pulse Reading" },
   { img: g21, cat: "Consultation & Care", title: "Radial Pulse Diagnosis Consultation" },
   { img: g43, cat: "Consultation & Care", title: "Clinical Examination Room" },

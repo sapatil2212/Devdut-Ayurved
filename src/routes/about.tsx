@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 import aboutHeroImg from "@/assets/about-hero.png";
 import aboutPaperImg from "@/assets/about-paper.png";
-import doctorImg from "@/assets/doctor-2.png";
+import doctorImg from "@/assets/doctor/1.png";
 import { Mandala } from "@/components/site/Ornament";
 import homeAboutImg from "@/assets/home-about.png";
 import treatmentsImg from "@/assets/treatments.jpg";
@@ -40,20 +40,28 @@ function AboutPage() {
 
       <section className="container-page pt-24 pb-8 grid gap-16 lg:grid-cols-2 items-center">
         <Reveal>
-          <div className="relative flex justify-center items-end rounded-[2.5rem] bg-gradient-to-b from-[#fbf7ee] via-[#f5edd9] to-[#ebdcc4] border border-[var(--gold)]/40 px-6 pt-10 pb-0 shadow-lg overflow-hidden max-w-lg mx-auto group h-[480px] md:h-[550px]">
-            {/* Faint ambient gold background glow */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[var(--gold)]/20 via-transparent to-transparent pointer-events-none" />
-            <Mandala className="absolute -left-20 -top-20 size-[320px] text-[var(--gold)]/25 pointer-events-none" />
-            <Mandala className="absolute -right-20 -bottom-20 size-[260px] text-[var(--gold)]/15 pointer-events-none" />
-
-            <img
-              src={doctorImg}
-              alt="Dr. Ganeshkumar Patil, Ayurvedic Physician"
-              width={1024}
-              height={1280}
-              loading="lazy"
-              className="relative z-20 w-full max-w-[440px] md:max-w-[480px] h-full object-contain object-bottom block transition-transform duration-500 group-hover:scale-[1.03]"
-            />
+          <div className="relative group max-w-lg mx-auto w-full">
+            <div className="relative overflow-hidden rounded-3xl border border-[var(--gold)]/35 shadow-2xl bg-[var(--forest-deep)]">
+              <img
+                src={doctorImg}
+                alt="Dr. Ganeshkumar Patil, Ayurvedic Physician"
+                width={1537}
+                height={1023}
+                loading="lazy"
+                className="w-full h-[400px] sm:h-[460px] md:h-[500px] object-cover object-center transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--forest-deep)]/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-[var(--parchment)]/95 backdrop-blur-md p-4 border border-[var(--gold)]/30 shadow-elegant flex items-center justify-between">
+                <div>
+                  <div className="font-display text-base font-semibold text-[var(--forest-deep)]">Dr. Ganeshkumar Patil</div>
+                  <div className="text-xs text-[var(--copper)] font-medium">Ayurvedic Physician &amp; Nadipariksha Expert</div>
+                </div>
+                <div className="text-right pl-3 border-l border-[var(--border)]">
+                  <div className="text-[10px] uppercase tracking-wider text-[var(--muted-foreground)]">Experience</div>
+                  <div className="font-display text-sm font-bold text-[var(--forest-deep)]">26+ Years</div>
+                </div>
+              </div>
+            </div>
           </div>
         </Reveal>
         <Reveal delay={0.1}>

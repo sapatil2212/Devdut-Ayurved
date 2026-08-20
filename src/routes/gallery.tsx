@@ -14,20 +14,23 @@ import heroImg from "@/assets/hero-ayurveda.jpg";
 import g6 from "@/assets/gallery/6.png";
 import g10 from "@/assets/gallery/10.png";
 import g11 from "@/assets/gallery/11.png";
-import g12 from "@/assets/gallery/12.png";
-import g13 from "@/assets/gallery/13.png";
 import g14 from "@/assets/gallery/14.png";
 import g15 from "@/assets/gallery/15.png";
-import g16 from "@/assets/gallery/16.png";
 import g17 from "@/assets/gallery/17.png";
-import g18 from "@/assets/gallery/18.png";
-import g19 from "@/assets/gallery/19.png";
 import g20 from "@/assets/gallery/20.png";
-import g21 from "@/assets/gallery/21.png";
 import g22 from "@/assets/gallery/22.png";
-import g23 from "@/assets/gallery/23.png";
-import g24 from "@/assets/gallery/24.png";
 import g25 from "@/assets/gallery/25.png";
+
+import n1 from "@/assets/new-images/1.png";
+import n2 from "@/assets/new-images/2.png";
+import n3 from "@/assets/new-images/3.png";
+import n4 from "@/assets/new-images/4.png";
+import n5 from "@/assets/new-images/5.png";
+import n6 from "@/assets/new-images/6.png";
+import n7 from "@/assets/new-images/7.png";
+import n8 from "@/assets/new-images/8.png";
+import n9 from "@/assets/new-images/9.png";
+
 import g26 from "@/assets/gallery/26.png";
 import g27 from "@/assets/gallery/27.png";
 import g28 from "@/assets/gallery/28.png";
@@ -81,7 +84,7 @@ interface GalleryItem {
 }
 
 const items: GalleryItem[] = [
-  // Clinic Exterior & Signs
+  // Clinic Exterior & Signs (Kept existing exterior images as requested)
   { img: g6, cat: "Clinic Exterior", title: "Devdut Healing Center Entrance" },
   { img: g10, cat: "Clinic Exterior", title: "Clinic Building Facade" },
   { img: g11, cat: "Clinic Exterior", title: "Nadipariksha Outdoor Signage" },
@@ -92,26 +95,23 @@ const items: GalleryItem[] = [
   { img: g22, cat: "Clinic Exterior", title: "Devdut Ayurved Aushadhalaya Counter" },
   { img: g25, cat: "Clinic Exterior", title: "Acidity & PCOD Treatment Boards" },
 
+  // Consultation & Care (Updated with new-images collection)
+  { img: n5, cat: "Consultation & Care", title: "Pulse Palpation & Vital Assessment" },
+  { img: n9, cat: "Consultation & Care", title: "Classical Nadipariksha Pulse Reading" },
+  { img: n1, cat: "Consultation & Care", title: "Personalized Patient Consultation" },
+  { img: n2, cat: "Consultation & Care", title: "Ayurvedic Diagnostic Evaluation" },
+  { img: n3, cat: "Consultation & Care", title: "Clinical Health Review Session" },
+  { img: n4, cat: "Consultation & Care", title: "Patient Assessment & Vitals Monitoring" },
+  { img: n6, cat: "Consultation & Care", title: "Clinical Examination & Auscultation" },
+  { img: n7, cat: "Consultation & Care", title: "Dr. Patil Consultation Desk" },
+  { img: n8, cat: "Consultation & Care", title: "Holistic Care & Treatment Plan" },
+
   // Pharmacy & Medicines
   { img: g45, cat: "Pharmacy & Medicines", title: "In-House Ayurvedic Pharmacy Shelves" },
   { img: g40, cat: "Pharmacy & Medicines", title: "Ayurvedic Medicine Dispensing Counter" },
   { img: g38, cat: "Pharmacy & Medicines", title: "Consultation & Prescription Desk" },
   { img: treatmentsImg, cat: "Pharmacy & Medicines", title: "Classical Herbal Formulations" },
   { img: heroImg, cat: "Pharmacy & Medicines", title: "Authentic Ayurvedic Herbs" },
-
-  // Consultation & Care
-  { img: g47, cat: "Consultation & Care", title: "Clinical Examination & Auscultation" },
-  { img: g46, cat: "Consultation & Care", title: "Dr. Patil Consultation Desk" },
-  { img: g44, cat: "Consultation & Care", title: "Dr. Patil Conducting Pulse Reading" },
-  { img: g21, cat: "Consultation & Care", title: "Radial Pulse Diagnosis Consultation" },
-  { img: g43, cat: "Consultation & Care", title: "Clinical Examination Room" },
-  { img: g16, cat: "Consultation & Care", title: "Pediatric Health Checkup" },
-  { img: g12, cat: "Consultation & Care", title: "Blood Pressure & Vitals Assessment" },
-  { img: g13, cat: "Consultation & Care", title: "Patient Vital Signs Monitoring" },
-  { img: g18, cat: "Consultation & Care", title: "Consultation Vitals Check" },
-  { img: g19, cat: "Consultation & Care", title: "Clinical Assessment Room" },
-  { img: g23, cat: "Consultation & Care", title: "Patient Evaluation Session" },
-  { img: g24, cat: "Consultation & Care", title: "Patient Care Room" },
 
   // Reception & Lounge
   { img: g29, cat: "Reception & Lounge", title: "Patient Waiting Lounge" },

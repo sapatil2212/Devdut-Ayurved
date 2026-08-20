@@ -19,11 +19,11 @@ import { NadiparikshaBookingDialog } from "@/components/site/NadiparikshaBooking
 import { SITE } from "@/lib/site";
 import { TESTIMONIALS } from "@/lib/testimonials";
 import heroImg from "@/assets/hero-ayurveda.jpg";
-import doctorImg from "@/assets/doctor-1.png";
+import doctorImg from "@/assets/doctor/1.png";
 import treatmentsImg from "@/assets/treatments.jpg";
 import therapyImg from "@/assets/therapy.jpg";
 import templeImg from "@/assets/temple.jpg";
-import homeAboutImg from "@/assets/home-about.png";
+import homeAboutImg from "@/assets/new-images/9.png";
 import parchmentImg from "@/assets/ancient-paper.png";
 import frangipaniFlowerImg from "@/assets/frangipani-flower.png";
 import rightPaperImg from "@/assets/right-book.webp";
@@ -795,10 +795,10 @@ function DoctorFeature() {
               <img
                 src={doctorImg}
                 alt="Dr. Ganeshkumar Patil, Ayurvedic physician"
-                width={1024}
-                height={1280}
+                width={1537}
+                height={1023}
                 loading="lazy"
-                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-[380px] sm:h-[450px] md:h-[480px] object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
             </div>
             <div className="absolute -bottom-6 -right-6 rounded-2xl bg-[var(--parchment)] text-[var(--forest-deep)] p-5 shadow-elegant border border-[var(--gold)]/30 z-20">

@@ -26,7 +26,7 @@ import { NadiparikshaBookingDialog } from "@/components/site/NadiparikshaBooking
 import { SITE } from "@/lib/site";
 
 import { motion } from "framer-motion";
-import nadi1 from "@/assets/nadipariksha/1.png";
+import nadi1 from "@/assets/new-images/5.png";
 import nadi2 from "@/assets/nadipariksha/2.png";
 import nadi5 from "@/assets/nadipariksha/5.png";
 import greenEarthImg from "@/assets/green-earth.png";

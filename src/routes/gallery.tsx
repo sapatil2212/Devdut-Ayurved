@@ -6,21 +6,6 @@ import { PageShell } from "@/components/site/PageShell";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 
-import treatmentsImg from "@/assets/treatments.jpg";
-import therapyImg from "@/assets/therapy.jpg";
-import templeImg from "@/assets/temple.jpg";
-import heroImg from "@/assets/hero-ayurveda.jpg";
-
-import g6 from "@/assets/gallery/6.png";
-import g10 from "@/assets/gallery/10.png";
-import g11 from "@/assets/gallery/11.png";
-import g14 from "@/assets/gallery/14.png";
-import g15 from "@/assets/gallery/15.png";
-import g17 from "@/assets/gallery/17.png";
-import g20 from "@/assets/gallery/20.png";
-import g22 from "@/assets/gallery/22.png";
-import g25 from "@/assets/gallery/25.png";
-
 import n1 from "@/assets/new-images/1.png";
 import n2 from "@/assets/new-images/2.png";
 import n3 from "@/assets/new-images/3.png";
@@ -30,29 +15,24 @@ import n6 from "@/assets/new-images/6.png";
 import n7 from "@/assets/new-images/7.png";
 import n8 from "@/assets/new-images/8.png";
 import n9 from "@/assets/new-images/9.png";
+import n10 from "@/assets/new-images/10.png";
+import n11 from "@/assets/new-images/11.png";
+import n12 from "@/assets/new-images/12.png";
+import n13 from "@/assets/new-images/13.png";
+import n14 from "@/assets/new-images/14.png";
+import n15 from "@/assets/new-images/15.png";
+import n17 from "@/assets/new-images/17.png";
+import n20 from "@/assets/new-images/20.png";
+import n22 from "@/assets/new-images/22.png";
+import n25 from "@/assets/new-images/25.png";
+import n45 from "@/assets/new-images/45.png";
+import n46 from "@/assets/new-images/46.png";
 
-import g26 from "@/assets/gallery/26.png";
-import g27 from "@/assets/gallery/27.png";
-import g28 from "@/assets/gallery/28.png";
-import g29 from "@/assets/gallery/29.png";
-import g30 from "@/assets/gallery/30.png";
-import g31 from "@/assets/gallery/31.png";
-import g32 from "@/assets/gallery/32.png";
-import g33 from "@/assets/gallery/33.png";
-import g34 from "@/assets/gallery/34.png";
-import g36 from "@/assets/gallery/36.png";
-import g37 from "@/assets/gallery/37.png";
-import g38 from "@/assets/gallery/38.png";
-import g39 from "@/assets/gallery/39.png";
-import g40 from "@/assets/gallery/40.png";
-import g41 from "@/assets/gallery/41.png";
-import g42 from "@/assets/gallery/42.png";
-import g43 from "@/assets/gallery/43.png";
-import g44 from "@/assets/gallery/44.png";
-import g45 from "@/assets/gallery/45.png";
-import g46 from "@/assets/gallery/46.png";
-import g47 from "@/assets/gallery/47.png";
-import gHomeAbout from "@/assets/gallery/home-about.png";
+import ext1 from "@/assets/new-images/exterio-1.png";
+import ext2 from "@/assets/new-images/exterio-2.png";
+import ext3 from "@/assets/new-images/exterio-3.png";
+import ext4 from "@/assets/new-images/exterio-4.png";
+import ext5 from "@/assets/new-images/exterio-5.png";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
@@ -69,10 +49,8 @@ export const Route = createFileRoute("/gallery")({
 const CATEGORIES = [
   "All",
   "Clinic Exterior",
-  "Pharmacy & Medicines",
   "Consultation & Care",
-  "Reception & Lounge",
-  "Therapy & Space",
+  "Pharmacy & Medicines",
 ] as const;
 
 type Category = (typeof CATEGORIES)[number];
@@ -84,18 +62,22 @@ interface GalleryItem {
 }
 
 const items: GalleryItem[] = [
-  // Clinic Exterior & Signs (Kept existing exterior images as requested)
-  { img: g6, cat: "Clinic Exterior", title: "Devdut Healing Center Entrance" },
-  { img: g10, cat: "Clinic Exterior", title: "Clinic Building Facade" },
-  { img: g11, cat: "Clinic Exterior", title: "Nadipariksha Outdoor Signage" },
-  { img: g14, cat: "Clinic Exterior", title: "Devdut Ayurved Clinic & Pharmacy" },
-  { img: g15, cat: "Clinic Exterior", title: "Healing Center Exterior View" },
-  { img: g17, cat: "Clinic Exterior", title: "Main Gate Board & Specialty Info" },
-  { img: g20, cat: "Clinic Exterior", title: "Nadi Pariksha Specialty Board" },
-  { img: g22, cat: "Clinic Exterior", title: "Devdut Ayurved Aushadhalaya Counter" },
-  { img: g25, cat: "Clinic Exterior", title: "Acidity & PCOD Treatment Boards" },
+  // Clinic Exterior & Signs (including exterio series)
+  { img: ext1, cat: "Clinic Exterior", title: "Devdut Healing Center Entrance" },
+  { img: ext2, cat: "Clinic Exterior", title: "Clinic Building Facade" },
+  { img: ext3, cat: "Clinic Exterior", title: "Nadipariksha Outdoor Signage" },
+  { img: ext4, cat: "Clinic Exterior", title: "Devdut Ayurved Clinic & Pharmacy" },
+  { img: ext5, cat: "Clinic Exterior", title: "Healing Center Exterior View" },
+  { img: n10, cat: "Clinic Exterior", title: "Clinic Building Exterior" },
+  { img: n11, cat: "Clinic Exterior", title: "Outdoor Pulse Diagnosis Sign" },
+  { img: n14, cat: "Clinic Exterior", title: "Ayurvedic Center & Pharmacy Board" },
+  { img: n15, cat: "Clinic Exterior", title: "Facility Facade & Entrance" },
+  { img: n17, cat: "Clinic Exterior", title: "Main Gate Board & Specialty Info" },
+  { img: n20, cat: "Clinic Exterior", title: "Nadi Pariksha Specialty Board" },
+  { img: n22, cat: "Clinic Exterior", title: "Devdut Ayurved Aushadhalaya Counter" },
+  { img: n25, cat: "Clinic Exterior", title: "Acidity & PCOD Treatment Boards" },
 
-  // Consultation & Care (Updated with new-images collection)
+  // Consultation & Care
   { img: n5, cat: "Consultation & Care", title: "Pulse Palpation & Vital Assessment" },
   { img: n9, cat: "Consultation & Care", title: "Classical Nadipariksha Pulse Reading" },
   { img: n1, cat: "Consultation & Care", title: "Personalized Patient Consultation" },
@@ -105,34 +87,12 @@ const items: GalleryItem[] = [
   { img: n6, cat: "Consultation & Care", title: "Clinical Examination & Auscultation" },
   { img: n7, cat: "Consultation & Care", title: "Dr. Patil Consultation Desk" },
   { img: n8, cat: "Consultation & Care", title: "Holistic Care & Treatment Plan" },
+  { img: n12, cat: "Consultation & Care", title: "Vitals Check & Blood Pressure Reading" },
+  { img: n13, cat: "Consultation & Care", title: "Pulse & Vital Signs Monitoring" },
+  { img: n46, cat: "Consultation & Care", title: "Clinical Discussion & Patient Guidance" },
 
   // Pharmacy & Medicines
-  { img: g45, cat: "Pharmacy & Medicines", title: "In-House Ayurvedic Pharmacy Shelves" },
-  { img: g40, cat: "Pharmacy & Medicines", title: "Ayurvedic Medicine Dispensing Counter" },
-  { img: g38, cat: "Pharmacy & Medicines", title: "Consultation & Prescription Desk" },
-  { img: treatmentsImg, cat: "Pharmacy & Medicines", title: "Classical Herbal Formulations" },
-  { img: heroImg, cat: "Pharmacy & Medicines", title: "Authentic Ayurvedic Herbs" },
-
-  // Reception & Lounge
-  { img: g29, cat: "Reception & Lounge", title: "Patient Waiting Lounge" },
-  { img: g36, cat: "Reception & Lounge", title: "Reception Desk & Waiting Area" },
-  { img: g33, cat: "Reception & Lounge", title: "Comfortable Patient Lounge" },
-  { img: g37, cat: "Reception & Lounge", title: "Front Desk & Billing Area" },
-  { img: g26, cat: "Reception & Lounge", title: "Clinic Reception Space" },
-  { img: g27, cat: "Reception & Lounge", title: "Waiting Room Seating" },
-  { img: g28, cat: "Reception & Lounge", title: "Lounge Area View" },
-  { img: g30, cat: "Reception & Lounge", title: "Patient Care Reception" },
-  { img: g31, cat: "Reception & Lounge", title: "Clinic Welcome Lounge" },
-  { img: g32, cat: "Reception & Lounge", title: "Comfortable Seating Area" },
-  { img: g34, cat: "Reception & Lounge", title: "Waiting Room Environment" },
-  { img: g39, cat: "Reception & Lounge", title: "Reception Desk View" },
-  { img: g41, cat: "Reception & Lounge", title: "Front Desk Assistance" },
-  { img: g42, cat: "Reception & Lounge", title: "Clinic Waiting Area" },
-
-  // Therapy & Space
-  { img: therapyImg, cat: "Therapy & Space", title: "Panchakarma Therapy Room" },
-  { img: templeImg, cat: "Therapy & Space", title: "Serene Healing Ambiance" },
-  { img: gHomeAbout, cat: "Therapy & Space", title: "Holistic Health Environment" },
+  { img: n45, cat: "Pharmacy & Medicines", title: "In-House Ayurvedic Pharmacy Shelves" },
 ];
 
 /* ─── Lightbox ─────────────────────────────────────────── */
@@ -322,7 +282,7 @@ function GalleryPage() {
         sanskrit="दर्शनम् · आरोग्यस्य"
         title="Inside Devdut."
         intro="Explore our authentic clinic spaces, in-house pharmacy, patient waiting lounge, and clinical care environments."
-        image={g10}
+        image={n10}
         imageHeightClass="min-h-[50vh] md:min-h-[65vh]"
       />
 

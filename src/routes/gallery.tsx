@@ -8,7 +8,6 @@ import { Reveal } from "@/components/site/Reveal";
 
 import n1 from "@/assets/new-images/1.png";
 import n2 from "@/assets/new-images/2.png";
-import n3 from "@/assets/new-images/3.png";
 import n4 from "@/assets/new-images/4.png";
 import n5 from "@/assets/new-images/5.png";
 import n6 from "@/assets/new-images/6.png";
@@ -16,12 +15,8 @@ import n7 from "@/assets/new-images/7.png";
 import n8 from "@/assets/new-images/8.png";
 import n9 from "@/assets/new-images/9.png";
 import n10 from "@/assets/new-images/10.png";
-import n11 from "@/assets/new-images/11.png";
-import n12 from "@/assets/new-images/12.png";
-import n13 from "@/assets/new-images/13.png";
 import n14 from "@/assets/new-images/14.png";
 import n15 from "@/assets/new-images/15.png";
-import n17 from "@/assets/new-images/17.png";
 import n20 from "@/assets/new-images/20.png";
 import n22 from "@/assets/new-images/22.png";
 import n25 from "@/assets/new-images/25.png";
@@ -62,17 +57,15 @@ interface GalleryItem {
 }
 
 const items: GalleryItem[] = [
-  // Clinic Exterior & Signs (including exterio series)
+  // Clinic Exterior & Signs
   { img: ext1, cat: "Clinic Exterior", title: "Devdut Healing Center Entrance" },
   { img: ext2, cat: "Clinic Exterior", title: "Clinic Building Facade" },
   { img: ext3, cat: "Clinic Exterior", title: "Nadipariksha Outdoor Signage" },
   { img: ext4, cat: "Clinic Exterior", title: "Devdut Ayurved Clinic & Pharmacy" },
   { img: ext5, cat: "Clinic Exterior", title: "Healing Center Exterior View" },
   { img: n10, cat: "Clinic Exterior", title: "Clinic Building Exterior" },
-  { img: n11, cat: "Clinic Exterior", title: "Outdoor Pulse Diagnosis Sign" },
   { img: n14, cat: "Clinic Exterior", title: "Ayurvedic Center & Pharmacy Board" },
   { img: n15, cat: "Clinic Exterior", title: "Facility Facade & Entrance" },
-  { img: n17, cat: "Clinic Exterior", title: "Main Gate Board & Specialty Info" },
   { img: n20, cat: "Clinic Exterior", title: "Nadi Pariksha Specialty Board" },
   { img: n22, cat: "Clinic Exterior", title: "Devdut Ayurved Aushadhalaya Counter" },
   { img: n25, cat: "Clinic Exterior", title: "Acidity & PCOD Treatment Boards" },
@@ -82,13 +75,10 @@ const items: GalleryItem[] = [
   { img: n9, cat: "Consultation & Care", title: "Classical Nadipariksha Pulse Reading" },
   { img: n1, cat: "Consultation & Care", title: "Personalized Patient Consultation" },
   { img: n2, cat: "Consultation & Care", title: "Ayurvedic Diagnostic Evaluation" },
-  { img: n3, cat: "Consultation & Care", title: "Clinical Health Review Session" },
   { img: n4, cat: "Consultation & Care", title: "Patient Assessment & Vitals Monitoring" },
   { img: n6, cat: "Consultation & Care", title: "Clinical Examination & Auscultation" },
   { img: n7, cat: "Consultation & Care", title: "Dr. Patil Consultation Desk" },
   { img: n8, cat: "Consultation & Care", title: "Holistic Care & Treatment Plan" },
-  { img: n12, cat: "Consultation & Care", title: "Vitals Check & Blood Pressure Reading" },
-  { img: n13, cat: "Consultation & Care", title: "Pulse & Vital Signs Monitoring" },
   { img: n46, cat: "Consultation & Care", title: "Clinical Discussion & Patient Guidance" },
 
   // Pharmacy & Medicines

@@ -20,7 +20,6 @@ import n15 from "@/assets/new-images/15.png";
 import n20 from "@/assets/new-images/20.png";
 import n22 from "@/assets/new-images/22.png";
 import n25 from "@/assets/new-images/25.png";
-import n45 from "@/assets/new-images/45.png";
 import n46 from "@/assets/new-images/46.png";
 
 import ext1 from "@/assets/new-images/exterio-1.png";
@@ -33,7 +32,7 @@ export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
       { title: "Gallery — Devdut Ayurved Clinic" },
-      { name: "description", content: "Inside Devdut Ayurved Clinic — consultation rooms, in-house pharmacy, waiting lounge, outdoor signage and clinical practice." },
+      { name: "description", content: "Inside Devdut Ayurved Clinic — consultation rooms, waiting lounge, outdoor signage and clinical practice." },
       { property: "og:url", content: "/gallery" },
     ],
     links: [{ rel: "canonical", href: "/gallery" }],
@@ -45,7 +44,6 @@ const CATEGORIES = [
   "All",
   "Clinic Exterior",
   "Consultation & Care",
-  "Pharmacy & Medicines",
 ] as const;
 
 type Category = (typeof CATEGORIES)[number];
@@ -80,9 +78,6 @@ const items: GalleryItem[] = [
   { img: n7, cat: "Consultation & Care", title: "Dr. Patil Consultation Desk" },
   { img: n8, cat: "Consultation & Care", title: "Holistic Care & Treatment Plan" },
   { img: n46, cat: "Consultation & Care", title: "Clinical Discussion & Patient Guidance" },
-
-  // Pharmacy & Medicines
-  { img: n45, cat: "Pharmacy & Medicines", title: "In-House Ayurvedic Pharmacy Shelves" },
 ];
 
 /* ─── Lightbox ─────────────────────────────────────────── */
@@ -271,7 +266,7 @@ function GalleryPage() {
       <PageHeader
         sanskrit="दर्शनम् · आरोग्यस्य"
         title="Inside Devdut."
-        intro="Explore our authentic clinic spaces, in-house pharmacy, patient waiting lounge, and clinical care environments."
+        intro="Explore our authentic clinic spaces, patient waiting lounge, and clinical care environments."
         image={n10}
         imageHeightClass="min-h-[50vh] md:min-h-[65vh]"
       />
